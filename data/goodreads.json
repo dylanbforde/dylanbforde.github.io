@@ -1,0 +1,138 @@
+{
+  "userId": "195775990",
+  "profileSlug": "dylan-forde",
+  "profileUrl": "https://www.goodreads.com/user/show/195775990-dylan-forde",
+  "updatedAt": "2026-04-22T00:19:04Z",
+  "detectedShelves": [
+    "0-star",
+    "1-star",
+    "2-star",
+    "3-star",
+    "4-star",
+    "5-star",
+    "6-star",
+    "7-star",
+    "currently-reading",
+    "did-not-finish",
+    "read",
+    "to-read"
+  ],
+  "currentlyReading": [
+    {
+      "bookId": "2458709",
+      "title": "50 Physics Ideas You Really Need to Know",
+      "author": "Joanne Baker",
+      "url": "https://www.goodreads.com/book/show/2458709",
+      "reviewUrl": "https://www.goodreads.com/review/show/8526925504?utm_medium=api&utm_source=rss",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1347235524l/2458709.jpg",
+      "summary": "In this book, Joanne Baker unravels the complexities of 20th-century scientific theory for a general readership. She explains ideas at the cutting-edge of scientific enquiry, making them comprehensible and accessible to the layperson.",
+      "averageRating": "3.94",
+      "userRating": "0",
+      "publishedYear": "2007",
+      "dateAdded": "Thu, 16 Apr 2026 06:31:03 -0700",
+      "dateCreated": "Thu, 16 Apr 2026 06:31:03 -0700",
+      "pages": 208,
+      "shelves": [
+        "currently-reading"
+      ]
+    },
+    {
+      "bookId": "241167480",
+      "title": "Reverend Insanity",
+      "author": "Gu Zhen Re",
+      "url": "https://www.goodreads.com/book/show/241167480",
+      "reviewUrl": "https://www.goodreads.com/review/show/8239059159?utm_medium=api&utm_source=rss",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1756954200l/241167480.jpg",
+      "summary": "Humans are the spirit of all living beings, Gu are the essence of Heaven and Earth. With his Three Fundamental Views* unrighteous, a demon is reborn. Former days are but an old dream, an identical name made anew. A story about a time traveller who constantly keeps on being reborn. A unique world that grows, cultivates, and uses Gu. The Spring Autumn Cicada, Moonlight Gu, Liquor worm, All-Encompassing Golden Light Worm, Fine Black Hair Gu, Hope Gu\u2026 And a peerless great demon that freely acts to his heart\u2019s content. \u2014\u2013 Gu is a legendary venomous insect, often used in black magic practices. It can take on the form of several insects, usually snakes, crickets, worms etc. * = one\u2019s world view, values of worth and philosophy on life",
+      "averageRating": "4.33",
+      "userRating": "0",
+      "publishedYear": "",
+      "dateAdded": "Thu, 08 Jan 2026 08:31:24 -0800",
+      "dateCreated": "Thu, 08 Jan 2026 08:31:24 -0800",
+      "pages": 19789,
+      "shelves": [
+        "currently-reading"
+      ]
+    },
+    {
+      "bookId": "231191100",
+      "title": "AI Systems Performance Engineering: Optimizing Model Training and Inference Workloads with GPUs, CUDA, and PyTorch",
+      "author": "Chris Fregly",
+      "url": "https://www.goodreads.com/book/show/231191100",
+      "reviewUrl": "https://www.goodreads.com/review/show/8210988029?utm_medium=api&utm_source=rss",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1746501287l/231191100._SX318_.jpg",
+      "summary": "Elevate your AI system performance capabilities with this definitive guide to maximizing efficiency across every layer of your AI infrastructure. In today's era of ever-growing generative models, AI Systems Performance Engineering provides engineers, researchers, and developers with a hands-on set of actionable optimization strategies. Learn to co-optimize hardware, software, and algorithms to build resilient, scalable, and cost-effective AI systems that excel in both training and inference. Authored by Chris Fregly, a performance-focused engineering and product leader, this resource transforms complex AI systems into streamlined, high-impact AI solutions. Inside, you'll discover step-by-step methodologies for fine-tuning GPU CUDA kernels, PyTorch-based algorithms, and multinode training and inference systems. You'll also master the art of scaling GPU clusters for high performance, distributed model training jobs, and inference servers. The book ends with a 175+-item checklist of proven, ready-to-use optimizations. Codesign and optimize hardware, software, and algorithms to achieve maximum throughput and cost savings Implement cutting-edge inference strategies that reduce latency and boost throughput in real-world settings Utilize industry-leading scalability tools and frameworks Profile, diagnose, and eliminate performance bottlenecks across complex AI pipelines Integrate full stack optimization techniques for robust, reliable AI system performance",
+      "averageRating": "4.22",
+      "userRating": "0",
+      "publishedYear": "",
+      "dateAdded": "Fri, 02 Jan 2026 07:38:10 -0800",
+      "dateCreated": "Fri, 02 Jan 2026 07:38:10 -0800",
+      "pages": 1060,
+      "shelves": [
+        "currently-reading"
+      ]
+    }
+  ],
+  "featuredShelf": {
+    "slug": "7-star",
+    "label": "7-Star Shelf",
+    "items": [
+      {
+        "bookId": "7967",
+        "title": "Speaker for the Dead (Ender's Saga, #2)",
+        "author": "Orson Scott Card",
+        "url": "https://www.goodreads.com/book/show/7967",
+        "reviewUrl": "https://www.goodreads.com/review/show/8111105567?utm_medium=api&utm_source=rss",
+        "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1295660894l/7967.jpg",
+        "summary": "In this second book in the saga set 3,000 years after the terrible war, Ender Wiggin is reviled by history as the Xenocide--the destroyer of the alien Buggers. Now, Ender tells the true story of the war and seeks to stop history from repeating itself. ... In the aftermath of his terrible war, Ender Wiggin disappeared, and a powerful voice arose: The Speaker for the Dead, who told the true story of the Bugger War. Now, long years later, a second alien race has been discovered, but again the aliens' ways are strange and frightening...again, humans die. And it is only the Speaker for the Dead, who is also Ender Wiggin the Xenocide, who has the courage to confront the mystery...and the truth. Speaker for the Dead , the second novel in Orson Scott Card's Ender Quintet, is the winner of the 1986 Nebula Award for Best Novel and the 1987 Hugo Award for Best Novel.",
+        "averageRating": "4.11",
+        "userRating": "5",
+        "publishedYear": "1986",
+        "dateAdded": "Sun, 30 Nov 2025 16:21:04 -0800",
+        "dateCreated": "Sun, 30 Nov 2025 14:18:13 -0800",
+        "pages": 382,
+        "shelves": [
+          "7-star",
+          "6-star"
+        ]
+      },
+      {
+        "bookId": "7126",
+        "title": "The Count of Monte Cristo",
+        "author": "Alexandre Dumas",
+        "url": "https://www.goodreads.com/book/show/7126",
+        "reviewUrl": "https://www.goodreads.com/review/show/8111073148?utm_medium=api&utm_source=rss",
+        "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1724863997l/7126._SY475_.jpg",
+        "summary": "An alternative cover edition for this ISBN can be found here Thrown in prison for a crime he has not committed, Edmond Dantes is confined to the grim fortress of If. There he learns of a great hoard of treasure hidden on the Isle of Monte Cristo and becomes determined not only to escape but to unearth the treasure and use it to plot the destruction of the three men responsible for his incarceration. A huge popular success when it was first serialized in the 1840s, Dumas was inspired by a real-life case of wrongful imprisonment when writing his epic tale of suffering and retribution.",
+        "averageRating": "4.30",
+        "userRating": "5",
+        "publishedYear": "1844",
+        "dateAdded": "Sun, 30 Nov 2025 16:21:01 -0800",
+        "dateCreated": "Sun, 30 Nov 2025 14:05:50 -0800",
+        "pages": 1276,
+        "shelves": [
+          "7-star",
+          "6-star"
+        ]
+      },
+      {
+        "bookId": "13530973",
+        "title": "Antifragile: Things That Gain from Disorder",
+        "author": "Nassim Nicholas Taleb",
+        "url": "https://www.goodreads.com/book/show/13530973",
+        "reviewUrl": "https://www.goodreads.com/review/show/8111070138?utm_medium=api&utm_source=rss",
+        "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1352422827l/13530973.jpg",
+        "summary": "From the bestselling author of The Black Swan and one of the foremost philosophers of our time, Nassim Nicholas Taleb, a book on how some systems actually benefit from disorder. In The Black Swan Taleb outlined a problem; in Antifragile he offers a definitive solution: how to gain from disorder and chaos while being protected from fragilities and adverse events. For what he calls the \"antifragile\" is one step beyond robust, as it benefits from adversity, uncertainty and stressors, just as human bones get stronger when subjected to stress and tension. Taleb stands uncertainty on its head, making it desirable, and proposing that things be built in an antifragile manner. Extremely ambitious and multidisciplinary, Antifragile provides a blueprint for how to behave\u2014and thrive\u2014in a world we don't understand and which is too uncertain for us to even try to understand. He who is not antifragile will perish. Why is the city state better than the nation state, why is debt bad for you, and why is almost everything modern bound to fail? The book covers innovation, health, biology, medicine, life decisions, politics, foreign policy, urban planning, war, personal finance, and economic systems. Throughout, the voice and recipes of the ancient wisdom from Phoenician, Roman, Greek, and Medieval sources are heard loud and clear.",
+        "averageRating": "4.08",
+        "userRating": "5",
+        "publishedYear": "2012",
+        "dateAdded": "Sun, 30 Nov 2025 16:20:56 -0800",
+        "dateCreated": "Sun, 30 Nov 2025 14:04:43 -0800",
+        "pages": 426,
+        "shelves": [
+          "7-star"
+        ]
+      }
+    ]
+  }
+}
