@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:wght@700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Playfair+Display:wght@700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="../styles/main.css">
     <style>
@@ -81,15 +81,16 @@
     <nav class="nav" id="navbar">
         <div class="container nav-inner">
             <a href="../index.html" class="nav-logo">DF.</a>
-            <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"
+                aria-controls="navLinks"><span></span><span></span><span></span></button>
             <ul class="nav-links" id="navLinks">
                 <li><a href="../index.html" class="nav-link">Home</a></li>
                 <li><a href="../resume.html" class="nav-link">Resume</a></li>
                 <li><a href="../projects.html" class="nav-link">Projects</a></li>
                 <li><a href="../writing.html" class="nav-link active">Writing</a></li>
                 <li><a href="../about.html" class="nav-link">About</a></li>
-                <li><a href="https://github.com/dylanbforde" target="_blank" class="btn btn-primary"
-                        style="padding: 0.25rem 1rem;">GitHub</a></li>
+                <li><a href="https://github.com/dylanbforde" target="_blank" rel="noreferrer"
+                        class="btn btn-secondary">GitHub</a></li>
             </ul>
         </div>
     </nav>
@@ -154,7 +155,8 @@
 
                 <p>DFS is high-risk, high-reward. There is individual risk in sinking time into a dead end (RIP, my <a
                         href="https://www.fanfiction.net/s/13079889/1/Expect-The-Unexpected" target="_blank"
-                        style="font-size: 0.85em; opacity: 0.7;">unfinished fanfiction at 17, lol</a>), but occasional
+                        rel="noreferrer" style="font-size: 0.85em; opacity: 0.7;">unfinished fanfiction at 17,
+                        lol</a>), but occasional
                     societal rewards: Taleb's <em>Black Swan</em>
                     innovation (Turing's obsession with computable numbers).</p>
 
@@ -227,15 +229,15 @@
                     coordination problem. By marginally valuing DFS, we might yet escape the local maxima.</p>
 
                 <footer class="article-footer">
-                    <p><em>Originally published on <a href="https://dforde.substack.com/"
-                                target="_blank">FordeSight</a></em></p>
+                    <p><em>Originally published on <a href="https://dforde.substack.com/" target="_blank"
+                                rel="noreferrer">FordeSight</a></em></p>
                 </footer>
             </article>
 
         </div>
     </main>
 
-    <footer class="footer section">
+    <footer class="footer">
         <div class="container">
             <p class="footer-copy">&copy; 2026 Dylan Forde. Built with paper & neon.</p>
         </div>

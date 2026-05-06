@@ -4,143 +4,344 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dylan Forde | AI Engineer & Researcher</title>
+    <title>Dylan Forde | AI Engineer, Researcher, Infrastructure Builder</title>
     <meta name="description"
-        content="Personal website of Dylan Forde - AI Engineer, Researcher, and Data Scientist based in Ireland.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:wght@700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="styles/main.css">
-    <!-- Twitter Card data -->
+        content="Dylan Forde builds machine learning systems across autonomous driving, research engineering, and MLOps infrastructure." />
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Dylan Forde | AI Engineer">
     <meta name="twitter:description"
-        content="AI Engineer & Researcher specializing in autonomous systems and machine learning.">
-    <!-- Open Graph data -->
+        content="Research-minded AI engineer working on autonomous systems, JAX optimization, and production ML infrastructure.">
     <meta property="og:title" content="Dylan Forde | AI Engineer">
     <meta property="og:type" content="website">
     <meta property="og:description"
-        content="AI Engineer & Researcher specializing in autonomous systems and machine learning.">
+        content="Research-minded AI engineer working on autonomous systems, JAX optimization, and production ML infrastructure.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Playfair+Display:wght@700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 
 <body class="paper-bg">
-
-    <!-- Navigation -->
     <nav class="nav" id="navbar">
         <div class="container nav-inner">
             <a href="index.html" class="nav-logo">DF.</a>
-
-            <button class="nav-toggle" aria-label="Toggle navigation" id="navToggle">
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"
+                aria-controls="navLinks">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
-
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html" class="nav-link active">Home</a></li>
                 <li><a href="resume.html" class="nav-link">Resume</a></li>
                 <li><a href="projects.html" class="nav-link">Projects</a></li>
                 <li><a href="writing.html" class="nav-link">Writing</a></li>
                 <li><a href="about.html" class="nav-link">About</a></li>
-                <li><a href="https://github.com/dylanbforde" target="_blank" class="btn btn-primary"
-                        style="padding: 0.25rem 1rem;">GitHub</a></li>
+                <li><a href="https://github.com/dylanbforde" target="_blank" rel="noreferrer"
+                        class="btn btn-secondary">GitHub</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="hero">
-        <div class="hero-orb hero-orb-1"></div>
-        <div class="hero-orb hero-orb-2"></div>
-        <div class="hero-orb hero-orb-3"></div>
+    <main>
+        <header class="hero hero-home">
+            <div class="hero-orb hero-orb-1"></div>
+            <div class="hero-orb hero-orb-2"></div>
+            <div class="hero-orb hero-orb-3"></div>
 
-        <div class="container hero-content fade-in-up">
-            <h1 class="hero-title">
-                Hi, I'm Dylan Forde.
-            </h1>
-            <h2 class="hero-title" style="font-size: clamp(1.5rem, 3vw, 2.5rem); margin-top: -0.5rem; opacity: 0.9;">
-                Building <span class="gradient-text-secondary">Intelligent Systems</span>
-            </h2>
+            <div class="container">
+                <div class="hero-shell fade-in-up">
+                    <div class="hero-split">
+                        <section class="hero-copy">
+                            <span class="eyebrow">Galway / Cork / Dublin</span>
+                            <p class="mono-line mt-lg">AI engineer working across research and production systems</p>
+                            <h1 class="hero-title">Building machine learning systems for real-world use.</h1>
+                            <p class="hero-subtitle">
+                                I work across autonomous driving, deep learning optimization, and MLOps
+                                infrastructure. At Valeo, that means shipping pipelines, accelerating JAX workloads,
+                                and helping models move from experiment to fleet-scale execution.
+                            </p>
+                            <div class="tags mt-lg">
+                                <span class="tag">Python</span>
+                                <span class="tag">JAX</span>
+                                <span class="tag">PyTorch</span>
+                                <span class="tag">Airflow</span>
+                                <span class="tag">Kubernetes</span>
+                                <span class="tag">Autonomous Systems</span>
+                            </div>
+                            <div class="hero-cta">
+                                <a href="resume.html" class="btn btn-primary">See Experience</a>
+                                <a href="projects.html" class="btn btn-secondary">Browse Projects</a>
+                                <a href="assets/resume/dylan-forde-research-resume.pdf" class="btn btn-quiet">Download
+                                    Resume PDF</a>
+                            </div>
+                        </section>
 
-            <p class="hero-subtitle">
-                AI Engineer & Researcher blending rigorous data science with production engineering. <br>
-                Currently building autonomous driving algorithms at Valeo.
-            </p>
-
-            <div class="hero-cta">
-                <a href="resume.html" class="btn btn-primary">View Experience</a>
-                <a href="projects.html" class="btn btn-secondary">See Projects</a>
-            </div>
-
-            <div class="mt-xl">
-                <div class="tags justify-center" style="opacity: 0.8; justify-content: center;">
-                    <span class="tag">Python</span>
-                    <span class="tag">PyTorch</span>
-                    <span class="tag">JAX</span>
-                    <span class="tag">Rust</span>
-                    <span class="tag">NixOS</span>
-                    <span class="tag">Docker</span>
-                    <span class="tag">Autonomous Systems</span>
+                        <aside class="hero-panel">
+                            <p class="mono-line mb-md">Current work</p>
+                            <h3 class="mb-md">Applied ML, research, and infrastructure.</h3>
+                            <ul class="profile-list">
+                                <li>Generative AI data pipelines for 10,000+ parking video traces at high hardware
+                                    utilization.</li>
+                                <li>JAX and Pallas optimizations that cut internal trace processing from 45 minutes to
+                                    5.</li>
+                                <li>Airflow and Kubernetes systems for resilient extraction, scheduling, and dynamic
+                                    task routing.</li>
+                                <li>Research work spanning optimal transport, RL domain shift, genomics, and medical
+                                    imaging.</li>
+                            </ul>
+                            <div class="subtle-divider"></div>
+                            <p class="mono-line mb-md">What I care about</p>
+                            <div class="tags">
+                                <span class="tag tag-gradient">Systems That Scale</span>
+                                <span class="tag">Fast Feedback Loops</span>
+                                <span class="tag">Clean Interfaces</span>
+                                <span class="tag">Testing</span>
+                                <span class="tag">Inference Efficiency</span>
+                            </div>
+                        </aside>
+                    </div>
                 </div>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <!-- Latest Updates / Featured Section could go here -->
+        <section class="section" style="padding-top: 0;">
+            <div class="container">
+                <div class="stat-grid">
+                    <article class="card stat-card reveal">
+                        <span class="stat-value">10,000+</span>
+                        <p class="stat-label">Parking traces processed in recent generative data workflows.</p>
+                    </article>
+                    <article class="card stat-card reveal delay-1">
+                        <span class="stat-value">30-45%</span>
+                        <p class="stat-label">Observed MFU range on one recent generative pipeline rather than a
+                            theoretical peak.</p>
+                    </article>
+                    <article class="card stat-card reveal delay-2">
+                        <span class="stat-value">89%</span>
+                        <p class="stat-label">Reduction in one internal height-map processing path.</p>
+                    </article>
+                    <article class="card stat-card reveal delay-3">
+                        <span class="stat-value">16K+</span>
+                        <p class="stat-label">Long-context target for differentiable Sinkhorn attention work.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
 
-    <footer class="footer section">
-        <div class="container">
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <p class="mono-line mb-sm">Focus Areas</p>
+                        <h2 class="section-title">Where I tend to do my best work</h2>
+                    </div>
+                    <p class="section-subtitle">
+                        The through-line is simple: I like technically hard systems where algorithmic quality and
+                        engineering quality both matter.
+                    </p>
+                </div>
+                <div class="feature-grid">
+                    <article class="card card-neon reveal">
+                        <div class="feature-meta">Production ML</div>
+                        <h3 class="feature-title">Shipping models into constrained environments</h3>
+                        <p>
+                            I care about the ugly middle between notebooks and deployment: dataset movement,
+                            observability, inference constraints, and the handoff between research code and real
+                            systems.
+                        </p>
+                    </article>
+                    <article class="card card-neon reveal delay-1">
+                        <div class="feature-meta">Research Engineering</div>
+                        <h3 class="feature-title">Turning theory into fast, inspectable implementations</h3>
+                        <p>
+                            My projects often start from papers or first principles and end in working kernels, clean
+                            evaluation loops, or experimental tooling that can actually be trusted.
+                        </p>
+                    </article>
+                    <article class="card card-neon reveal delay-2">
+                        <div class="feature-meta">Infrastructure</div>
+                        <h3 class="feature-title">Designing pipelines with fewer hidden failure modes</h3>
+                        <p>
+                            I like replacing fragile manual steps with explicit orchestration, better test coverage, and
+                            systems that recover well when data, dependencies, or hardware are imperfect.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-shell">
+                    <div class="section-header">
+                        <div>
+                            <p class="mono-line mb-sm">Selected Work</p>
+                            <h2 class="section-title">Recent systems and research threads</h2>
+                        </div>
+                        <a href="projects.html" class="btn btn-secondary">View Full Project List</a>
+                    </div>
+                    <div class="project-grid">
+                        <article class="card reveal">
+                            <div class="spotlight-meta">Valeo Vision Systems</div>
+                            <h3 class="spotlight-title">Generative data and infrastructure for autonomous systems</h3>
+                            <p>
+                                Built and optimized internal ML workflows spanning generative augmentation, trace
+                                processing, orchestration, and cross-cluster scheduling for perception workloads.
+                            </p>
+                            <div class="tags mt-md">
+                                <span class="tag">JAX</span>
+                                <span class="tag">Airflow</span>
+                                <span class="tag">K8s</span>
+                                <span class="tag">Computer Vision</span>
+                            </div>
+                        </article>
+                        <article class="card reveal delay-1">
+                            <div class="spotlight-meta">NeurIPS Manuscript</div>
+                            <h3 class="spotlight-title">Block-wise differentiable Sinkhorn attention</h3>
+                            <p>
+                                Designed a memory-efficient optimal transport kernel for long-context alignment with a
+                                custom backward pass and TPU-oriented JAX/Pallas implementation.
+                            </p>
+                            <div class="tags mt-md">
+                                <span class="tag">Optimal Transport</span>
+                                <span class="tag">TPU</span>
+                                <span class="tag">Kernel Engineering</span>
+                            </div>
+                        </article>
+                        <article class="card reveal delay-2">
+                            <div class="spotlight-meta">Microsoft Research</div>
+                            <h3 class="spotlight-title">Developer tooling and mocking for faster preview loops</h3>
+                            <p>
+                                Built state and API mocking systems, configuration abstractions, and LLM evaluation work
+                                to reduce friction in production and internal engineering workflows.
+                            </p>
+                            <div class="tags mt-md">
+                                <span class="tag">TypeScript</span>
+                                <span class="tag">Testing</span>
+                                <span class="tag">LLM Evaluation</span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-shell">
+                    <div class="section-header">
+                        <div>
+                            <p class="mono-line mb-sm">Books</p>
+                            <h2 class="section-title">What I am reading and what has stayed with me.</h2>
+                        </div>
+                        <a href="https://www.goodreads.com/user/show/195775990-dylan-forde" target="_blank"
+                            rel="noreferrer" class="btn btn-secondary">Goodreads Profile</a>
+                    </div>
+                    <div class="split-grid">
+                        <section class="section-panel reveal">
+                            <p class="mono-line mb-sm">Currently Reading</p>
+                            <p class="mb-lg">
+                                A few of the books I am in the middle of at the moment.
+                            </p>
+                            <div class="book-grid" id="currentlyReadingBooks">
+                                <article class="book-card book-card-placeholder">
+                                    <div class="book-copy">
+                                        <h3 class="book-title">Loading current reads</h3>
+                                        <p class="book-author">A moment while the reading list comes in.</p>
+                                    </div>
+                                </article>
+                            </div>
+                        </section>
+
+                        <aside class="section-panel reveal delay-1">
+                            <p class="mono-line mb-sm">7-Star Shelf</p>
+                            <p class="mb-lg">
+                                The small shelf for books that felt better than the normal rating scale allowed.
+                            </p>
+                            <div class="book-grid" id="sevenStarBooks">
+                                <article class="book-card book-card-placeholder">
+                                    <div class="book-copy">
+                                        <h3 class="book-title">Loading favorites</h3>
+                                        <p class="book-author">A moment while the shelf comes in.</p>
+                                    </div>
+                                </article>
+                            </div>
+                        </aside>
+                    </div>
+                    <p class="mono-line mt-lg" id="goodreadsMeta">
+                        Drawn from my public Goodreads shelves.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="split-grid">
+                    <section class="section-panel reveal">
+                        <p class="mono-line mb-sm">Writing</p>
+                        <h2 class="section-title">I also write about coordination problems, AI, and incentives.</h2>
+                        <p class="mb-lg">
+                            The essays are less about recapping the news and more about building better models for how
+                            technology, institutions, and people behave under pressure.
+                        </p>
+                        <div class="grid">
+                            <article class="card">
+                                <div class="feature-meta">Essay</div>
+                                <h3 class="feature-title">Tragedy of the Correlated Commons</h3>
+                                <p>On why prestige optimization can flatten out weird, frontier-seeking talent.</p>
+                            </article>
+                            <article class="card">
+                                <div class="feature-meta">Essay</div>
+                                <h3 class="feature-title">The Communist Constraint</h3>
+                                <p>Using gradient descent to think about planning, markets, and adaptation.</p>
+                            </article>
+                            <article class="card">
+                                <div class="feature-meta">Essay</div>
+                                <h3 class="feature-title">Compounding Genetic Capital</h3>
+                                <p>An essay on selection, compounding effects, and long-horizon divergence.</p>
+                            </article>
+                        </div>
+                        <a href="writing.html" class="card-link">Read the writing archive <span
+                                aria-hidden="true">→</span></a>
+                    </section>
+
+                    <aside class="section-panel reveal delay-1">
+                        <p class="mono-line mb-sm">Contact</p>
+                        <h3 class="mb-md">Interested in research engineering, applied ML, or infrastructure roles?</h3>
+                        <p>
+                            I am most interested in teams where systems design and practical model performance both
+                            matter.
+                        </p>
+                        <div class="contact-grid mt-lg">
+                            <a href="mailto:forde.dylan@gmail.com" class="btn btn-primary">Email</a>
+                            <a href="https://linkedin.com/in/dylanbforde" target="_blank" rel="noreferrer"
+                                class="btn btn-secondary">LinkedIn</a>
+                            <a href="https://github.com/dylanbforde" target="_blank" rel="noreferrer"
+                                class="btn btn-secondary">GitHub</a>
+                            <a href="resume.html" class="btn btn-secondary">Resume Page</a>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
             <ul class="footer-links">
-                <li>
-                    <a href="https://github.com/dylanbforde" target="_blank" class="footer-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path
-                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                            </path>
-                        </svg>
-                        GitHub
-                    </a>
-                </li>
-                <li>
-                    <a href="https://linkedin.com/in/dylanbforde" target="_blank" class="footer-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
-                            </path>
-                            <rect x="2" y="9" width="4" height="12"></rect>
-                            <circle cx="4" cy="4" r="2"></circle>
-                        </svg>
-                        LinkedIn
-                    </a>
-                </li>
-                <li>
-                    <a href="mailto:forde.dylan@gmail.com" class="footer-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
-                            </path>
-                            <polyline points="22,6 12,13 2,6"></polyline>
-                        </svg>
-                        Email
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.goodreads.com/user/show/195775990-dylan-forde" target="_blank"
-                        class="footer-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path
-                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
-                            </path>
-                        </svg>
-                        Goodreads
-                    </a>
-                </li>
+                <li><a href="mailto:forde.dylan@gmail.com" class="footer-link">Email</a></li>
+                <li><a href="https://github.com/dylanbforde" target="_blank" rel="noreferrer"
+                        class="footer-link">GitHub</a></li>
+                <li><a href="https://linkedin.com/in/dylanbforde" target="_blank" rel="noreferrer"
+                        class="footer-link">LinkedIn</a></li>
+                <li><a href="https://dforde.substack.com/" target="_blank" rel="noreferrer"
+                        class="footer-link">Substack</a></li>
             </ul>
-            <p class="footer-copy">&copy; 2026 Dylan Forde. Built with paper & neon.</p>
+            <p class="footer-copy">Built to be clear, fast, and easy to maintain.</p>
         </div>
     </footer>
 

@@ -5,21 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Writing | Dylan Forde</title>
-    <meta name="description" content="Essays on AI, economics, game theory, and systems thinking.">
+    <meta name="description"
+        content="Essays by Dylan Forde on AI, coordination, economics, systems thinking, and technology." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:wght@700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Playfair+Display:wght@700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles/main.css">
 </head>
 
 <body class="paper-bg">
-
     <nav class="nav" id="navbar">
         <div class="container nav-inner">
             <a href="index.html" class="nav-logo">DF.</a>
-            <button class="nav-toggle" id="navToggle">
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"
+                aria-controls="navLinks">
                 <span></span><span></span><span></span>
             </button>
             <ul class="nav-links" id="navLinks">
@@ -28,83 +29,141 @@
                 <li><a href="projects.html" class="nav-link">Projects</a></li>
                 <li><a href="writing.html" class="nav-link active">Writing</a></li>
                 <li><a href="about.html" class="nav-link">About</a></li>
-                <li><a href="https://github.com/dylanbforde" target="_blank" class="btn btn-primary"
-                        style="padding: 0.25rem 1rem;">GitHub</a></li>
+                <li><a href="https://github.com/dylanbforde" target="_blank" rel="noreferrer"
+                        class="btn btn-secondary">GitHub</a></li>
             </ul>
         </div>
     </nav>
 
-    <header class="section text-center fade-in-up">
-        <div class="container">
-            <h1 class="hero-title">Writing & Thoughts</h1>
-            <p class="hero-subtitle">Essays on AI, economics, game theory, and complex systems.</p>
-        </div>
-    </header>
-
-    <section class="section">
-        <div class="container container-narrow">
-
-            <!-- Article 1: Tragedy of the Correlated Commons -->
-            <article class="card card-neon mb-lg fade-in-up">
-                <h2 class="mb-sm"><a href="writing/correlated-commons.html">Tragedy of the Correlated Commons</a></h2>
-                <p class="mb-md" style="font-style: italic; color: var(--text-secondary);">How Tiger Parents Engineer a
-                    World of Incrementalism (Why Your Weird Hobby Matters)</p>
-                <p class="mb-md">When parents correlate their strategies pushing kids toward SAT-optimized,
-                    resume-padding 'safe' milestones, they create a tragedy of the commons: a world starved of the deep,
-                    weird, uncorrelated innovations that only depth-first exploration can find.</p>
-                <div class="tags">
-                    <span class="tag">Education</span>
-                    <span class="tag">Game Theory</span>
-                    <span class="tag">Innovation</span>
+    <main>
+        <header class="hero">
+            <div class="hero-orb hero-orb-1"></div>
+            <div class="container">
+                <div class="hero-shell fade-in-up">
+                    <div class="hero-split">
+                        <section class="hero-copy">
+                            <span class="eyebrow">Writing</span>
+                            <p class="mono-line mt-lg">Essays on incentives, technology, economics, and systems</p>
+                            <h1 class="hero-title">Notes from the overlap between machine learning and social theory.
+                            </h1>
+                            <p class="hero-subtitle">
+                                Most of these essays try to take one technical frame, optimization, compounding,
+                                coordination, search, and use it to think more clearly about human systems.
+                            </p>
+                        </section>
+                        <aside class="hero-panel">
+                            <p class="mono-line mb-md">Why write?</p>
+                            <p>
+                                Writing is where I pressure-test intuitions that are too fuzzy to deserve confidence
+                                yet. The essays are usually trying to explain a mechanism, not just take a stance.
+                            </p>
+                            <div class="button-row">
+                                <a href="https://dforde.substack.com/" target="_blank" rel="noreferrer"
+                                    class="btn btn-primary">Substack</a>
+                                <a href="about.html" class="btn btn-secondary">About Me</a>
+                            </div>
+                        </aside>
+                    </div>
                 </div>
-            </article>
-
-            <!-- Article 2: The Communist Constraint -->
-            <article class="card card-neon mb-lg fade-in-up delay-1">
-                <h2 class="mb-sm"><a href="writing/communist-constraint.html">The Communist Constraint</a></h2>
-                <p class="mb-md" style="font-style: italic; color: var(--text-secondary);">How Gradient Descent Explains
-                    the Fall of the Soviet Union</p>
-                <p class="mb-md">Picture two ML engineers optimizing human welfare: Adam Smith deploys stochastic
-                    gradient descent with thousands of independent agents. Karl insists on batch gradient descent. The
-                    optimization problem that ate the 20th century explained through machine learning.</p>
-                <div class="tags">
-                    <span class="tag">Machine Learning</span>
-                    <span class="tag">Economics</span>
-                    <span class="tag">Optimization</span>
-                </div>
-            </article>
-
-            <!-- Article 3: Compounding Returns of Genetic Capital -->
-            <article class="card card-neon mb-lg fade-in-up delay-2">
-                <h2 class="mb-sm"><a href="writing/genetic-capital.html">Compounding Returns of Genetic Capital</a></h2>
-                <p class="mb-md" style="font-style: italic; color: var(--text-secondary);">How Embryonic Selection
-                    Creates Exponential Divergence in Human Potential</p>
-                <p class="mb-md">In 2006, Warren Buffet donated $31 billion to the Gates Foundation; yet a hypothetical
-                    $10 thousand invested in embryonic selection might yield greater social welfare returns. Through the
-                    compound interest of genetic advantages across generations, small differences today create vast
-                    divides tomorrow.</p>
-                <div class="tags">
-                    <span class="tag">Genomics</span>
-                    <span class="tag">Economics</span>
-                    <span class="tag">Game Theory</span>
-                </div>
-            </article>
-
-            <!-- Substack CTA -->
-            <div class="card text-center fade-in-up"
-                style="background: linear-gradient(135deg, rgba(0, 229, 255, 0.05) 0%, rgba(255, 107, 53, 0.05) 100%);">
-                <h3 class="mb-sm">More on Substack</h3>
-                <p class="mb-md">Subscribe to FordeSight for new essays on AI, systems thinking, and technology.</p>
-                <a href="https://dforde.substack.com/" target="_blank" class="btn btn-primary">Subscribe on Substack
-                    →</a>
             </div>
+        </header>
 
-        </div>
-    </section>
+        <section class="section" style="padding-top: 0;">
+            <div class="container">
+                <div class="writing-grid">
+                    <article class="card card-neon reveal">
+                        <div class="feature-meta">Essay / Education / Game Theory</div>
+                        <h3 class="mb-sm"><a href="writing/correlated-commons.html">Tragedy of the Correlated
+                                Commons</a></h3>
+                        <p class="mb-md">
+                            How prestige optimization and correlated parenting strategies can produce safer outcomes for
+                            individuals while starving the frontier of weird, depth-first exploration.
+                        </p>
+                        <div class="tags">
+                            <span class="tag">Innovation</span>
+                            <span class="tag">Coordination</span>
+                            <span class="tag">Search</span>
+                        </div>
+                        <a href="writing/correlated-commons.html" class="card-link">Read essay <span
+                                aria-hidden="true">→</span></a>
+                    </article>
 
-    <footer class="footer section">
-        <div class="container">
-            <p class="footer-copy">&copy; 2026 Dylan Forde. Built with paper & neon.</p>
+                    <article class="card card-neon reveal delay-1">
+                        <div class="feature-meta">Essay / Economics / Optimization</div>
+                        <h3 class="mb-sm"><a href="writing/communist-constraint.html">The Communist Constraint</a></h3>
+                        <p class="mb-md">
+                            A machine-learning-flavored argument for why centrally optimized systems struggle when the
+                            environment is high-dimensional, adaptive, and computationally ugly.
+                        </p>
+                        <div class="tags">
+                            <span class="tag">Markets</span>
+                            <span class="tag">Gradient Descent</span>
+                            <span class="tag">Complexity</span>
+                        </div>
+                        <a href="writing/communist-constraint.html" class="card-link">Read essay <span
+                                aria-hidden="true">→</span></a>
+                    </article>
+
+                    <article class="card card-neon reveal delay-2">
+                        <div class="feature-meta">Essay / Genetics / Long Horizon</div>
+                        <h3 class="mb-sm"><a href="writing/genetic-capital.html">Compounding Returns of Genetic
+                                Capital</a></h3>
+                        <p class="mb-md">
+                            On selection, compounding effects across generations, and why some technologies matter
+                            mostly because their consequences stack over time.
+                        </p>
+                        <div class="tags">
+                            <span class="tag">Genomics</span>
+                            <span class="tag">Compounding</span>
+                            <span class="tag">Policy</span>
+                        </div>
+                        <a href="writing/genetic-capital.html" class="card-link">Read essay <span
+                                aria-hidden="true">→</span></a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="split-grid">
+                    <section class="section-panel reveal">
+                        <p class="mono-line mb-sm">Common Threads</p>
+                        <h2 class="section-title">The essays keep circling the same few ideas</h2>
+                        <div class="tags">
+                            <span class="tag">Optimization as a worldview</span>
+                            <span class="tag">Coordination failures</span>
+                            <span class="tag">Compounding incentives</span>
+                            <span class="tag">Technological drift</span>
+                            <span class="tag">Institutional fragility</span>
+                        </div>
+                    </section>
+                    <aside class="section-panel reveal delay-1">
+                        <p class="mono-line mb-sm">Elsewhere</p>
+                        <p>
+                            The site mirrors selected essays, but the main writing stream lives on Substack. That is
+                            where newer drafts and more frequent notes land first.
+                        </p>
+                        <div class="button-row">
+                            <a href="https://dforde.substack.com/" target="_blank" rel="noreferrer"
+                                class="btn btn-primary">Visit Substack</a>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <ul class="footer-links">
+                <li><a href="index.html" class="footer-link">Home</a></li>
+                <li><a href="projects.html" class="footer-link">Projects</a></li>
+                <li><a href="resume.html" class="footer-link">Resume</a></li>
+                <li><a href="https://dforde.substack.com/" target="_blank" rel="noreferrer"
+                        class="footer-link">Substack</a></li>
+            </ul>
+            <p class="footer-copy">Essays, not content marketing.</p>
         </div>
     </footer>
 

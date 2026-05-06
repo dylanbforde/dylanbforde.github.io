@@ -5,20 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | Dylan Forde</title>
+    <meta name="description"
+        content="More about Dylan Forde: background, working style, interests, and how to get in touch." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:wght@700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Playfair+Display:wght@700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles/main.css">
 </head>
 
 <body class="paper-bg">
-
     <nav class="nav" id="navbar">
         <div class="container nav-inner">
             <a href="index.html" class="nav-logo">DF.</a>
-            <button class="nav-toggle" id="navToggle">
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"
+                aria-controls="navLinks">
                 <span></span><span></span><span></span>
             </button>
             <ul class="nav-links" id="navLinks">
@@ -27,54 +29,151 @@
                 <li><a href="projects.html" class="nav-link">Projects</a></li>
                 <li><a href="writing.html" class="nav-link">Writing</a></li>
                 <li><a href="about.html" class="nav-link active">About</a></li>
-                <li><a href="https://github.com/dylanbforde" target="_blank" class="btn btn-primary"
-                        style="padding: 0.25rem 1rem;">GitHub</a></li>
+                <li><a href="https://github.com/dylanbforde" target="_blank" rel="noreferrer"
+                        class="btn btn-secondary">GitHub</a></li>
             </ul>
         </div>
     </nav>
 
-    <header class="section text-center fade-in-up">
-        <div class="container">
-            <h1 class="hero-title">About Me</h1>
-        </div>
-    </header>
-
-    <section class="section">
-        <div class="container container-narrow">
-            <div class="card card-neon fade-in-up">
-                <p class="mb-md">
-                    Hello! I'm Dylan Forde, an AI Engineer and Researcher based in Ireland. I specialize in building
-                    intelligent systems that bridge the gap between theoretical research and practical, scalable
-                    application.
-                </p>
-                <p class="mb-md">
-                    My work spans autonomous driving, medical imaging, and large-scale data infrastructure. I'm
-                    passionate about clean code, rigorous testing, and the aesthetic beauty of well-engineered systems.
-                </p>
-                <p class="mb-lg">
-                    When I'm not coding, I'm likely reading about the latest in deep learning, or enjoying the rugged
-                    landscapes of Ireland that inspired this website's design.
-                </p>
-
-                <h3 class="mb-md">Connect</h3>
-                <div class="grid grid-2">
-                    <a href="mailto:forde.dylan@gmail.com" class="btn btn-secondary text-center"
-                        style="display: flex; justify-content: center;">Email</a>
-                    <a href="https://linkedin.com/in/dylanbforde" target="_blank" class="btn btn-secondary text-center"
-                        style="display: flex; justify-content: center;">LinkedIn</a>
-                    <a href="https://github.com/dylanbforde" target="_blank" class="btn btn-secondary text-center"
-                        style="display: flex; justify-content: center;">GitHub</a>
-                    <a href="https://www.goodreads.com/user/show/195775990-dylan-forde" target="_blank"
-                        class="btn btn-secondary text-center"
-                        style="display: flex; justify-content: center;">Goodreads</a>
+    <main>
+        <header class="hero">
+            <div class="hero-orb hero-orb-2"></div>
+            <div class="container">
+                <div class="hero-shell fade-in-up">
+                    <div class="hero-split">
+                        <section class="hero-copy">
+                            <span class="eyebrow">About</span>
+                            <p class="mono-line mt-lg">Engineer, researcher, reader, systems-minded generalist</p>
+                            <h1 class="hero-title">I like difficult technical work that still has to be useful.</h1>
+                            <p class="hero-subtitle">
+                                My background crosses data science, deep learning, infrastructure, and software
+                                engineering. I do my best work on problems that need both technical depth and
+                                practical implementation.
+                            </p>
+                        </section>
+                        <aside class="hero-panel">
+                            <p class="mono-line mb-md">Current location</p>
+                            <ul class="profile-list">
+                                <li>Based in Ireland, currently working in Galway.</li>
+                                <li>Interested in autonomous systems, efficient ML, and research engineering.</li>
+                                <li>Outside work I spend a lot of time reading, writing, and refining my tools.</li>
+                            </ul>
+                        </aside>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </header>
 
-    <footer class="footer section">
-        <div class="container">
-            <p class="footer-copy">&copy; 2026 Dylan Forde. Built with paper & neon.</p>
+        <section class="section" style="padding-top: 0;">
+            <div class="container">
+                <div class="split-grid">
+                    <section class="section-panel reveal">
+                        <p class="mono-line mb-sm">Working style</p>
+                        <h2 class="section-title">How I tend to approach problems</h2>
+                        <ul class="feature-list">
+                            <li>I prefer explicit systems over magical ones. Good abstractions are earned by surviving
+                                contact with edge cases.</li>
+                            <li>I care about speed, but the real gains usually come from better interfaces, fewer
+                                handoffs, and cleaner feedback loops.</li>
+                            <li>I like reading source code, tracing data movement, and understanding failure modes
+                                before trying to "improve" anything.</li>
+                            <li>I am unusually comfortable moving between algorithmic work and operational plumbing.
+                            </li>
+                        </ul>
+                    </section>
+                    <aside class="section-panel reveal delay-1">
+                        <p class="mono-line mb-sm">Outside work</p>
+                        <p>
+                            A lot of my off-hours go into essays, books, and side projects that sit somewhere between
+                            economics, machine learning, coordination problems, and technology history.
+                        </p>
+                        <p>
+                            This site is static because it is easy to understand, easy to host, and hard to break by
+                            accident.
+                        </p>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-shell">
+                    <div class="section-header">
+                        <div>
+                            <p class="mono-line mb-sm">Interests</p>
+                            <h2 class="section-title">Things I keep coming back to</h2>
+                        </div>
+                    </div>
+                    <div class="feature-grid">
+                        <article class="card reveal">
+                            <div class="feature-meta">Technical</div>
+                            <h3 class="feature-title">Efficient ML and kernel-level thinking</h3>
+                            <p>
+                                Long-context methods, hardware-aware optimization, and performance work that translates
+                                into tangible throughput wins.
+                            </p>
+                        </article>
+                        <article class="card reveal delay-1">
+                            <div class="feature-meta">Systems</div>
+                            <h3 class="feature-title">Pipelines that become easier to trust</h3>
+                            <p>
+                                Better orchestration, test coverage, and tooling so teams spend less time fighting the
+                                system around the model.
+                            </p>
+                        </article>
+                        <article class="card reveal delay-2">
+                            <div class="feature-meta">Writing</div>
+                            <h3 class="feature-title">Essays that use technical ideas as explanatory tools</h3>
+                            <p>
+                                I like using concepts from optimization, economics, and complex systems to think
+                                clearly about social and technological change.
+                            </p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="contact-grid">
+                    <article class="card reveal">
+                        <p class="mono-line mb-sm">Connect</p>
+                        <h3 class="mb-md">The straightforward options</h3>
+                        <div class="button-row">
+                            <a href="mailto:forde.dylan@gmail.com" class="btn btn-primary">Email</a>
+                            <a href="https://linkedin.com/in/dylanbforde" target="_blank" rel="noreferrer"
+                                class="btn btn-secondary">LinkedIn</a>
+                            <a href="https://github.com/dylanbforde" target="_blank" rel="noreferrer"
+                                class="btn btn-secondary">GitHub</a>
+                        </div>
+                    </article>
+                    <article class="card reveal delay-1">
+                        <p class="mono-line mb-sm">Also Here</p>
+                        <h3 class="mb-md">Writing and reading traces</h3>
+                        <div class="button-row">
+                            <a href="writing.html" class="btn btn-secondary">Writing</a>
+                            <a href="https://dforde.substack.com/" target="_blank" rel="noreferrer"
+                                class="btn btn-secondary">Substack</a>
+                            <a href="https://www.goodreads.com/user/show/195775990-dylan-forde" target="_blank"
+                                rel="noreferrer" class="btn btn-secondary">Goodreads</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <ul class="footer-links">
+                <li><a href="index.html" class="footer-link">Home</a></li>
+                <li><a href="resume.html" class="footer-link">Resume</a></li>
+                <li><a href="projects.html" class="footer-link">Projects</a></li>
+                <li><a href="writing.html" class="footer-link">Writing</a></li>
+            </ul>
+            <p class="footer-copy">Simple stack, clear writing, no unnecessary moving parts.</p>
         </div>
     </footer>
 

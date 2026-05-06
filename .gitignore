@@ -1,0 +1,6 @@
+.DS_Store
+.codex
+.agents/
+_site/
+__pycache__/
+*.py[cod]

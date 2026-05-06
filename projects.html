@@ -5,20 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects | Dylan Forde</title>
+    <meta name="description"
+        content="Selected projects across autonomous systems, deep learning, medical imaging, genomics, and infrastructure." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:wght@700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Playfair+Display:wght@700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles/main.css">
 </head>
 
 <body class="paper-bg">
-
     <nav class="nav" id="navbar">
         <div class="container nav-inner">
             <a href="index.html" class="nav-logo">DF.</a>
-            <button class="nav-toggle" id="navToggle">
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"
+                aria-controls="navLinks">
                 <span></span><span></span><span></span>
             </button>
             <ul class="nav-links" id="navLinks">
@@ -27,140 +29,268 @@
                 <li><a href="projects.html" class="nav-link active">Projects</a></li>
                 <li><a href="writing.html" class="nav-link">Writing</a></li>
                 <li><a href="about.html" class="nav-link">About</a></li>
-                <li><a href="https://github.com/dylanbforde" target="_blank" class="btn btn-primary"
-                        style="padding: 0.25rem 1rem;">GitHub</a></li>
+                <li><a href="https://github.com/dylanbforde" target="_blank" rel="noreferrer"
+                        class="btn btn-secondary">GitHub</a></li>
             </ul>
         </div>
     </nav>
 
-    <header class="section text-center fade-in-up">
-        <div class="container">
-            <h1 class="hero-title">Featured Projects</h1>
-            <p class="hero-subtitle">
-                A collection of research, technical implementations, and experiments in AI and Software Engineering.
-            </p>
-            <div class="mt-lg">
-                <a href="https://github.com/dylanbforde" target="_blank" class="btn btn-primary">View All on GitHub</a>
+    <main>
+        <header class="hero">
+            <div class="hero-orb hero-orb-1"></div>
+            <div class="hero-orb hero-orb-3"></div>
+            <div class="container">
+                <div class="hero-shell fade-in-up">
+                    <div class="hero-split">
+                        <section class="hero-copy">
+                            <span class="eyebrow">Selected Projects</span>
+                            <p class="mono-line mt-lg">Research engineering, production systems, and applied ML</p>
+                            <h1 class="hero-title">Work that sits between algorithm design and practical deployment.
+                            </h1>
+                            <p class="hero-subtitle">
+                                Some projects are research-heavy, some are infrastructure-heavy, and some are purely
+                                applied. The interesting ones usually involve all three.
+                            </p>
+                            <div class="button-row">
+                                <a href="https://github.com/dylanbforde" target="_blank" rel="noreferrer"
+                                    class="btn btn-primary">GitHub Profile</a>
+                                <a href="resume.html" class="btn btn-secondary">Resume Context</a>
+                            </div>
+                        </section>
+                        <aside class="hero-panel">
+                            <p class="mono-line mb-md">Themes</p>
+                            <div class="tags">
+                                <span class="tag tag-gradient">Autonomous Systems</span>
+                                <span class="tag">Long-context Models</span>
+                                <span class="tag">Medical Imaging</span>
+                                <span class="tag">Genomics</span>
+                                <span class="tag">Deep RL</span>
+                                <span class="tag">Forecasting</span>
+                            </div>
+                            <div class="subtle-divider"></div>
+                            <p>
+                                I am generally drawn to projects with messy data, weak abstractions, and enough
+                                technical depth that performance and correctness have to be argued for, not assumed.
+                            </p>
+                        </aside>
+                    </div>
+                </div>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <section class="section" style="padding-top: 0;">
-        <div class="container">
-
-            <h2 class="section-title mb-lg text-center">Research Projects</h2>
-            <div class="grid grid-2 mb-2xl">
-                <!-- Multi-Omics -->
-                <article class="card card-neon fade-in-up">
-                    <div class="mb-sm" style="color: var(--text-muted); font-size: 0.85rem;">2024–2025</div>
-                    <h3 class="mb-sm">Multi-Omics Analysis for Hepatic Liver Cancer</h3>
-                    <div class="tags mb-md">
-                        <span class="tag">Deep Learning</span>
-                        <span class="tag">Bioinformatics</span>
-                        <span class="tag">Multi-omics</span>
+        <section class="section" style="padding-top: 0;">
+            <div class="container">
+                <div class="section-shell">
+                    <div class="section-header">
+                        <div>
+                            <p class="mono-line mb-sm">Production and Systems</p>
+                            <h2 class="section-title">Operational work</h2>
+                        </div>
+                        <p class="section-subtitle">
+                            The work closest to deployment usually has the hardest constraints and the most useful
+                            feedback loops.
+                        </p>
                     </div>
-                    <p>Integrated genomic, transcriptomic, and proteomic data to identify predictive biomarkers of liver
-                        cancer progression. Applied deep learning and statistical modeling methods to complex
-                        multi-omics data pipelines.</p>
-                </article>
-
-                <!-- Domain Shift RL -->
-                <article class="card card-neon fade-in-up delay-1">
-                    <div class="mb-sm" style="color: var(--text-muted); font-size: 0.85rem;">2019–2020</div>
-                    <h3 class="mb-sm">Intrinsic Quantification of Domain Shift in RL</h3>
-                    <div class="tags mb-md">
-                        <span class="tag">Reinforcement Learning</span>
-                        <span class="tag">OpenAI Gym</span>
-                        <span class="tag">Research</span>
+                    <div class="project-grid">
+                        <article class="card reveal">
+                            <div class="feature-meta">Valeo</div>
+                            <h3 class="feature-title">Generative parking-trace pipeline</h3>
+                            <p>
+                                Pipeline for complex object insertion and removal over parking video traces using
+                                segmentation, masking, and inpainting to support downstream model development.
+                            </p>
+                            <div class="tags mt-md">
+                                <span class="tag">Computer Vision</span>
+                                <span class="tag">GenAI</span>
+                                <span class="tag">Data Pipelines</span>
+                            </div>
+                        </article>
+                        <article class="card reveal delay-1">
+                            <div class="feature-meta">Infrastructure</div>
+                            <h3 class="feature-title">Airflow and Kubernetes orchestration stack</h3>
+                            <p>
+                                Reworked DAGs, improved dependency behavior, and designed scalable task routing across
+                                cloud and on-prem compute for data extraction and processing.
+                            </p>
+                            <div class="tags mt-md">
+                                <span class="tag">Airflow</span>
+                                <span class="tag">Kubernetes</span>
+                                <span class="tag">Docker</span>
+                            </div>
+                        </article>
+                        <article class="card reveal delay-2">
+                            <div class="feature-meta">Performance</div>
+                            <h3 class="feature-title">JAX optimization for height maps and point clouds</h3>
+                            <p>
+                                Ported processing paths to JAX and Pallas-style kernels to cut expensive workloads down
+                                dramatically and make throughput less hardware-specific.
+                            </p>
+                            <div class="tags mt-md">
+                                <span class="tag">JAX</span>
+                                <span class="tag">Kernel Optimization</span>
+                                <span class="tag">3D Data</span>
+                            </div>
+                        </article>
                     </div>
-                    <p>Developed methods to quantify the effects of domain shift on RL agents using reactive
-                        exploration. Implemented experiments across multiple OpenAI Gym environments to evaluate
-                        predictive capability.</p>
-                </article>
+                </div>
             </div>
+        </section>
 
-            <h2 class="section-title mb-lg text-center">Technical & Engineering</h2>
-            <div class="grid grid-3">
-                <!-- Cancer Vaccine GNN -->
-                <article class="card card-neon fade-in-up">
-                    <h3 class="mb-sm">Personalized Cancer Vaccine Design (Graph AI)</h3>
-                    <div class="tags mb-md">
-                        <span class="tag">GNN</span>
-                        <span class="tag">Graph AI</span>
-                        <span class="tag">Bioinformatics</span>
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <p class="mono-line mb-sm">Research and Manuscripts</p>
+                        <h2 class="section-title">Projects with a stronger theory component</h2>
                     </div>
-                    <p>Built an end-to-end pipeline from TCGA mutations to peptide candidates. Modeled peptide–MHC
-                        binding with GNNs trained on IEDB data and validated with UniProt context to rank neoantigens.
-                    </p>
-                </article>
-
-                <!-- Cardiac MRI -->
-                <article class="card card-neon fade-in-up delay-1">
-                    <h3 class="mb-sm">Cardiac MRI Segmentation (3D SegFormer)</h3>
-                    <div class="tags mb-md">
-                        <span class="tag">Computer Vision</span>
-                        <span class="tag">3D MixTransformer</span>
-                        <span class="tag">Segmentation</span>
-                    </div>
-                    <p>Implemented a 3D MixTransformer backbone with overlapping 3D patch embeddings and stochastic
-                        depth. Produced voxel-wise masks via trilinear upsampling for volumetric anatomy.</p>
-                </article>
-
-                <!-- MRI Classification -->
-                <article class="card card-neon fade-in-up delay-2">
-                    <h3 class="mb-sm">MRNet MRI Classification (ViT)</h3>
-                    <div class="tags mb-md">
-                        <span class="tag">Vision Transformers</span>
-                        <span class="tag">Attention</span>
-                        <span class="tag">Medical Imaging</span>
-                    </div>
-                    <p>Tokenized 2D slices into patch sequences and applied multi-head self-attention. Aggregated
-                        slice-level CLS tokens using dedicated inter-slice attention for volume-aware diagnosis.</p>
-                </article>
-
-                <!-- Drug Response ODE -->
-                <article class="card card-neon fade-in-up">
-                    <h3 class="mb-sm">ODE Modelling for Drug Response</h3>
-                    <div class="tags mb-md">
-                        <span class="tag">ODE</span>
-                        <span class="tag">Network Biology</span>
-                        <span class="tag">GENIE3</span>
-                    </div>
-                    <p>Analyzed GRN outputs to derive network statistics and consensus interactions. Integrated ranked
-                        interactions into downstream survival/response feature sets.</p>
-                </article>
-
-                <!-- Deep RL Atari -->
-                <article class="card card-neon fade-in-up delay-1">
-                    <h3 class="mb-sm">Deep RL Agents for Atari</h3>
-                    <div class="tags mb-md">
-                        <span class="tag">Deep RL</span>
-                        <span class="tag">Atari</span>
-                        <span class="tag">Benchmarking</span>
-                    </div>
-                    <p>Implemented agents under domain shifts, including spaced-repetition-style training to test recall
-                        robustness across classic control and Atari tasks.</p>
-                </article>
-
-                <!-- NixOS Config -->
-                <article class="card card-neon fade-in-up delay-2">
-                    <h3 class="mb-sm">NixOS Configuration & Dotfiles</h3>
-                    <div class="tags mb-md">
-                        <span class="tag">NixOS</span>
-                        <span class="tag">Nix Flakes</span>
-                        <span class="tag">DevOps</span>
-                    </div>
-                    <p>Reproducible NixOS system configuration using flakes. Includes Hyprland, development
-                        environments, and container tooling.</p>
-                </article>
+                </div>
+                <div class="project-grid">
+                    <article class="card card-neon reveal">
+                        <div class="feature-meta">Optimal Transport</div>
+                        <h3 class="feature-title">Block-wise differentiable Sinkhorn attention</h3>
+                        <p>
+                            Designed a memory-efficient long-context attention mechanism with a custom multi-plan
+                            backward pass and linear-memory scaling target.
+                        </p>
+                        <div class="tags mt-md">
+                            <span class="tag">NeurIPS Manuscript</span>
+                            <span class="tag">TPU v6e</span>
+                            <span class="tag">JAX Pallas</span>
+                        </div>
+                    </article>
+                    <article class="card card-neon reveal delay-1">
+                        <div class="feature-meta">Deep RL</div>
+                        <h3 class="feature-title">Intrinsic quantification of domain shift magnitude</h3>
+                        <p>
+                            Developed methods for measuring domain shift through reactive exploration and evaluated them
+                            across OpenAI Gym environments.
+                        </p>
+                        <div class="tags mt-md">
+                            <span class="tag">Reinforcement Learning</span>
+                            <span class="tag">Evaluation</span>
+                            <span class="tag">OpenAI Gym</span>
+                        </div>
+                    </article>
+                    <article class="card card-neon reveal delay-2">
+                        <div class="feature-meta">LLM Evaluation</div>
+                        <h3 class="feature-title">Copilot semantic assessment initiative</h3>
+                        <p>
+                            Combined NLP techniques, topic modeling, and semantic accuracy analysis to evaluate model
+                            usefulness and behavior in developer-facing contexts.
+                        </p>
+                        <div class="tags mt-md">
+                            <span class="tag">NLP</span>
+                            <span class="tag">Evaluation</span>
+                            <span class="tag">Developer Tools</span>
+                        </div>
+                    </article>
+                </div>
             </div>
+        </section>
 
-        </div>
-    </section>
+        <section class="section">
+            <div class="container">
+                <div class="section-shell">
+                    <div class="section-header">
+                        <div>
+                            <p class="mono-line mb-sm">Applied ML</p>
+                            <h2 class="section-title">Bio, vision, and modeling projects</h2>
+                        </div>
+                    </div>
+                    <div class="project-grid">
+                        <article class="card reveal">
+                            <div class="feature-meta">Graph AI</div>
+                            <h3 class="feature-title">Personalized cancer vaccine design</h3>
+                            <p>
+                                End-to-end pipeline from TCGA mutations to neoantigen ranking using peptide-MHC
+                                prediction, graph methods, and biological validation signals.
+                            </p>
+                            <div class="tags mt-md">
+                                <span class="tag">GNNs</span>
+                                <span class="tag">IEDB</span>
+                                <span class="tag">UniProt</span>
+                            </div>
+                        </article>
+                        <article class="card reveal delay-1">
+                            <div class="feature-meta">Medical Imaging</div>
+                            <h3 class="feature-title">Cardiac MRI segmentation with 3D SegFormer</h3>
+                            <p>
+                                Implemented a 3D MixTransformer-style encoder with overlapping patch embeddings and
+                                multi-scale decoding for volumetric segmentation tasks.
+                            </p>
+                            <div class="tags mt-md">
+                                <span class="tag">3D Vision</span>
+                                <span class="tag">Segmentation</span>
+                                <span class="tag">Transformers</span>
+                            </div>
+                        </article>
+                        <article class="card reveal delay-2">
+                            <div class="feature-meta">Medical Imaging</div>
+                            <h3 class="feature-title">MRNet MRI classification with slice attention</h3>
+                            <p>
+                                Combined patch tokenization, self-attention, and inter-slice aggregation to build
+                                volume-aware diagnostic classifiers for MRI studies.
+                            </p>
+                            <div class="tags mt-md">
+                                <span class="tag">ViT</span>
+                                <span class="tag">Attention</span>
+                                <span class="tag">MRI</span>
+                            </div>
+                        </article>
+                        <article class="card reveal">
+                            <div class="feature-meta">Systems Biology</div>
+                            <h3 class="feature-title">ODE modeling for drug response prediction</h3>
+                            <p>
+                                Analyzed regulatory network output and integrated ranked interactions into downstream
+                                survival and response modeling workflows.
+                            </p>
+                            <div class="tags mt-md">
+                                <span class="tag">ODEs</span>
+                                <span class="tag">GENIE3</span>
+                                <span class="tag">Network Biology</span>
+                            </div>
+                        </article>
+                        <article class="card reveal delay-1">
+                            <div class="feature-meta">Forecasting</div>
+                            <h3 class="feature-title">Forecasting model benchmarking and SaaS transition</h3>
+                            <p>
+                                Benchmarked against strong public baselines and delivered alternative models while
+                                helping move forecasting capability into a more scalable product shape.
+                            </p>
+                            <div class="tags mt-md">
+                                <span class="tag">LightGBM</span>
+                                <span class="tag">XGBoost</span>
+                                <span class="tag">ARIMA</span>
+                            </div>
+                        </article>
+                        <article class="card reveal delay-2">
+                            <div class="feature-meta">Personal Systems</div>
+                            <h3 class="feature-title">NixOS configuration and reproducible environments</h3>
+                            <p>
+                                Ongoing system configuration work around flakes, developer environments, container
+                                tooling, and maintaining a machine that stays pleasant to use.
+                            </p>
+                            <div class="tags mt-md">
+                                <span class="tag">NixOS</span>
+                                <span class="tag">Flakes</span>
+                                <span class="tag">Dev Environments</span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-    <footer class="footer section">
-        <div class="container">
-            <p class="footer-copy">&copy; 2026 Dylan Forde. Built with paper & neon.</p>
+    <footer class="footer">
+        <div class="container footer-inner">
+            <ul class="footer-links">
+                <li><a href="resume.html" class="footer-link">Resume</a></li>
+                <li><a href="writing.html" class="footer-link">Writing</a></li>
+                <li><a href="about.html" class="footer-link">About</a></li>
+                <li><a href="mailto:forde.dylan@gmail.com" class="footer-link">Email</a></li>
+            </ul>
+            <p class="footer-copy">A static portfolio is enough if the work itself is concrete.</p>
         </div>
     </footer>
 
