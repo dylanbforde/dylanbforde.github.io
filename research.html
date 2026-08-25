@@ -107,14 +107,14 @@
                         <div>
                             <p class="stage-kicker">Block-wise transport attention</p>
                             <p class="stage-description" data-stage-description>
-                                Hover or move across the field to inspect how a query owns a local transport window.
+                                The active tile moves through banded support while the rest of the plan stays out of memory.
                             </p>
                         </div>
                         <div class="stage-controls" aria-label="Visualization mode">
-                            <button class="stage-control" type="button" data-mode="transport"
-                                aria-pressed="true">Transport</button>
                             <button class="stage-control" type="button" data-mode="stream"
-                                aria-pressed="false">Block stream</button>
+                                aria-pressed="true">Block stream</button>
+                            <button class="stage-control" type="button" data-mode="transport"
+                                aria-pressed="false">Transport</button>
                             <button class="stage-control" type="button" data-mode="adjoint"
                                 aria-pressed="false">Tail adjoint</button>
                             <button class="stage-control" type="button" data-action="speed"
@@ -135,7 +135,7 @@
                             <span class="stage-stat">Reference tiles <strong>1</strong></span>
                             <span class="stage-stat">Extra HBM <strong>O(L)</strong></span>
                         </div>
-                        <p class="stage-stat" data-stage-status>Query 09 · local transport window</p>
+                        <p class="stage-stat" data-stage-status>Query 09 · one active plan tile</p>
                     </div>
                 </div>
 
@@ -263,7 +263,7 @@
     </footer>
 
     <script src="scripts/main.js?v=20260825"></script>
-    <script src="scripts/sinkhorn-visualization.js?v=20260825d"></script>
+    <script src="scripts/sinkhorn-visualization.js?v=20260825e"></script>
 </body>
 
 </html>

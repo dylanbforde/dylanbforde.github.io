@@ -35,8 +35,9 @@
         { multiplier: 0.12, label: "150× slow" }
     ];
 
-    let mode = "transport";
+    let mode = "stream";
     let selectedRow = 8;
+    let pointerInside = false;
     let speedIndex = reducedMotion ? 2 : 0;
     let paused = reducedMotion;
     let width = 0;
@@ -50,10 +51,10 @@
         ink: "#2d261f",
         muted: "#867a69",
         faint: "rgba(45, 38, 31, 0.1)",
-        cyan: "#0f9d8d",
-        cyanSoft: "rgba(15, 157, 141, 0.16)",
-        amber: "#d9782d",
-        amberSoft: "rgba(217, 120, 45, 0.14)",
+        cyan: "#00a3ff",
+        cyanSoft: "rgba(0, 163, 255, 0.16)",
+        amber: "#ff5c00",
+        amberSoft: "rgba(255, 92, 0, 0.14)",
         red: "#a54826",
         paper: "rgba(255, 252, 246, 0.92)"
     };
@@ -105,6 +106,15 @@
         context.stroke();
     };
 
+    const pointOnCurve = (x1, y1, x2, y2, bend, progress) => {
+        const centerX = (x1 + x2) / 2;
+        const inverse = 1 - progress;
+        return {
+            x: inverse ** 3 * x1 + 3 * inverse ** 2 * progress * centerX + 3 * inverse * progress ** 2 * centerX + progress ** 3 * x2,
+            y: inverse ** 3 * y1 + 3 * inverse ** 2 * progress * (y1 + bend) + 3 * inverse * progress ** 2 * (y2 - bend) + progress ** 3 * y2
+        };
+    };
+
     const drawSequenceLabels = (layout) => {
         context.save();
         context.fillStyle = palette.muted;
@@ -119,6 +129,12 @@
     const drawTransport = (time, layout) => {
         const phase = time * 0.0012 * speedStates[speedIndex].multiplier;
         const windowRadius = layout.compact ? 2 : 3;
+
+        if (!pointerInside) {
+            const sweep = (time * 0.00016 * speedStates[speedIndex].multiplier) % 2;
+            const pingPong = sweep <= 1 ? sweep : 2 - sweep;
+            selectedRow = Math.round(pingPong * (layout.count - 1));
+        }
 
         for (let row = 0; row < layout.count; row += 2) {
             const target = clamp(row + Math.round(Math.sin(phase + row * 0.7) * 2), 0, layout.count - 1);
@@ -138,16 +154,38 @@
             const distance = Math.abs(offset);
             const pulse = 0.76 + Math.sin(phase * 2.2 + offset) * 0.14;
             const opacity = clamp((1 - distance / (windowRadius + 1)) * pulse, 0.16, 0.9);
+            const startX = layout.left + 5;
+            const startY = nodeY(selectedRow, layout);
+            const endX = layout.right - 5;
+            const endY = nodeY(target, layout);
+            const bend = offset * 7;
             drawCurve(
-                layout.left + 5,
-                nodeY(selectedRow, layout),
-                layout.right - 5,
-                nodeY(target, layout),
+                startX,
+                startY,
+                endX,
+                endY,
                 opacity,
-                offset === 0 ? "rgba(15, 157, 141, ALPHA)" : "rgba(217, 120, 45, ALPHA)",
-                offset * 7
+                offset === 0 ? "rgba(0, 163, 255, ALPHA)" : "rgba(255, 92, 0, ALPHA)",
+                bend
             );
+
+            const flowProgress = (time * 0.00055 * speedStates[speedIndex].multiplier + (offset + windowRadius) * 0.11) % 1;
+            const particle = pointOnCurve(startX, startY, endX, endY, bend, flowProgress);
+            const particleColor = offset === 0 ? palette.cyan : palette.amber;
+            context.beginPath();
+            context.arc(particle.x, particle.y, distance === 0 ? 9 : 7, 0, Math.PI * 2);
+            context.fillStyle = offset === 0 ? "rgba(0, 163, 255, 0.16)" : "rgba(255, 92, 0, 0.13)";
+            context.fill();
+            context.beginPath();
+            context.arc(particle.x, particle.y, distance === 0 ? 4.2 : 3.2, 0, Math.PI * 2);
+            context.fillStyle = particleColor;
+            context.fill();
         }
+
+        context.fillStyle = palette.ink;
+        context.font = `${layout.compact ? 8 : 10}px JetBrains Mono, monospace`;
+        context.textAlign = "center";
+        context.fillText("MASS FLOW  →", width / 2, nodeY(selectedRow, layout) - 18);
 
         for (let row = 0; row < layout.count; row += 1) {
             drawNode(layout.left, nodeY(row, layout), row === selectedRow);
@@ -188,8 +226,8 @@
             for (let column = 0; column < matrix.cells; column += 1) {
                 if (Math.abs(row - column) <= band) {
                     context.fillStyle = row === active
-                        ? "rgba(15, 157, 141, 0.34)"
-                        : "rgba(15, 157, 141, 0.07)";
+                        ? "rgba(0, 163, 255, 0.34)"
+                        : "rgba(0, 163, 255, 0.07)";
                     context.fillRect(
                         matrix.x + column * matrix.cell + 1,
                         matrix.y + row * matrix.cell + 1,
@@ -225,7 +263,7 @@
         const tileX = matrix.x + matrix.size / 2 - tileSize / 2;
         const tileY = matrix.y + matrix.size / 2 - tileSize / 2;
 
-        context.fillStyle = "rgba(15, 157, 141, 0.2)";
+        context.fillStyle = "rgba(0, 163, 255, 0.2)";
         context.fillRect(tileX, tileY, tileSize, tileSize);
         context.strokeStyle = palette.cyan;
         context.lineWidth = 2;
@@ -239,7 +277,7 @@
             const y = tileY + tileSize / 2 + Math.sin(angle) * orbit;
             context.beginPath();
             context.arc(x, y, 18, 0, Math.PI * 2);
-            context.fillStyle = index === 0 ? palette.cyan : "rgba(217, 120, 45, 0.13)";
+            context.fillStyle = index === 0 ? palette.cyan : "rgba(255, 92, 0, 0.13)";
             context.fill();
             context.strokeStyle = index === 0 ? palette.ink : palette.amber;
             context.lineWidth = 1;
@@ -256,7 +294,7 @@
                 x,
                 y,
                 index === 0 ? 0.8 : 0.38,
-                index === 0 ? "rgba(15, 157, 141, ALPHA)" : "rgba(217, 120, 45, ALPHA)",
+                index === 0 ? "rgba(0, 163, 255, ALPHA)" : "rgba(255, 92, 0, ALPHA)",
                 0
             );
         });
@@ -333,6 +371,7 @@
         if (mode !== "transport") {
             return;
         }
+        pointerInside = true;
         const rect = canvas.getBoundingClientRect();
         const layout = getLayout();
         const pointerY = event.clientY - rect.top;
@@ -343,6 +382,9 @@
 
     canvas.addEventListener("pointermove", updateSelectedRow, { passive: true });
     canvas.addEventListener("pointerdown", updateSelectedRow, { passive: true });
+    canvas.addEventListener("pointerleave", () => {
+        pointerInside = false;
+    }, { passive: true });
 
     document.addEventListener("visibilitychange", () => {
         if (document.hidden && frameId) {
