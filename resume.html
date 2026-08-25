@@ -12,7 +12,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Playfair+Display:wght@700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/main.css?v=20260825c">
 </head>
 
 <body class="paper-bg">
@@ -25,8 +25,9 @@
             </button>
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="resume.html" class="nav-link active">Resume</a></li>
+                <li><a href="research.html" class="nav-link">Research</a></li>
                 <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="resume.html" class="nav-link active">Resume</a></li>
                 <li><a href="writing.html" class="nav-link">Writing</a></li>
                 <li><a href="about.html" class="nav-link">About</a></li>
                 <li><a href="https://github.com/dylanbforde" target="_blank" rel="noreferrer"
@@ -212,12 +213,15 @@
 
                         <div class="feature-grid">
                             <article class="card reveal">
-                                <div class="feature-meta">Manuscript</div>
-                                <h3 class="feature-title">Block-wise differentiable Sinkhorn attention</h3>
+                                <div class="feature-meta">arXiv Preprint · 2026</div>
+                                <h3 class="feature-title"><a href="research.html#blockwise-sinkhorn">Block-wise
+                                        differentiable Sinkhorn attention</a></h3>
                                 <p>
                                     Memory-efficient optimal transport attention with a custom backward pass, VMEM
                                     packing, and TPU-oriented JAX/Pallas kernels.
                                 </p>
+                                <a href="research.html#blockwise-sinkhorn" class="card-link">Research details <span
+                                        aria-hidden="true">→</span></a>
                             </article>
                             <article class="card reveal delay-1">
                                 <div class="feature-meta">Research</div>
@@ -358,7 +362,7 @@
         </div>
     </footer>
 
-    <script src="scripts/main.js"></script>
+    <script src="scripts/main.js?v=20260825"></script>
 </body>
 
 </html>

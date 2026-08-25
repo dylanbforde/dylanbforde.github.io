@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research | Dylan Forde</title>
+    <meta name="description"
+        content="Research by Dylan Forde across efficient attention, optimal transport, differentiable systems, and hardware-aware machine learning." />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Research | Dylan Forde">
+    <meta name="twitter:description"
+        content="Papers and research systems spanning block-wise Sinkhorn attention, optimal transport, and efficient machine learning.">
+    <meta property="og:title" content="Research | Dylan Forde">
+    <meta property="og:type" content="website">
+    <meta property="og:description"
+        content="Papers and research systems spanning block-wise Sinkhorn attention, optimal transport, and efficient machine learning.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Playfair+Display:wght@700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css?v=20260825c">
+</head>
+
+<body class="paper-bg">
+    <nav class="nav" id="navbar">
+        <div class="container nav-inner">
+            <a href="index.html" class="nav-logo">DF.</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"
+                aria-controls="navLinks">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="research.html" class="nav-link active">Research</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="resume.html" class="nav-link">Resume</a></li>
+                <li><a href="writing.html" class="nav-link">Writing</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="https://github.com/dylanbforde" target="_blank" rel="noreferrer"
+                        class="btn btn-secondary">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <header class="hero research-hero">
+            <div class="hero-orb hero-orb-1"></div>
+            <div class="hero-orb hero-orb-2"></div>
+            <div class="container">
+                <div class="hero-shell fade-in-up">
+                    <div class="hero-split">
+                        <section class="hero-copy">
+                            <span class="eyebrow">Research</span>
+                            <p class="mono-line mt-lg">Optimal transport / efficient attention / ML systems</p>
+                            <h1 class="hero-title">Research where mathematical structure meets hardware constraints.</h1>
+                            <p class="hero-subtitle">
+                                I work on learning systems that have to survive both theoretical scrutiny and real
+                                machines: differentiable transport, long-context attention, sparse derivatives, and
+                                implementations designed around the memory hierarchy.
+                            </p>
+                            <div class="button-row">
+                                <a href="#blockwise-sinkhorn" class="btn btn-primary">Explore Featured Paper</a>
+                                <a href="https://arxiv.org/search/?query=Dylan+Forde&amp;searchtype=author" target="_blank" rel="noreferrer"
+                                    class="btn btn-secondary">arXiv Author Page</a>
+                            </div>
+                        </section>
+                        <aside class="hero-panel">
+                            <p class="mono-line mb-md">Current direction</p>
+                            <h3 class="mb-md">Making structured attention practical at long context.</h3>
+                            <ul class="profile-list">
+                                <li>Exact, inspectable differentiation schedules rather than opaque memory blow-ups.</li>
+                                <li>Block-wise algorithms that align mathematical sparsity with accelerator memory.</li>
+                                <li>Evidence that separates numerical exactness, systems performance, and task outcomes.</li>
+                            </ul>
+                            <div class="subtle-divider"></div>
+                            <p class="mono-line">Europe · Independent research</p>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="section" id="blockwise-sinkhorn" style="padding-top: 0;">
+            <div class="container paper-feature">
+                <div class="paper-heading reveal">
+                    <div>
+                        <p class="mono-line mb-sm">Featured paper · arXiv:2605.08123 · April 2026</p>
+                        <h2 class="paper-title">Block-Wise Differentiable Sinkhorn Attention</h2>
+                        <p class="paper-deck">
+                            Tail-refinement gradients with a gap-aware dustbin bridge: a memory-efficient route to
+                            differentiating balanced entropic optimal-transport attention at long context.
+                        </p>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="https://arxiv.org/abs/2605.08123" target="_blank" rel="noreferrer"
+                            class="btn btn-primary">Read on arXiv</a>
+                        <a href="https://arxiv.org/pdf/2605.08123" target="_blank" rel="noreferrer"
+                            class="btn btn-secondary">Open PDF</a>
+                    </div>
+                </div>
+
+                <div class="research-stage reveal" data-sinkhorn-stage>
+                    <div class="stage-header">
+                        <div>
+                            <p class="stage-kicker">Block-wise transport attention</p>
+                            <p class="stage-description" data-stage-description>
+                                Hover or move across the field to inspect how a query owns a local transport window.
+                            </p>
+                        </div>
+                        <div class="stage-controls" aria-label="Visualization mode">
+                            <button class="stage-control" type="button" data-mode="transport"
+                                aria-pressed="true">Transport</button>
+                            <button class="stage-control" type="button" data-mode="stream"
+                                aria-pressed="false">Block stream</button>
+                            <button class="stage-control" type="button" data-mode="adjoint"
+                                aria-pressed="false">Tail adjoint</button>
+                            <button class="stage-control" type="button" data-action="speed"
+                                aria-pressed="false">Slow down</button>
+                            <button class="stage-control" type="button" data-action="pause"
+                                aria-pressed="false">Pause</button>
+                        </div>
+                    </div>
+                    <canvas class="sinkhorn-canvas" data-sinkhorn-canvas role="img"
+                        aria-label="Interactive visualization of block-wise Sinkhorn transport between query and key sequences. Move across the display to select a query row.">
+                        Your browser does not support Canvas. The paper uses a streamed block-wise transport schedule
+                        with one resident reference plan tile.
+                    </canvas>
+                    <div class="stage-footer">
+                        <div class="stage-stats">
+                            <span class="stage-stat">Context <strong>16K+</strong></span>
+                            <span class="stage-stat">Active support <strong>O(LW)</strong></span>
+                            <span class="stage-stat">Reference tiles <strong>1</strong></span>
+                            <span class="stage-stat">Extra HBM <strong>O(L)</strong></span>
+                        </div>
+                        <p class="stage-stat" data-stage-status>Query 09 · local transport window</p>
+                    </div>
+                </div>
+
+                <div class="paper-facts reveal">
+                    <article class="paper-fact">
+                        <p class="mono-line mb-sm">01 · Exact surrogate adjoint</p>
+                        <h3>One reference tile</h3>
+                        <p>
+                            For the reported two-step refinement path, the four staircase plan factors can be
+                            reconstructed from one resident reference tile and explicit row and column modifiers.
+                        </p>
+                    </article>
+                    <article class="paper-fact">
+                        <p class="mono-line mb-sm">02 · Hardware-aware schedule</p>
+                        <h3>Stream the active support</h3>
+                        <p>
+                            Fixed-width block-wise execution yields O((T+R)LW) work, O(Ld) input storage, and O(L)
+                            additional HBM for fixed head dimension and band width.
+                        </p>
+                    </article>
+                    <article class="paper-fact">
+                        <p class="mono-line mb-sm">03 · Structured gaps</p>
+                        <h3>Dustbin augmentation bridge</h3>
+                        <p>
+                            The implemented gap-aware path is formalized as the same balanced surrogate on an augmented
+                            support, allowing the adjoint schedule to lift without claiming a general unbalanced model.
+                        </p>
+                    </article>
+                </div>
+
+                <aside class="evidence-note reveal">
+                    <p class="mono-line mb-sm">Evidence boundary</p>
+                    <p>
+                        The optimized masked kernel matches exact autodiff of the same centered surrogate on synthetic
+                        checks. TPU experiments establish trainability and systems stability for the promoted balanced
+                        path; the paper reports mixed downstream alignment results and keeps those claims deliberately
+                        separate from kernel exactness.
+                    </p>
+                </aside>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <p class="mono-line mb-sm">Publications</p>
+                        <h2 class="section-title">Research record</h2>
+                    </div>
+                    <p class="section-subtitle">
+                        This index is designed to grow as new papers are released, with each paper receiving its own
+                        explanation, artifacts, and evidence boundary.
+                    </p>
+                </div>
+                <div class="publication-list reveal">
+                    <article class="publication-row">
+                        <div>
+                            <p class="publication-year">2026</p>
+                            <p class="publication-status">Preprint</p>
+                        </div>
+                        <div>
+                            <h3>Block-Wise Differentiable Sinkhorn Attention: Tail-Refinement Gradients with a
+                                Gap-Aware Dustbin Bridge</h3>
+                            <p>Dylan Forde</p>
+                        </div>
+                        <div class="publication-links">
+                            <a href="#blockwise-sinkhorn">Explore</a>
+                            <a href="https://arxiv.org/abs/2605.08123" target="_blank" rel="noreferrer">arXiv</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-shell">
+                    <div class="section-header">
+                        <div>
+                            <p class="mono-line mb-sm">Earlier research threads</p>
+                            <h2 class="section-title">Problems that shaped the current work</h2>
+                        </div>
+                    </div>
+                    <div class="feature-grid">
+                        <article class="card reveal">
+                            <div class="feature-meta">Deep reinforcement learning</div>
+                            <h3 class="feature-title">Intrinsic quantification of domain shift</h3>
+                            <p>
+                                Reactive exploration methods for measuring domain-shift magnitude across controlled
+                                reinforcement-learning environments.
+                            </p>
+                        </article>
+                        <article class="card reveal delay-1">
+                            <div class="feature-meta">Computational biology</div>
+                            <h3 class="feature-title">Multi-omics and biological representation learning</h3>
+                            <p>
+                                Research across biomarker discovery, protein representations, regulatory networks, and
+                                learning from heterogeneous biological signals.
+                            </p>
+                        </article>
+                        <article class="card reveal delay-2">
+                            <div class="feature-meta">Medical imaging</div>
+                            <h3 class="feature-title">Attention across volumetric MRI</h3>
+                            <p>
+                                Patch tokenization, self-attention, and inter-slice aggregation for volume-aware
+                                diagnostic classification.
+                            </p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <ul class="footer-links">
+                <li><a href="projects.html" class="footer-link">Projects</a></li>
+                <li><a href="resume.html" class="footer-link">Resume</a></li>
+                <li><a href="writing.html" class="footer-link">Writing</a></li>
+                <li><a href="mailto:forde.dylan@gmail.com" class="footer-link">Email</a></li>
+            </ul>
+            <p class="footer-copy">Theory, implementation, and evidence kept close together.</p>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js?v=20260825"></script>
+    <script src="scripts/sinkhorn-visualization.js?v=20260825d"></script>
+</body>
+
+</html>

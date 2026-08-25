@@ -20,7 +20,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Playfair+Display:wght@700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/main.css?v=20260825c">
 </head>
 
 <body class="paper-bg">
@@ -35,8 +35,9 @@
             </button>
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html" class="nav-link active">Home</a></li>
-                <li><a href="resume.html" class="nav-link">Resume</a></li>
+                <li><a href="research.html" class="nav-link">Research</a></li>
                 <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="resume.html" class="nav-link">Resume</a></li>
                 <li><a href="writing.html" class="nav-link">Writing</a></li>
                 <li><a href="about.html" class="nav-link">About</a></li>
                 <li><a href="https://github.com/dylanbforde" target="_blank" rel="noreferrer"
@@ -55,7 +56,7 @@
                 <div class="hero-shell fade-in-up">
                     <div class="hero-split">
                         <section class="hero-copy">
-                            <span class="eyebrow">Galway / Cork / Dublin</span>
+                            <span class="eyebrow">Europe</span>
                             <p class="mono-line mt-lg">AI engineer working across research and production systems</p>
                             <h1 class="hero-title">Building machine learning systems for real-world use.</h1>
                             <p class="hero-subtitle">
@@ -181,7 +182,10 @@
                             <p class="mono-line mb-sm">Selected Work</p>
                             <h2 class="section-title">Recent systems and research threads</h2>
                         </div>
-                        <a href="projects.html" class="btn btn-secondary">View Full Project List</a>
+                        <div class="button-row">
+                            <a href="research.html" class="btn btn-primary">Explore Research</a>
+                            <a href="projects.html" class="btn btn-secondary">View Projects</a>
+                        </div>
                     </div>
                     <div class="project-grid">
                         <article class="card reveal">
@@ -198,18 +202,21 @@
                                 <span class="tag">Computer Vision</span>
                             </div>
                         </article>
-                        <article class="card reveal delay-1">
-                            <div class="spotlight-meta">NeurIPS Manuscript</div>
-                            <h3 class="spotlight-title">Block-wise differentiable Sinkhorn attention</h3>
+                        <article class="card card-neon reveal delay-1">
+                            <div class="spotlight-meta">arXiv Preprint · 2026</div>
+                            <h3 class="spotlight-title"><a href="research.html#blockwise-sinkhorn">Block-wise
+                                    differentiable Sinkhorn attention</a></h3>
                             <p>
-                                Designed a memory-efficient optimal transport kernel for long-context alignment with a
-                                custom backward pass and TPU-oriented JAX/Pallas implementation.
+                                A block-wise optimal-transport attention kernel with an exact tail-refinement adjoint,
+                                one-reference-tile schedule, and TPU-oriented JAX implementation.
                             </p>
                             <div class="tags mt-md">
                                 <span class="tag">Optimal Transport</span>
                                 <span class="tag">TPU</span>
                                 <span class="tag">Kernel Engineering</span>
                             </div>
+                            <a href="research.html#blockwise-sinkhorn" class="card-link">Explore paper <span
+                                    aria-hidden="true">→</span></a>
                         </article>
                         <article class="card reveal delay-2">
                             <div class="spotlight-meta">Microsoft Research</div>
@@ -345,7 +352,7 @@
         </div>
     </footer>
 
-    <script src="scripts/main.js"></script>
+    <script src="scripts/main.js?v=20260825"></script>
 </body>
 
 </html>
