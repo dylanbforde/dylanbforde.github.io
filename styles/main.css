@@ -844,6 +844,216 @@ button:focus-visible {
   color: var(--ink-2);
 }
 
+.resume-trajectory {
+  padding-top: var(--space-lg);
+}
+
+.resume-trajectory .section-header {
+  align-items: end;
+}
+
+.trajectory-intro {
+  max-width: 34rem;
+  margin: 0;
+  color: var(--ink-2);
+}
+
+.career-map {
+  position: relative;
+  padding: clamp(1.8rem, 4vw, 3.4rem) 0 1rem;
+  border-top: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+  overflow: hidden;
+}
+
+.career-map::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 20%, rgba(0, 163, 255, 0.08), transparent 25%),
+    radial-gradient(circle at 88% 78%, rgba(255, 92, 0, 0.07), transparent 27%);
+}
+
+.career-track {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.career-track::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0.62rem;
+  left: 8.333%;
+  right: 8.333%;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(0, 163, 255, 0.6), rgba(255, 92, 0, 0.62));
+}
+
+.career-track::after {
+  content: "";
+  position: absolute;
+  top: 0.35rem;
+  left: 8.333%;
+  width: 0.68rem;
+  height: 0.68rem;
+  border-radius: 50%;
+  background: var(--paper-0);
+  border: 2px solid var(--accent-orange);
+  box-shadow: 0 0 0 5px rgba(255, 92, 0, 0.1);
+  animation: career-packet 7s ease-in-out infinite;
+}
+
+@keyframes career-packet {
+  0%, 8% { left: calc(8.333% - 0.34rem); border-color: var(--accent-blue); }
+  92%, 100% { left: calc(91.667% - 0.34rem); border-color: var(--accent-orange); }
+}
+
+.career-stop {
+  appearance: none;
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 0.38rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink-2);
+  font: inherit;
+  cursor: pointer;
+}
+
+.career-stop-dot {
+  width: 1.3rem;
+  height: 1.3rem;
+  border: 2px solid rgba(45, 38, 31, 0.28);
+  border-radius: 50%;
+  background: var(--paper-0);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.career-stop:hover .career-stop-dot,
+.career-stop:focus-visible .career-stop-dot {
+  transform: scale(1.16);
+  border-color: var(--accent-blue);
+}
+
+.career-stop:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 0.45rem;
+  border-radius: 0.2rem;
+}
+
+.career-stop.is-active .career-stop-dot {
+  border-color: var(--accent-orange);
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-orange));
+  box-shadow: 0 0 0 6px rgba(255, 92, 0, 0.1);
+  transform: scale(1.08);
+}
+
+.career-stop-year,
+.career-stop-label,
+.career-panel-index,
+.career-panel-date,
+.career-map-hint {
+  font-family: var(--font-mono);
+}
+
+.career-stop-year {
+  color: var(--ink-0);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.career-stop-label {
+  max-width: 8rem;
+  color: var(--ink-3);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  line-height: 1.35;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.career-stop.is-active .career-stop-year,
+.career-stop.is-active .career-stop-label {
+  color: var(--accent-red);
+}
+
+.career-panels {
+  position: relative;
+  z-index: 1;
+  min-height: 13rem;
+  padding: clamp(1.5rem, 3vw, 2.5rem) 0 1rem;
+  border-top: 1px solid rgba(45, 38, 31, 0.12);
+}
+
+.career-panel {
+  display: grid;
+  grid-template-columns: minmax(120px, 0.34fr) minmax(0, 1.66fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: start;
+  animation: career-panel-in 260ms ease both;
+}
+
+.career-panel[hidden] {
+  display: none;
+}
+
+@keyframes career-panel-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.career-panel-index,
+.career-panel-date {
+  color: var(--accent-red);
+  font-size: 0.74rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.career-panel-index {
+  margin: 0.35rem 0 0;
+}
+
+.career-panel-date {
+  margin-bottom: 0.6rem;
+}
+
+.career-panel h3 {
+  max-width: 19ch;
+  margin-bottom: 0.8rem;
+  font-family: var(--font-serif);
+  font-size: clamp(1.85rem, 4vw, 3.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+}
+
+.career-panel div > p:last-child {
+  max-width: 48rem;
+  margin: 0;
+  color: var(--ink-2);
+  font-size: clamp(1rem, 1.5vw, 1.12rem);
+}
+
+.career-map-hint {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: var(--ink-3);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-align: right;
+  text-transform: uppercase;
+}
+
 .resume-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.9fr);
@@ -1740,6 +1950,84 @@ button:focus-visible {
 }
 
 @media (max-width: 820px) {
+  .resume-trajectory .section-header,
+  .career-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .trajectory-intro {
+    max-width: none;
+  }
+
+  .career-map {
+    padding-top: 1.7rem;
+  }
+
+  .career-track {
+    grid-template-columns: 1fr;
+    gap: 0.78rem;
+    padding-left: 0.1rem;
+  }
+
+  .career-track::before {
+    top: 0.65rem;
+    bottom: 0.65rem;
+    left: 0.7rem;
+    right: auto;
+    width: 2px;
+    height: auto;
+    background: linear-gradient(180deg, rgba(0, 163, 255, 0.6), rgba(255, 92, 0, 0.62));
+  }
+
+  .career-track::after {
+    top: 0.3rem;
+    left: 0.36rem;
+    animation-name: career-packet-mobile;
+  }
+
+  @keyframes career-packet-mobile {
+    0%, 8% { top: 0.3rem; left: 0.36rem; border-color: var(--accent-blue); }
+    92%, 100% { top: calc(100% - 0.95rem); left: 0.36rem; border-color: var(--accent-orange); }
+  }
+
+  .career-stop {
+    grid-template-columns: 1.4rem 4rem minmax(0, 1fr);
+    justify-items: start;
+    min-height: 2rem;
+    gap: 0.7rem;
+    text-align: left;
+  }
+
+  .career-stop-dot {
+    align-self: center;
+  }
+
+  .career-stop-year {
+    align-self: center;
+  }
+
+  .career-stop-label {
+    align-self: center;
+    max-width: none;
+    text-align: left;
+  }
+
+  .career-panels {
+    min-height: 18rem;
+  }
+
+  .career-panel {
+    gap: 0.7rem;
+  }
+
+  .career-panel-index {
+    margin-top: 0;
+  }
+
+  .career-map-hint {
+    text-align: left;
+  }
+
   .nav-links {
     display: none;
     position: absolute;
