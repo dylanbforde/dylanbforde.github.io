@@ -1088,6 +1088,237 @@ button:focus-visible {
   color: var(--accent-red);
 }
 
+/* Interactive project and writing atlases */
+.project-feature,
+.writing-feature {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+.project-stage,
+.argument-stage {
+  min-height: 640px;
+  background:
+    radial-gradient(circle at 18% 44%, rgba(217, 120, 45, 0.07), transparent 34%),
+    radial-gradient(circle at 78% 52%, rgba(15, 157, 141, 0.09), transparent 38%),
+    rgba(255, 252, 246, 0.84);
+}
+
+.project-canvas,
+.argument-canvas {
+  height: 640px;
+}
+
+.stage-pause {
+  position: relative;
+  pointer-events: auto;
+  flex: 0 0 auto;
+}
+
+.stage-pause[aria-pressed="true"] {
+  color: #fffaf4;
+  border-color: transparent;
+  background: var(--accent-orange);
+}
+
+.interaction-hint {
+  margin: -0.75rem 0 0;
+  color: var(--ink-3);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+}
+
+.case-study-list,
+.essay-list,
+.professional-grid {
+  display: grid;
+}
+
+.case-study-list,
+.essay-list {
+  border-top: 1px solid var(--line-strong);
+}
+
+.case-study {
+  display: grid;
+  grid-template-columns: minmax(100px, 0.24fr) minmax(0, 1.76fr);
+  gap: var(--space-xl);
+  padding: clamp(2rem, 5vw, 4.5rem) 0;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.case-index,
+.essay-number {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  color: var(--ink-3);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.case-index span:first-child,
+.essay-number span:first-child {
+  color: var(--accent-cyan);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.case-main h3,
+.essay-copy h3 {
+  max-width: 25ch;
+  margin-bottom: var(--space-md);
+  font-size: clamp(1.75rem, 3.2vw, 2.75rem);
+  line-height: 1.08;
+}
+
+.case-deck,
+.essay-lede {
+  max-width: 72rem;
+  margin-bottom: var(--space-xl);
+  color: var(--ink-2);
+  font-size: clamp(1rem, 1.5vw, 1.13rem);
+  line-height: 1.75;
+}
+
+.case-columns,
+.essay-anatomy {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-lg);
+}
+
+.case-columns > div,
+.essay-anatomy > div {
+  padding-top: 1rem;
+  border-top: 2px solid rgba(15, 157, 141, 0.2);
+}
+
+.case-columns h4,
+.essay-anatomy h4 {
+  margin-bottom: 0.5rem;
+  color: var(--ink-1);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.case-columns p,
+.essay-anatomy p {
+  margin-bottom: 0;
+  color: var(--ink-3);
+  font-size: 0.92rem;
+  line-height: 1.68;
+}
+
+.case-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  margin-top: var(--space-xl);
+}
+
+.professional-grid {
+  gap: 1rem;
+}
+
+.system-card {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  gap: var(--space-lg);
+  padding: clamp(1.5rem, 3vw, 2.3rem);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 252, 246, 0.58);
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.system-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(15, 157, 141, 0.3);
+  background: rgba(255, 252, 246, 0.9);
+}
+
+.system-number {
+  color: var(--accent-orange);
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.system-card h3 {
+  margin-bottom: 0.65rem;
+  font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+}
+
+.system-card p:not(.feature-meta) {
+  max-width: 75rem;
+}
+
+.essay-feature {
+  display: grid;
+  grid-template-columns: minmax(140px, 0.3fr) minmax(0, 1.7fr);
+  gap: var(--space-xl);
+  padding: clamp(2.5rem, 6vw, 5.5rem) 0;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.essay-route {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  margin: var(--space-xl) 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: route;
+}
+
+.essay-route li {
+  position: relative;
+  min-height: 5rem;
+  padding: 2rem 0.8rem 0 0;
+  border-top: 1px solid var(--line-strong);
+  color: var(--ink-2);
+  font-size: 0.78rem;
+  counter-increment: route;
+}
+
+.essay-route li::before {
+  content: counter(route, decimal-leading-zero);
+  position: absolute;
+  top: 0.45rem;
+  left: 0;
+  color: var(--accent-orange);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+}
+
+.essay-route li:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  top: 0.32rem;
+  right: 0.7rem;
+  color: rgba(45, 38, 31, 0.3);
+}
+
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+  width: 100%;
+  height: 3px;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: var(--gradient-primary);
+  pointer-events: none;
+}
+
 .footer {
   position: relative;
   padding: var(--space-xl) 0 var(--space-2xl);
@@ -1237,6 +1468,11 @@ button:focus-visible {
   .paper-actions {
     justify-content: flex-start;
   }
+
+  .case-columns,
+  .essay-anatomy {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 820px) {
@@ -1285,7 +1521,11 @@ button:focus-visible {
   }
 
   .research-stage,
-  .sinkhorn-canvas {
+  .sinkhorn-canvas,
+  .project-stage,
+  .project-canvas,
+  .argument-stage,
+  .argument-canvas {
     min-height: 680px;
     height: 680px;
   }
@@ -1297,6 +1537,19 @@ button:focus-visible {
   .publication-row {
     grid-template-columns: 1fr;
     gap: 0.55rem;
+  }
+
+  .case-study,
+  .essay-feature {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .case-index,
+  .essay-number {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 0.75rem;
   }
 }
 
@@ -1360,7 +1613,11 @@ button:focus-visible {
   }
 
   .research-stage,
-  .sinkhorn-canvas {
+  .sinkhorn-canvas,
+  .project-stage,
+  .project-canvas,
+  .argument-stage,
+  .argument-canvas {
     min-height: 720px;
     height: 720px;
   }
@@ -1379,6 +1636,28 @@ button:focus-visible {
 
   .stage-stats {
     gap: 0.55rem 0.85rem;
+  }
+
+  .case-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .case-footer .btn {
+    width: 100%;
+  }
+
+  .system-card {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+
+  .essay-route {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .essay-route li:nth-child(2)::after {
+    display: none;
   }
 }
 

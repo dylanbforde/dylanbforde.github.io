@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const currentReadingRoot = document.getElementById("currentlyReadingBooks");
         const sevenStarRoot = document.getElementById("sevenStarBooks");
         const goodreadsMeta = document.getElementById("goodreadsMeta");
+        const articleContent = document.querySelector(".article-content");
 
         const syncNavbar = () => {
             if (!navbar) {
@@ -81,6 +82,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
         syncNavbar();
         window.addEventListener("scroll", syncNavbar, { passive: true });
+
+        if (articleContent) {
+            const progress = document.createElement("div");
+            progress.className = "reading-progress";
+            progress.setAttribute("role", "progressbar");
+            progress.setAttribute("aria-label", "Article reading progress");
+            progress.setAttribute("aria-valuemin", "0");
+            progress.setAttribute("aria-valuemax", "100");
+            document.body.prepend(progress);
+
+            const syncReadingProgress = () => {
+                const start = articleContent.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.35;
+                const finish = start + articleContent.offsetHeight - window.innerHeight * 0.45;
+                const ratio = Math.max(0, Math.min(1, (window.scrollY - start) / Math.max(1, finish - start)));
+                progress.style.transform = `scaleX(${ratio})`;
+                progress.setAttribute("aria-valuenow", String(Math.round(ratio * 100)));
+            };
+
+            syncReadingProgress();
+            window.addEventListener("scroll", syncReadingProgress, { passive: true });
+            window.addEventListener("resize", syncReadingProgress, { passive: true });
+        }
 
         const formatDate = (value) => {
             if (!value) {

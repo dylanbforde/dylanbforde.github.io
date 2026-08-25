@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects | Dylan Forde</title>
     <meta name="description"
-        content="Selected projects across autonomous systems, deep learning, medical imaging, genomics, and infrastructure." />
+        content="Detailed project case studies across graph AI, adaptive networks, reinforcement learning, medical imaging, computational biology, and reproducible systems." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Playfair+Display:wght@700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="styles/main.css?v=20260825c">
+    <link rel="stylesheet" href="styles/main.css?v=20260825e">
 </head>
 
 <body class="paper-bg">
@@ -20,9 +20,7 @@
         <div class="container nav-inner">
             <a href="index.html" class="nav-logo">DF.</a>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"
-                aria-controls="navLinks">
-                <span></span><span></span><span></span>
-            </button>
+                aria-controls="navLinks"><span></span><span></span><span></span></button>
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html" class="nav-link">Home</a></li>
                 <li><a href="research.html" class="nav-link">Research</a></li>
@@ -37,7 +35,7 @@
     </nav>
 
     <main>
-        <header class="hero">
+        <header class="hero project-hero">
             <div class="hero-orb hero-orb-1"></div>
             <div class="hero-orb hero-orb-3"></div>
             <div class="container">
@@ -45,92 +43,276 @@
                     <div class="hero-split">
                         <section class="hero-copy">
                             <span class="eyebrow">Selected Projects</span>
-                            <p class="mono-line mt-lg">Production systems, infrastructure, and applied ML</p>
-                            <h1 class="hero-title">Work that sits between algorithm design and practical deployment.
-                            </h1>
+                            <p class="mono-line mt-lg">Systems, experiments, and applied machine learning</p>
+                            <h1 class="hero-title">Projects are more useful when you can see how they work.</h1>
                             <p class="hero-subtitle">
-                                Some projects are research-heavy, some are infrastructure-heavy, and some are purely
-                                applied. The interesting ones usually involve all three.
+                                These are not just technology lists. Each case study starts with the problem, follows
+                                the data through the system, and states what the public repository actually supports.
                             </p>
                             <div class="button-row">
-                                <a href="https://github.com/dylanbforde" target="_blank" rel="noreferrer"
-                                    class="btn btn-primary">GitHub Profile</a>
+                                <a href="#project-atlas" class="btn btn-primary">Explore the systems</a>
                                 <a href="research.html" class="btn btn-secondary">Research Papers</a>
-                                <a href="resume.html" class="btn btn-secondary">Resume Context</a>
                             </div>
                         </section>
                         <aside class="hero-panel">
-                            <p class="mono-line mb-md">Themes</p>
-                            <div class="tags">
-                                <span class="tag tag-gradient">Autonomous Systems</span>
-                                <span class="tag">Long-context Models</span>
-                                <span class="tag">Medical Imaging</span>
-                                <span class="tag">Genomics</span>
-                                <span class="tag">Deep RL</span>
-                                <span class="tag">Forecasting</span>
-                            </div>
+                            <p class="mono-line mb-md">How to read this page</p>
+                            <p>Use the atlas to move between projects. The diagrams are compact models of each
+                                repository: inputs enter on the left, transformations happen in the middle, and useful
+                                artifacts emerge on the right.</p>
                             <div class="subtle-divider"></div>
-                            <p>
-                                I am generally drawn to projects with messy data, weak abstractions, and enough
-                                technical depth that performance and correctness have to be argued for, not assumed.
-                            </p>
+                            <div class="tags">
+                                <span class="tag tag-gradient">Public source</span>
+                                <span class="tag">Mechanism first</span>
+                                <span class="tag">Evidence bounded</span>
+                            </div>
                         </aside>
                     </div>
                 </div>
             </div>
         </header>
 
-        <section class="section" style="padding-top: 0;">
+        <section class="section" id="project-atlas" style="padding-top: 0;">
+            <div class="container">
+                <div class="section-shell project-feature">
+                    <div class="paper-heading reveal">
+                        <div>
+                            <p class="mono-line mb-sm">Interactive system map</p>
+                            <h2 class="paper-title">Seven projects, seven different computational shapes.</h2>
+                            <p class="paper-deck">Switch projects to inspect their pipelines. The animation shows the
+                                active path through each system; pause it to inspect a static architecture.</p>
+                        </div>
+                        <div class="paper-actions">
+                            <a href="#case-studies" class="btn btn-secondary">Read the case studies</a>
+                        </div>
+                    </div>
+
+                    <div class="research-stage project-stage reveal" data-project-stage>
+                        <div class="stage-header">
+                            <div>
+                                <p class="stage-kicker" data-project-kicker>Graph AI / precision oncology</p>
+                                <p class="stage-description" data-project-description>Mutations become candidate
+                                    peptides, graph representations, binding estimates, and a ranked shortlist.</p>
+                            </div>
+                            <div class="stage-controls" role="group" aria-label="Choose a project diagram">
+                                <button class="stage-control" type="button" data-project-mode="vaccine"
+                                    aria-pressed="true">Vaccine</button>
+                                <button class="stage-control" type="button" data-project-mode="forde"
+                                    aria-pressed="false">FORDE</button>
+                                <button class="stage-control" type="button" data-project-mode="shift"
+                                    aria-pressed="false">Domain shift</button>
+                                <button class="stage-control" type="button" data-project-mode="cardiac"
+                                    aria-pressed="false">Cardiac MRI</button>
+                                <button class="stage-control" type="button" data-project-mode="mrnet"
+                                    aria-pressed="false">MRNet</button>
+                                <button class="stage-control" type="button" data-project-mode="luad"
+                                    aria-pressed="false">LUAD</button>
+                                <button class="stage-control" type="button" data-project-mode="nix"
+                                    aria-pressed="false">NixOS</button>
+                            </div>
+                        </div>
+                        <canvas class="sinkhorn-canvas project-canvas" data-project-canvas
+                            aria-label="Animated architecture diagram for the selected project"></canvas>
+                        <div class="stage-footer">
+                            <div class="stage-stats">
+                                <span class="stage-stat">Input <strong data-project-input>TCGA variants</strong></span>
+                                <span class="stage-stat">Core <strong data-project-core>peptide graph</strong></span>
+                                <span class="stage-stat">Output <strong data-project-output>ranked candidates</strong></span>
+                            </div>
+                            <button class="stage-control stage-pause" type="button" data-project-pause
+                                aria-pressed="false">Pause motion</button>
+                        </div>
+                    </div>
+                    <p class="interaction-hint">Tip: move the pointer across a node to focus it and reveal its role in
+                        the pipeline.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="case-studies">
             <div class="container">
                 <div class="section-shell">
-                    <div class="section-header">
+                    <div class="section-header reveal">
                         <div>
-                            <p class="mono-line mb-sm">Production and Systems</p>
-                            <h2 class="section-title">Operational work</h2>
+                            <p class="mono-line mb-sm">Open-source case studies</p>
+                            <h2 class="section-title">From repository to working idea</h2>
                         </div>
-                        <p class="section-subtitle">
-                            The work closest to deployment usually has the hardest constraints and the most useful
-                            feedback loops.
-                        </p>
+                        <p class="section-subtitle">The emphasis here is architecture and intent. Where a repository
+                            is exploratory or notebook-led, it is described that way.</p>
                     </div>
-                    <div class="project-grid">
-                        <article class="card reveal">
-                            <div class="feature-meta">Valeo</div>
-                            <h3 class="feature-title">Generative parking-trace pipeline</h3>
-                            <p>
-                                Pipeline for complex object insertion and removal over parking video traces using
-                                segmentation, masking, and inpainting to support downstream model development.
-                            </p>
-                            <div class="tags mt-md">
-                                <span class="tag">Computer Vision</span>
-                                <span class="tag">GenAI</span>
-                                <span class="tag">Data Pipelines</span>
+
+                    <div class="case-study-list">
+                        <article class="case-study reveal" id="vaccine-design">
+                            <div class="case-index"><span>01</span><span>Graph AI</span></div>
+                            <div class="case-main">
+                                <p class="feature-meta">Personalized cancer vaccine design</p>
+                                <h3>Turning a patient’s variants into a defensible neoantigen shortlist.</h3>
+                                <p class="case-deck">The pipeline connects mutation processing, protein sequence
+                                    reconstruction, graph learning, and peptide–MHC scoring. Its most interesting
+                                    engineering challenge is preserving biological meaning as messy variant records
+                                    become fixed-length model inputs.</p>
+                                <div class="case-columns">
+                                    <div><h4>Problem</h4><p>Generate candidate 9-mers around missense, frameshift, and
+                                        in-frame mutations without silently corrupting sequence context.</p></div>
+                                    <div><h4>System</h4><p>TCGA records are filtered and matched to UniProt or Ensembl
+                                        sequences, encoded as peptide graphs, scored by a GNN, then aligned to learned
+                                        motifs with log-domain Sinkhorn.</p></div>
+                                    <div><h4>Public artifact</h4><p>An end-to-end Python repository with preprocessing,
+                                        candidate generation, training, prediction, tests, and report outputs.</p></div>
+                                </div>
+                                <div class="case-footer"><div class="tags"><span class="tag">PyTorch Geometric</span><span
+                                            class="tag">TCGA</span><span class="tag">IEDB</span><span
+                                            class="tag">Sinkhorn</span></div><a class="card-link"
+                                        href="https://github.com/dylanbforde/vaccine_cancer_design" target="_blank"
+                                        rel="noreferrer">Inspect repository <span aria-hidden="true">↗</span></a></div>
                             </div>
                         </article>
-                        <article class="card reveal delay-1">
-                            <div class="feature-meta">Infrastructure</div>
-                            <h3 class="feature-title">Airflow and Kubernetes orchestration stack</h3>
-                            <p>
-                                Reworked DAGs, improved dependency behavior, and designed scalable task routing across
-                                cloud and on-prem compute for data extraction and processing.
-                            </p>
-                            <div class="tags mt-md">
-                                <span class="tag">Airflow</span>
-                                <span class="tag">Kubernetes</span>
-                                <span class="tag">Docker</span>
+
+                        <article class="case-study reveal" id="forde-network">
+                            <div class="case-index"><span>02</span><span>Adaptive networks</span></div>
+                            <div class="case-main">
+                                <p class="feature-meta">FORDE vision–language model</p>
+                                <h3>A neural network that reorganizes its own functional routes.</h3>
+                                <p class="case-deck">FORDE—Functional Organisation via Route-Density Estimation—adds
+                                    a slower structural loop around ordinary gradient updates. The model collects
+                                    activation and gradient history, clusters its internal units, smooths the resulting
+                                    map, and uses that map to alter future routing.</p>
+                                <div class="case-columns">
+                                    <div><h4>Problem</h4><p>Most networks adapt weights but leave their computational
+                                        organization fixed, even when stable functional specialization emerges.</p></div>
+                                    <div><h4>System</h4><p>A fast loop trains a CLIP-style dual encoder. Periodically, a
+                                        Sense → Cluster → Smooth → Actuate loop updates stateful route assignments.</p></div>
+                                    <div><h4>Public artifact</h4><p>A JAX/Flax implementation with a baseline ablation,
+                                        streaming Conceptual Captions input, brain-map diagnostics, and tests.</p></div>
+                                </div>
+                                <div class="case-footer"><div class="tags"><span class="tag">JAX</span><span
+                                            class="tag">Flax</span><span class="tag">Vision–Language</span><span
+                                            class="tag">Dynamic routing</span></div><a class="card-link"
+                                        href="https://github.com/dylanbforde/forde-vision-language" target="_blank"
+                                        rel="noreferrer">Inspect repository <span aria-hidden="true">↗</span></a></div>
                             </div>
                         </article>
-                        <article class="card reveal delay-2">
-                            <div class="feature-meta">Performance</div>
-                            <h3 class="feature-title">JAX optimization for height maps and point clouds</h3>
-                            <p>
-                                Ported processing paths to JAX and Pallas-style kernels to cut expensive workloads down
-                                dramatically and make throughput less hardware-specific.
-                            </p>
-                            <div class="tags mt-md">
-                                <span class="tag">JAX</span>
-                                <span class="tag">Kernel Optimization</span>
-                                <span class="tag">3D Data</span>
+
+                        <article class="case-study reveal" id="domain-shift">
+                            <div class="case-index"><span>03</span><span>Deep RL</span></div>
+                            <div class="case-main">
+                                <p class="feature-meta">Domain-shift quantification</p>
+                                <h3>Estimating whether a policy will survive the next environment.</h3>
+                                <p class="case-deck">This dissertation project treats domain shift as something to
+                                    measure before deployment, not merely observe after performance collapses. A meta
+                                    model learns signals about policy suitability under upcoming changes.</p>
+                                <div class="case-columns">
+                                    <div><h4>Problem</h4><p>A policy that works in one simulated domain can fail when
+                                        dynamics or observations move, while conventional validation hides the size of
+                                        that move.</p></div>
+                                    <div><h4>System</h4><p>Generate controlled shifts, collect policy behaviour across
+                                        domains, and train a second-order model to estimate compatibility.</p></div>
+                                    <div><h4>Public artifact</h4><p>Experiment code, tests, dissertation material, and a
+                                        paper describing intrinsic quantification of domain-shift magnitude.</p></div>
+                                </div>
+                                <div class="case-footer"><div class="tags"><span class="tag">Reinforcement Learning</span><span
+                                            class="tag">Generalization</span><span class="tag">Meta-model</span></div><a
+                                        class="card-link" href="https://github.com/dylanbforde/DeepReinforcementLearning"
+                                        target="_blank" rel="noreferrer">Inspect repository <span
+                                            aria-hidden="true">↗</span></a></div>
+                            </div>
+                        </article>
+
+                        <article class="case-study reveal" id="cardiac-mri">
+                            <div class="case-index"><span>04</span><span>Volumetric vision</span></div>
+                            <div class="case-main">
+                                <p class="feature-meta">Cardiac MRI segmentation</p>
+                                <h3>Adapting a hierarchical transformer to three-dimensional anatomy.</h3>
+                                <p class="case-deck">A notebook-led implementation explores how SegFormer’s efficient
+                                    multi-scale representation can be carried into volumetric cardiac data, where local
+                                    boundary detail and long-range spatial context both matter.</p>
+                                <div class="case-columns">
+                                    <div><h4>Problem</h4><p>Segment anatomical structures across an MRI volume without
+                                        discarding the relationships between adjacent slices.</p></div>
+                                    <div><h4>System</h4><p>Overlapping 3D patch embeddings feed a MixTransformer-style
+                                        hierarchy; multi-resolution features are decoded into voxel-level masks.</p></div>
+                                    <div><h4>Public artifact</h4><p>Exploratory notebooks for data loading, segmentation,
+                                        model construction, training, and saved model checkpoints.</p></div>
+                                </div>
+                                <div class="case-footer"><div class="tags"><span class="tag">3D SegFormer</span><span
+                                            class="tag">Transformers</span><span class="tag">Segmentation</span></div><a
+                                        class="card-link" href="https://github.com/dylanbforde/Cardiac-MRI-Segmentation"
+                                        target="_blank" rel="noreferrer">Inspect repository <span
+                                            aria-hidden="true">↗</span></a></div>
+                            </div>
+                        </article>
+
+                        <article class="case-study reveal" id="mrnet">
+                            <div class="case-index"><span>05</span><span>Medical imaging</span></div>
+                            <div class="case-main">
+                                <p class="feature-meta">MRNet MRI classification</p>
+                                <h3>Moving from independent slices to a volume-aware diagnosis.</h3>
+                                <p class="case-deck">This experimental notebook project asks how attention can combine
+                                    evidence distributed through a scan. Rather than collapsing a volume immediately,
+                                    it develops representations per slice and then aggregates across the study.</p>
+                                <div class="case-columns">
+                                    <div><h4>Problem</h4><p>Diagnostic cues may be small, appear on only a few slices,
+                                        and depend on context elsewhere in the MRI sequence.</p></div>
+                                    <div><h4>System</h4><p>Patch tokenization and self-attention form slice features;
+                                        inter-slice aggregation turns variable evidence into a study-level decision.</p></div>
+                                    <div><h4>Public artifact</h4><p>A sequence of exploratory notebooks covering the
+                                        architecture, dataset handling, training experiments, and visual inspection.</p></div>
+                                </div>
+                                <div class="case-footer"><div class="tags"><span class="tag">MRI</span><span
+                                            class="tag">Slice attention</span><span class="tag">Classification</span></div><a
+                                        class="card-link" href="https://github.com/dylanbforde/MRNet-MRI-Classification"
+                                        target="_blank" rel="noreferrer">Inspect repository <span
+                                            aria-hidden="true">↗</span></a></div>
+                            </div>
+                        </article>
+
+                        <article class="case-study reveal" id="luad-modeling">
+                            <div class="case-index"><span>06</span><span>Computational biology</span></div>
+                            <div class="case-main">
+                                <p class="feature-meta">Lung adenocarcinoma modeling</p>
+                                <h3>Connecting expression data, survival signals, and treatment rules.</h3>
+                                <p class="case-deck">The project combines TCGA-LUAD molecular and clinical data into a
+                                    research workflow for risk stratification, regulatory-network analysis, and
+                                    explainable treatment recommendation.</p>
+                                <div class="case-columns">
+                                    <div><h4>Problem</h4><p>High-dimensional gene expression, censored survival data,
+                                        and incomplete clinical records must be reconciled before any downstream model
+                                        is meaningful.</p></div>
+                                    <div><h4>System</h4><p>Univariate Cox screening and Lasso-Cox produce a risk model;
+                                        clinical and biomarker rules feed an R6 recommendation system and report.</p></div>
+                                    <div><h4>Evidence boundary</h4><p>This is a research and educational codebase, not a
+                                        clinically validated decision system. Reported cohort figures originate in the
+                                        repository.</p></div>
+                                </div>
+                                <div class="case-footer"><div class="tags"><span class="tag">TCGA-LUAD</span><span
+                                            class="tag">Cox models</span><span class="tag">R</span><span
+                                            class="tag">Regulatory networks</span></div><a class="card-link"
+                                        href="https://github.com/dylanbforde/lung-cancer-ODE" target="_blank"
+                                        rel="noreferrer">Inspect repository <span aria-hidden="true">↗</span></a></div>
+                            </div>
+                        </article>
+
+                        <article class="case-study reveal" id="nixos-system">
+                            <div class="case-index"><span>07</span><span>Developer systems</span></div>
+                            <div class="case-main">
+                                <p class="feature-meta">Nix flake and dotfiles</p>
+                                <h3>Treating a personal workstation as a reproducible system.</h3>
+                                <p class="case-deck">The configuration turns machine setup into reviewed source:
+                                    hosts compose reusable modules, dependencies are pinned, secrets stay encrypted,
+                                    and checks catch drift before activation.</p>
+                                <div class="case-columns">
+                                    <div><h4>Problem</h4><p>Developer machines accumulate invisible state, fragile
+                                        installation steps, and credentials that are difficult to audit or reproduce.</p></div>
+                                    <div><h4>System</h4><p>A flake composes host and user modules, sops-nix decrypts
+                                        secrets at activation time, and automated checks validate configuration and
+                                        scan for leaks.</p></div>
+                                    <div><h4>Public artifact</h4><p>The live configuration structure, pinned flake lock,
+                                        reusable modules, security policy, and setup documentation.</p></div>
+                                </div>
+                                <div class="case-footer"><div class="tags"><span class="tag">NixOS</span><span
+                                            class="tag">Flakes</span><span class="tag">sops-nix</span><span
+                                            class="tag">Reproducibility</span></div><a class="card-link"
+                                        href="https://github.com/dylanbforde/nix-flake-and-dots" target="_blank"
+                                        rel="noreferrer">Inspect repository <span aria-hidden="true">↗</span></a></div>
                             </div>
                         </article>
                     </div>
@@ -141,110 +323,33 @@
         <section class="section">
             <div class="container">
                 <div class="section-shell">
-                    <div class="section-header">
-                        <div>
-                            <p class="mono-line mb-sm">Applied ML</p>
-                            <h2 class="section-title">Bio, vision, and modeling projects</h2>
-                        </div>
+                    <div class="section-header reveal">
+                        <div><p class="mono-line mb-sm">Production work</p><h2 class="section-title">Systems built under real constraints</h2></div>
+                        <p class="section-subtitle">These projects are described at the architectural level because
+                            the underlying data and implementation are private.</p>
                     </div>
-                    <div class="project-grid">
-                        <article class="card reveal">
-                            <div class="feature-meta">Graph AI</div>
-                            <h3 class="feature-title">Personalized cancer vaccine design</h3>
-                            <p>
-                                End-to-end pipeline from TCGA mutations to neoantigen ranking using peptide-MHC
-                                prediction, graph methods, and biological validation signals.
-                            </p>
-                            <div class="tags mt-md">
-                                <span class="tag">GNNs</span>
-                                <span class="tag">IEDB</span>
-                                <span class="tag">UniProt</span>
-                            </div>
-                        </article>
-                        <article class="card reveal delay-1">
-                            <div class="feature-meta">Medical Imaging</div>
-                            <h3 class="feature-title">Cardiac MRI segmentation with 3D SegFormer</h3>
-                            <p>
-                                Implemented a 3D MixTransformer-style encoder with overlapping patch embeddings and
-                                multi-scale decoding for volumetric segmentation tasks.
-                            </p>
-                            <div class="tags mt-md">
-                                <span class="tag">3D Vision</span>
-                                <span class="tag">Segmentation</span>
-                                <span class="tag">Transformers</span>
-                            </div>
-                        </article>
-                        <article class="card reveal delay-2">
-                            <div class="feature-meta">Medical Imaging</div>
-                            <h3 class="feature-title">MRNet MRI classification with slice attention</h3>
-                            <p>
-                                Combined patch tokenization, self-attention, and inter-slice aggregation to build
-                                volume-aware diagnostic classifiers for MRI studies.
-                            </p>
-                            <div class="tags mt-md">
-                                <span class="tag">ViT</span>
-                                <span class="tag">Attention</span>
-                                <span class="tag">MRI</span>
-                            </div>
-                        </article>
-                        <article class="card reveal">
-                            <div class="feature-meta">Systems Biology</div>
-                            <h3 class="feature-title">ODE modeling for drug response prediction</h3>
-                            <p>
-                                Analyzed regulatory network output and integrated ranked interactions into downstream
-                                survival and response modeling workflows.
-                            </p>
-                            <div class="tags mt-md">
-                                <span class="tag">ODEs</span>
-                                <span class="tag">GENIE3</span>
-                                <span class="tag">Network Biology</span>
-                            </div>
-                        </article>
-                        <article class="card reveal delay-1">
-                            <div class="feature-meta">Forecasting</div>
-                            <h3 class="feature-title">Forecasting model benchmarking and SaaS transition</h3>
-                            <p>
-                                Benchmarked against strong public baselines and delivered alternative models while
-                                helping move forecasting capability into a more scalable product shape.
-                            </p>
-                            <div class="tags mt-md">
-                                <span class="tag">LightGBM</span>
-                                <span class="tag">XGBoost</span>
-                                <span class="tag">ARIMA</span>
-                            </div>
-                        </article>
-                        <article class="card reveal delay-2">
-                            <div class="feature-meta">Personal Systems</div>
-                            <h3 class="feature-title">NixOS configuration and reproducible environments</h3>
-                            <p>
-                                Ongoing system configuration work around flakes, developer environments, container
-                                tooling, and maintaining a machine that stays pleasant to use.
-                            </p>
-                            <div class="tags mt-md">
-                                <span class="tag">NixOS</span>
-                                <span class="tag">Flakes</span>
-                                <span class="tag">Dev Environments</span>
-                            </div>
-                        </article>
+                    <div class="professional-grid">
+                        <article class="system-card reveal"><span class="system-number">A</span><div><p class="feature-meta">Valeo / computer vision</p><h3>Generative parking-trace pipeline</h3><p>A multi-stage pipeline for inserting and removing complex objects in parking video traces. Segmentation and mask conditioning constrain the edit; inpainting reconstructs plausible scene content; downstream checks keep temporal and geometric artifacts from entering training data.</p><div class="tags"><span class="tag">Segmentation</span><span class="tag">Inpainting</span><span class="tag">Data quality</span></div></div></article>
+                        <article class="system-card reveal"><span class="system-number">B</span><div><p class="feature-meta">Infrastructure / orchestration</p><h3>Airflow and Kubernetes execution stack</h3><p>Reworked workflow dependencies and task boundaries so extraction and processing jobs could route across cloud and on-premise compute. The design work centered on failure visibility, retry behaviour, resource-aware scheduling, and making DAG state understandable to operators.</p><div class="tags"><span class="tag">Airflow</span><span class="tag">Kubernetes</span><span class="tag">Docker</span></div></div></article>
+                        <article class="system-card reveal"><span class="system-number">C</span><div><p class="feature-meta">Performance / 3D data</p><h3>JAX kernels for height maps and point clouds</h3><p>Moved expensive array-processing paths into JAX and Pallas-style kernels. The work combined algorithmic restructuring with compilation-aware memory access so high-volume spatial workloads became faster without binding the pipeline to one hardware shape.</p><div class="tags"><span class="tag">JAX</span><span class="tag">Pallas</span><span class="tag">Point clouds</span></div></div></article>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="split-grid">
+                    <section class="section-panel reveal"><p class="mono-line mb-sm">Smaller builds</p><h2 class="section-title">Experiments outside the main case studies</h2><p>Older and narrower repositories still capture useful implementation work: JAX training exercises, GPU experiments, forecasting studies, Kaggle deep-learning work, and a terminal typing game in Rust.</p><div class="button-row"><a class="btn btn-secondary" href="https://github.com/dylanbforde?tab=repositories" target="_blank" rel="noreferrer">Browse all repositories</a></div></section>
+                    <aside class="section-panel reveal delay-1"><p class="mono-line mb-sm">Research belongs next door</p><p>Blockwise Sinkhorn Attention and subsequent paper work live on the dedicated Research page, where claims can be tied to manuscripts, code, and explicit evidence boundaries.</p><div class="button-row"><a class="btn btn-primary" href="research.html">Go to Research</a></div></aside>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="container footer-inner">
-            <ul class="footer-links">
-                <li><a href="resume.html" class="footer-link">Resume</a></li>
-                <li><a href="writing.html" class="footer-link">Writing</a></li>
-                <li><a href="about.html" class="footer-link">About</a></li>
-                <li><a href="mailto:forde.dylan@gmail.com" class="footer-link">Email</a></li>
-            </ul>
-            <p class="footer-copy">Applied systems, implementation detail, and measurable outcomes.</p>
-        </div>
-    </footer>
+    <footer class="footer"><div class="container footer-inner"><ul class="footer-links"><li><a href="research.html" class="footer-link">Research</a></li><li><a href="writing.html" class="footer-link">Writing</a></li><li><a href="about.html" class="footer-link">About</a></li><li><a href="mailto:forde.dylan@gmail.com" class="footer-link">Email</a></li></ul><p class="footer-copy">Mechanisms, implementation detail, and honest boundaries.</p></div></footer>
 
-    <script src="scripts/main.js?v=20260825"></script>
+    <script src="scripts/main.js?v=20260825e"></script>
+    <script src="scripts/projects-visualization.js?v=20260825e"></script>
 </body>
-
 </html>
