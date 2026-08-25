@@ -266,16 +266,43 @@
     const drawMrnet = (time,a) => {
         const compact=width<700, span=a.right-a.left, sliceW=compact?145:240, sliceH=compact?62:82;
         const sx=compact?a.left+10:a.left+span*.08, sy=a.top+25;
+        const stepX=compact?8:14, stepY=compact?30:24;
+        const scan=(time*.00042)%6, activeSlice=Math.floor(scan);
+        const blue="#00a3ff", orange="#ff5c00";
         ctx.globalAlpha=sectionAlpha("input");
-        for(let i=5;i>=0;i--){const x=sx+i*(compact?8:14),y=sy+i*(compact?30:24);roundRect(x,y,sliceW,sliceH,12,"rgba(45,38,31,.035)","rgba(45,38,31,.18)");ctx.strokeStyle="rgba(45,38,31,.16)";ctx.beginPath();ctx.ellipse(x+sliceW*.5,y+sliceH*.5,sliceW*.28,sliceH*.31,0,0,Math.PI*2);ctx.stroke();if(i===2){dot(x+sliceW*.62,y+sliceH*.43,8,"rgba(217,120,45,.72)");}}
+        for(let i=5;i>=0;i--){
+            const x=sx+i*stepX,y=sy+i*stepY,isActive=i===activeSlice;
+            roundRect(x,y,sliceW,sliceH,12,isActive?"rgba(0,163,255,.11)":"rgba(45,38,31,.035)",isActive?"rgba(0,163,255,.72)":"rgba(45,38,31,.18)");
+            ctx.lineWidth=isActive?2:1;
+            ctx.strokeStyle=isActive?"rgba(0,163,255,.68)":"rgba(45,38,31,.16)";
+            ctx.beginPath();ctx.ellipse(x+sliceW*.5,y+sliceH*.5,sliceW*.28,sliceH*.31,0,0,Math.PI*2);ctx.stroke();
+            if(i===2){const lesionPulse=1+.22*Math.sin(time*.006);dot(x+sliceW*.62,y+sliceH*.43,8*lesionPulse,"rgba(255,92,0,.78)");}
+        }
+        const scanY=sy+scan*stepY+sliceH*.5;
+        line(sx-4,scanY,sx+sliceW+stepX*5+4,scanY,"rgba(0,163,255,.78)",2);
+        roundRect(sx-4,scanY-5,sliceW+stepX*5+8,10,5,"rgba(0,163,255,.09)");
         label("ORDERED MRI SLICES",sx,sy-10,{align:"left",color:colors.ink});
+        label(`SCAN ${String(activeSlice+1).padStart(2,"0")} / 06`,sx+sliceW+stepX*5,sy-10,{align:"right",color:blue});
         ctx.globalAlpha=sectionAlpha("core");
         const ax=compact?a.right-42:a.left+span*.62, ay=a.top+(a.bottom-a.top)*.5;
-        for(let i=0;i<6;i++){const weight=.18+((i*37)%7)/8;const fromX=sx+5*(compact?8:14)+sliceW;const fromY=sy+i*(compact?30:24)+sliceH*.5;line(fromX,fromY,ax,ay,`rgba(15,157,141,${.12+weight*.5})`,1+weight*3);}
-        dot(ax,ay,compact?28:42,"rgba(15,157,141,.88)");label("Σ",ax,ay+6,{color:colors.paper,font:sans(18,700),upper:false});label("SLICE ATTENTION",ax,ay+(compact?48:66),{color:colors.teal});
+        for(let i=0;i<6;i++){
+            const weight=.18+((i*37)%7)/8,activeBoost=i===activeSlice?1:0;
+            const fromX=sx+i*stepX+sliceW,fromY=sy+i*stepY+sliceH*.5;
+            line(fromX,fromY,ax,ay,activeBoost?"rgba(255,92,0,.78)":`rgba(0,163,255,${.1+weight*.34})`,1+weight*2+activeBoost*2);
+        }
+        const packetProgress=(time*.0009)%1;
+        const packetStartX=sx+activeSlice*stepX+sliceW,packetStartY=sy+activeSlice*stepY+sliceH*.5;
+        const packetX=packetStartX+(ax-packetStartX)*packetProgress,packetY=packetStartY+(ay-packetStartY)*packetProgress;
+        dot(packetX,packetY,8,"rgba(255,92,0,.14)");dot(packetX,packetY,3.5,orange);
+        const attentionPulse=(compact?28:42)+(2+2*Math.sin(time*.004));
+        dot(ax,ay,attentionPulse,"rgba(0,163,255,.88)");label("Σ",ax,ay+6,{color:colors.paper,font:sans(18,700),upper:false});label("SLICE ATTENTION",ax,ay+(compact?48:66),{color:blue});
         ctx.globalAlpha=sectionAlpha("output");
         const bx=compact?a.left:a.left+span*.78, by=compact?a.bottom-33:ay-28, bw=compact?span:span*.2;
-        roundRect(bx,by,bw,56,14,"rgba(255,252,246,.92)","rgba(217,120,45,.35)");label("STUDY PREDICTION",bx+bw/2,by+24,{color:colors.ink});label("evidence weighted",bx+bw/2,by+42,{color:colors.orange,upper:false});
+        const confidence=.76+.1*(.5+.5*Math.sin(time*.0016));
+        roundRect(bx,by,bw,56,14,"rgba(255,252,246,.92)","rgba(255,92,0,.38)");
+        label("STUDY PREDICTION",bx+bw/2,by+18,{color:colors.ink});
+        label(`ATTENTION ${Math.round(confidence*100)}%`,bx+bw/2,by+34,{color:orange,font:mono(compact?7:8)});
+        roundRect(bx+12,by+42,bw-24,6,3,"rgba(45,38,31,.08)");roundRect(bx+12,by+42,(bw-24)*confidence,6,3,orange);
         ctx.globalAlpha=1;
     };
 
