@@ -197,21 +197,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 meta.appendChild(year);
             }
 
-            const addedDate = formatDate(book.dateAdded);
-            if (addedDate) {
-                const added = document.createElement("span");
-                added.className = "book-chip";
-                added.textContent = `Added ${addedDate}`;
-                meta.appendChild(added);
-            }
-
-            if (book.shelves && book.shelves.length > 0) {
-                const shelf = document.createElement("span");
-                shelf.className = "book-chip";
-                shelf.textContent = book.shelves.join(" / ");
-                meta.appendChild(shelf);
-            }
-
             if (meta.children.length > 0) {
                 copy.appendChild(meta);
             }

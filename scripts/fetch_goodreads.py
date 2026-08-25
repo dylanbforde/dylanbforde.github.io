@@ -17,6 +17,7 @@ USER_ID = "195775990"
 PROFILE_SLUG = "dylan-forde"
 PROFILE_URL = f"https://www.goodreads.com/user/show/{USER_ID}-{PROFILE_SLUG}"
 RSS_BASE_URL = f"https://www.goodreads.com/review/list_rss/{USER_ID}"
+FEATURED_SHELF = "7-star"
 OUTPUT_PATH = Path(__file__).resolve().parent.parent / "data" / "goodreads.json"
 USER_AGENT = (
     "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
@@ -53,14 +54,17 @@ def extract_shelves(profile_html: str) -> list[str]:
 
 
 def find_featured_shelf(shelves: list[str]) -> str | None:
-    if "7-star" in shelves:
-        return "7-star"
+    if FEATURED_SHELF in shelves:
+        return FEATURED_SHELF
 
     for shelf in shelves:
         if "7" in shelf and "star" in shelf:
             return shelf
 
-    return None
+    # Goodreads does not consistently expose custom shelves in profile HTML,
+    # while their public RSS endpoints remain available. Keep the deliberately
+    # curated shelf stable instead of dropping it from the generated snapshot.
+    return FEATURED_SHELF
 
 
 def feed_url(shelf: str, per_page: int) -> str:
