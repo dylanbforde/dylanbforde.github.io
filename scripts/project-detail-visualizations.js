@@ -243,23 +243,47 @@
         ctx.globalAlpha=1;
     };
 
-    const heartPath = (cx, cy, s) => {
-        ctx.beginPath(); ctx.moveTo(cx,cy+s*.32); ctx.bezierCurveTo(cx-s*.62,cy-s*.08,cx-s*.58,cy-s*.62,cx-s*.22,cy-s*.56); ctx.bezierCurveTo(cx,cy-s*.52,cx,cy-s*.3,cx,cy-s*.22); ctx.bezierCurveTo(cx,cy-s*.3,cx,cy-s*.52,cx+s*.22,cy-s*.56); ctx.bezierCurveTo(cx+s*.58,cy-s*.62,cx+s*.62,cy-s*.08,cx,cy+s*.32); ctx.closePath();
-    };
     const drawCardiac = (time, a) => {
-        const compact=width<700, span=a.right-a.left;
-        const cx=compact?(a.left+a.right)/2:a.left+span*.38, cy=a.top+(a.bottom-a.top)*.52, s=Math.min(compact?140:220,(a.bottom-a.top)*.72);
+        const compact=width<700,narrow=width<470,span=a.right-a.left,blue="#00a3ff",orange="#ff5c00";
+        const scan=(time*.00034)%1,activeSlice=Math.min(4,Math.floor(scan*5));
+        const arrow=(x1,y1,x2,y2,color)=>{line(x1,y1,x2,y2,color,1.5);const angle=Math.atan2(y2-y1,x2-x1);ctx.fillStyle=color;ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-Math.cos(angle-.55)*7,y2-Math.sin(angle-.55)*7);ctx.lineTo(x2-Math.cos(angle+.55)*7,y2-Math.sin(angle+.55)*7);ctx.closePath();ctx.fill();};
+        const anatomy=(cx,cy,scale,animated=false)=>{
+            ctx.fillStyle="rgba(45,38,31,.035)";ctx.strokeStyle="rgba(45,38,31,.22)";ctx.lineWidth=1.2;ctx.beginPath();ctx.ellipse(cx,cy,scale*.7,scale*.54,-.08,0,Math.PI*2);ctx.fill();ctx.stroke();
+            ctx.fillStyle="rgba(0,163,255,.12)";ctx.strokeStyle=blue;ctx.lineWidth=Math.max(2,scale*.055);ctx.beginPath();ctx.ellipse(cx-scale*.08,cy,scale*.27,scale*.31,.05,0,Math.PI*2);ctx.fill();ctx.stroke();
+            ctx.strokeStyle=orange;ctx.lineWidth=Math.max(3,scale*.09);if(animated){ctx.setLineDash([7,5]);ctx.lineDashOffset=-time*.018;}ctx.beginPath();ctx.ellipse(cx-scale*.08,cy,scale*.39,scale*.43,.05,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);
+            ctx.fillStyle="rgba(0,163,255,.17)";ctx.strokeStyle="rgba(0,163,255,.75)";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(cx+scale*.25,cy-scale*.28);ctx.bezierCurveTo(cx+scale*.62,cy-scale*.18,cx+scale*.62,cy+scale*.24,cx+scale*.24,cy+scale*.31);ctx.bezierCurveTo(cx+scale*.42,cy+scale*.12,cx+scale*.42,cy-scale*.08,cx+scale*.25,cy-scale*.28);ctx.closePath();ctx.fill();ctx.stroke();
+        };
+
+        const volumeX=narrow?(a.left+a.right)/2:a.left+(compact?70:span*.15);
+        const volumeY=narrow?a.top+62:a.top+(a.bottom-a.top)*.48;
+        const volumeW=narrow?126:(compact?126:180),volumeH=narrow?72:(compact?82:112);
         ctx.globalAlpha=sectionAlpha("input");
-        for(let i=3;i>=0;i--){ctx.strokeStyle=`rgba(45,38,31,${.07+i*.035})`;ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(cx+i*7,cy-i*5,s*.7,s*.48,0,0,Math.PI*2);ctx.stroke();}
+        for(let i=4;i>=0;i--){const offset=(i-2)*(narrow?5:7),x=volumeX-volumeW/2+offset,y=volumeY-volumeH/2-offset*.65,isActive=i===activeSlice;roundRect(x,y,volumeW,volumeH,12,isActive?"rgba(0,163,255,.1)":"rgba(255,252,246,.76)",isActive?"rgba(0,163,255,.68)":"rgba(45,38,31,.15)");anatomy(x+volumeW/2,y+volumeH/2,Math.min(volumeW,volumeH)*(isActive?.54:.48));}
+        const planeY=volumeY-volumeH*.5+scan*volumeH;
+        line(volumeX-volumeW*.64,planeY,volumeX+volumeW*.64,planeY,"rgba(0,163,255,.82)",2);roundRect(volumeX-volumeW*.64,planeY-4,volumeW*1.28,8,4,"rgba(0,163,255,.1)");
+        label("3D MRI VOLUME",volumeX,volumeY+volumeH*.72,{color:colors.ink});label(`SLICE ${String(activeSlice+1).padStart(2,"0")} / 05`,volumeX,volumeY+volumeH*.72+14,{color:blue,font:mono(compact?7:8)});
+
+        const encoderY=narrow?a.top+214:volumeY;
+        const encoderStart=narrow?a.left+34:a.left+(compact?170:span*.34);
+        const encoderEnd=narrow?a.right-34:a.left+(compact?365:span*.67);
+        const stageGap=(encoderEnd-encoderStart)/3;
+        const stageSizes=narrow?[48,42,36,30]:(compact?[58,50,42,34]:[78,66,54,42]);
         ctx.globalAlpha=sectionAlpha("core");
-        heartPath(cx,cy,s);ctx.fillStyle="rgba(185,82,72,.12)";ctx.fill();ctx.strokeStyle="rgba(185,82,72,.78)";ctx.lineWidth=3;ctx.stroke();
-        heartPath(cx,cy,s*.68);ctx.strokeStyle="rgba(217,120,45,.42)";ctx.lineWidth=2;ctx.stroke();
-        const scan = paused ? .5 : (time * .00016) % 1; const sy=cy-s*.62+scan*s*1.05;
-        line(cx-s*.72,sy,cx+s*.72,sy,"rgba(15,157,141,.75)",2); roundRect(cx-s*.75,sy-5,s*1.5,10,5,"rgba(15,157,141,.1)");
-        label("LIVE MRI PLANE",cx,sy-10,{color:colors.teal});
+        const stages=stageSizes.map((size,i)=>({x:encoderStart+i*stageGap,y:encoderY,size}));
+        stages.forEach((stage,i)=>{roundRect(stage.x-stage.size/2,stage.y-stage.size/2,stage.size,stage.size,10,"rgba(255,252,246,.92)",i===3?"rgba(255,92,0,.55)":"rgba(0,163,255,.42)");const cells=i<2?4:3,cell=stage.size/(cells+2);for(let row=0;row<cells;row++)for(let col=0;col<cells;col++){ctx.fillStyle=(row+col+i)%4===0?orange:"rgba(0,163,255,.58)";ctx.fillRect(stage.x-stage.size*.3+col*cell,stage.y-stage.size*.3+row*cell,Math.max(2,cell-3),Math.max(2,cell-3));}label(`S${i+1}`,stage.x,stage.y+stage.size/2+16,{color:i===3?orange:blue,font:mono(compact?7:8)});if(i<3)arrow(stage.x+stage.size/2+4,stage.y,stages[i+1].x-stages[i+1].size/2-5,stages[i+1].y,"rgba(45,38,31,.28)");});
+        label("SPATIAL DETAIL ↓   CONTEXT ↑",(encoderStart+encoderEnd)/2,encoderY-(compact?48:66),{color:colors.muted,font:mono(compact?7:8)});
+        if(narrow)arrow(volumeX,volumeY+volumeH*.78,(encoderStart+encoderEnd)/2,encoderY-stageSizes[0]*.75,"rgba(45,38,31,.28)");else arrow(volumeX+volumeW*.66,volumeY,encoderStart-stageSizes[0]*.7,encoderY,"rgba(45,38,31,.28)");
+        const packetProgress=(time*.00042)%1,totalSegments=stages.length-1,segment=Math.min(totalSegments-1,Math.floor(packetProgress*totalSegments)),localProgress=packetProgress*totalSegments-segment;
+        const packetX=stages[segment].x+(stages[segment+1].x-stages[segment].x)*localProgress,packetY=stages[segment].y+(stages[segment+1].y-stages[segment].y)*localProgress;dot(packetX,packetY,8,"rgba(255,92,0,.14)");dot(packetX,packetY,3.5,orange);
+
+        const maskX=narrow?(a.left+a.right)/2:a.right-(compact?50:span*.13);
+        const maskY=narrow?a.top+340:volumeY;
+        const maskScale=narrow?54:(compact?54:82);
         ctx.globalAlpha=sectionAlpha("output");
-        if(!compact){const ox=a.left+span*.78,oy=cy;[1,.82,.64,.46].forEach((scale,i)=>{heartPath(ox+i*18,oy-i*12,s*.48*scale);ctx.strokeStyle=i===0?colors.orange:`rgba(15,157,141,${.55-i*.08})`;ctx.lineWidth=2;ctx.stroke();});label("MULTI-SCALE MASK",ox,cy+s*.38,{color:colors.orange});}
-        else label("SEGMENTATION MASK BUILDS WITH EACH PASS",cx,a.bottom-3,{color:colors.orange});
+        if(narrow)arrow((encoderStart+encoderEnd)/2,encoderY+stageSizes[0]*.75,maskX,maskY-maskScale*.8,"rgba(255,92,0,.48)");else arrow(encoderEnd+stageSizes[3]*.7,encoderY,maskX-maskScale*.9,maskY,"rgba(255,92,0,.48)");
+        roundRect(maskX-maskScale*.92,maskY-maskScale*.72,maskScale*1.84,maskScale*1.44,16,"rgba(255,252,246,.92)","rgba(255,92,0,.3)");anatomy(maskX,maskY,maskScale,true);
+        label("VOXEL MASK",maskX,maskY+maskScale*.95,{color:orange});
+        const legendY=maskY+maskScale*1.2;dot(maskX-maskScale*.48,legendY,3.5,blue);label("CAVITY",maskX-maskScale*.39,legendY+3,{align:"left",color:colors.muted,font:mono(6.5)});dot(maskX+maskScale*.08,legendY,3.5,orange);label("MYOCARDIUM",maskX+maskScale*.17,legendY+3,{align:"left",color:colors.muted,font:mono(6.5)});
         ctx.globalAlpha=1;
     };
 
