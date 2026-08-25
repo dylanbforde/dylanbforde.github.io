@@ -6,17 +6,20 @@
     const ctx = canvas.getContext("2d");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const controls = [...stage.querySelectorAll("[data-project-mode]")];
+    const focusControls = [...stage.querySelectorAll("[data-project-focus]")];
     const pauseButton = stage.querySelector("[data-project-pause]");
     const fields = {
         kicker: stage.querySelector("[data-project-kicker]"),
         description: stage.querySelector("[data-project-description]"),
         input: stage.querySelector("[data-project-input]"),
         core: stage.querySelector("[data-project-core]"),
-        output: stage.querySelector("[data-project-output]")
+        output: stage.querySelector("[data-project-output]"),
+        link: stage.querySelector("[data-project-link]")
     };
 
     const projects = {
         vaccine: {
+            page: "projects/vaccine-design.html",
             kicker: "Graph AI / precision oncology",
             description: "Mutations become candidate peptides, graph representations, binding estimates, and a ranked shortlist.",
             stats: ["TCGA variants", "peptide graph", "ranked candidates"],
@@ -24,6 +27,7 @@
             edges: [[0,1],[0,2],[1,3],[2,3],[3,4],[3,5],[4,6],[5,6]]
         },
         forde: {
+            page: "projects/forde-vision-language.html",
             kicker: "Adaptive networks / vision–language",
             description: "A fast gradient loop feeds a slower Sense → Cluster → Smooth → Actuate reorganization loop.",
             stats: ["image + text", "dual-loop routing", "brain map"],
@@ -31,6 +35,7 @@
             edges: [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,1]]
         },
         shift: {
+            page: "projects/domain-shift-rl.html",
             kicker: "Deep reinforcement learning / robustness",
             description: "Behaviour across controlled environment changes trains a meta-model of policy suitability.",
             stats: ["source policy", "shift meta-model", "suitability estimate"],
@@ -38,6 +43,7 @@
             edges: [[0,1],[0,2],[1,3],[2,4],[3,5],[4,5],[5,6]]
         },
         cardiac: {
+            page: "projects/cardiac-mri.html",
             kicker: "Volumetric vision / segmentation",
             description: "Overlapping 3D patches move through a hierarchical encoder and return as a voxel-level mask.",
             stats: ["MRI volume", "3D MixTransformer", "anatomy mask"],
@@ -45,6 +51,7 @@
             edges: [[0,1],[1,2],[2,3],[3,4],[4,5],[2,6],[3,6],[4,6],[5,6]]
         },
         mrnet: {
+            page: "projects/mrnet-classification.html",
             kicker: "Medical imaging / study classification",
             description: "Slice representations preserve local evidence before attention aggregates a decision across the scan.",
             stats: ["MRI slices", "slice attention", "study prediction"],
@@ -52,6 +59,7 @@
             edges: [[0,3],[1,4],[2,5],[3,6],[4,6],[5,6],[6,7]]
         },
         luad: {
+            page: "projects/luad-modeling.html",
             kicker: "Computational biology / survival modeling",
             description: "Molecular and clinical data converge on risk stratification, rule-based recommendations, and a report.",
             stats: ["TCGA-LUAD", "Cox + rules", "risk report"],
@@ -59,6 +67,7 @@
             edges: [[0,2],[1,2],[2,3],[1,4],[3,5],[4,5],[5,6]]
         },
         nix: {
+            page: "projects/nixos-system.html",
             kicker: "Developer systems / reproducibility",
             description: "Pinned inputs compose hosts and modules while encrypted secrets and checks guard activation.",
             stats: ["flake inputs", "module graph", "reproducible host"],
@@ -67,7 +76,8 @@
         }
     };
 
-    let mode = "vaccine";
+    let mode = stage.dataset.projectStage || "vaccine";
+    let focus = "all";
     let width = 0;
     let height = 0;
     let paused = reduceMotion;
@@ -117,7 +127,7 @@
         const uy = dy / distance;
         const start = { x: a.x + ux * 54, y: a.y + uy * 28 };
         const end = { x: b.x - ux * 56, y: b.y - uy * 28 };
-        ctx.strokeStyle = active ? "rgba(15,157,141,.62)" : "rgba(45,38,31,.17)";
+        ctx.strokeStyle = active ? "rgba(15,157,141,.62)" : "rgba(45,38,31,.1)";
         ctx.lineWidth = active ? 2 : 1.2;
         ctx.setLineDash(active ? [] : [4, 5]);
         ctx.beginPath();
@@ -146,28 +156,28 @@
         }
     };
 
-    const drawNode = (node, index, position) => {
+    const drawNode = (node, index, position, active) => {
         const compact = width < 700;
         const w = compact ? 104 : 122;
         const h = compact ? 50 : 58;
-        const active = index === hoverIndex;
+        const hovered = index === hoverIndex;
         const x = Math.max(8, Math.min(width - w - 8, position.x - w / 2));
         const y = position.y - h / 2;
-        ctx.shadowColor = active ? "rgba(15,157,141,.22)" : "rgba(45,38,31,.08)";
-        ctx.shadowBlur = active ? 20 : 8;
+        ctx.shadowColor = hovered ? "rgba(15,157,141,.22)" : "rgba(45,38,31,.08)";
+        ctx.shadowBlur = hovered ? 20 : 8;
         ctx.shadowOffsetY = 3;
         roundedRect(x, y, w, h, 12);
-        ctx.fillStyle = active ? "rgba(15,157,141,.96)" : "rgba(255,252,246,.97)";
+        ctx.fillStyle = hovered ? "rgba(15,157,141,.96)" : (active ? "rgba(255,252,246,.97)" : "rgba(255,252,246,.58)");
         ctx.fill();
         ctx.shadowColor = "transparent";
-        ctx.strokeStyle = active ? "rgba(15,157,141,1)" : "rgba(45,38,31,.18)";
+        ctx.strokeStyle = hovered ? "rgba(15,157,141,1)" : (active ? "rgba(45,38,31,.18)" : "rgba(45,38,31,.08)");
         ctx.lineWidth = 1;
         ctx.stroke();
         ctx.textAlign = "center";
-        ctx.fillStyle = active ? "#fffaf4" : "#2d261f";
+        ctx.fillStyle = hovered ? "#fffaf4" : (active ? "#2d261f" : "rgba(45,38,31,.35)");
         ctx.font = `600 ${compact ? 10 : 11}px Inter, sans-serif`;
         ctx.fillText(node[2], x + w / 2, y + 21);
-        ctx.fillStyle = active ? "rgba(255,250,244,.76)" : "rgba(91,80,69,.76)";
+        ctx.fillStyle = hovered ? "rgba(255,250,244,.76)" : (active ? "rgba(91,80,69,.76)" : "rgba(91,80,69,.3)");
         ctx.font = `${compact ? 8 : 9}px 'JetBrains Mono', monospace`;
         ctx.fillText(node[3], x + w / 2, y + 38);
     };
@@ -177,11 +187,19 @@
         ctx.clearRect(0, 0, width, height);
         const project = projects[mode];
         const positions = project.nodes.map(layoutNode);
+        const incoming = new Set(project.edges.map((edge) => edge[1]));
+        const outgoing = new Set(project.edges.map((edge) => edge[0]));
+        const activeIndices = new Set(project.nodes.map((_, index) => index).filter((index) => {
+            if (focus === "input") return !incoming.has(index);
+            if (focus === "output") return !outgoing.has(index);
+            if (focus === "core") return incoming.has(index) && outgoing.has(index);
+            return true;
+        }));
         project.edges.forEach((edge, index) => {
-            const active = hoverIndex < 0 || edge.includes(hoverIndex);
+            const active = hoverIndex >= 0 ? edge.includes(hoverIndex) : (focus === "all" || activeIndices.has(edge[0]) || activeIndices.has(edge[1]));
             drawArrow(positions[edge[0]], positions[edge[1]], active, time, index);
         });
-        project.nodes.forEach((node, index) => drawNode(node, index, positions[index]));
+        project.nodes.forEach((node, index) => drawNode(node, index, positions[index], focus === "all" || activeIndices.has(index)));
 
         if (pointer && hoverIndex >= 0) {
             ctx.fillStyle = "rgba(217,120,45,.08)";
@@ -209,10 +227,16 @@
         fields.input.textContent = project.stats[0];
         fields.core.textContent = project.stats[1];
         fields.output.textContent = project.stats[2];
+        if (fields.link) fields.link.href = project.page;
         draw(performance.now());
     };
 
     controls.forEach((button) => button.addEventListener("click", () => setMode(button.dataset.projectMode)));
+    focusControls.forEach((button) => button.addEventListener("click", () => {
+        focus = button.dataset.projectFocus;
+        focusControls.forEach((current) => current.setAttribute("aria-pressed", String(current === button)));
+        draw(performance.now());
+    }));
     pauseButton?.addEventListener("click", () => {
         paused = !paused;
         pauseButton.setAttribute("aria-pressed", String(paused));
@@ -236,6 +260,7 @@
 
     const observer = new ResizeObserver(resize);
     observer.observe(canvas);
+    setMode(mode);
     resize();
     frame = requestAnimationFrame(animate);
     window.addEventListener("pagehide", () => cancelAnimationFrame(frame), { once: true });
