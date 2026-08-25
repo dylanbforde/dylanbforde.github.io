@@ -308,18 +308,38 @@
 
     const drawLuad = (time,a) => {
         const compact=width<700, span=a.right-a.left, mid=compact?a.top+(a.bottom-a.top)*.48:a.left+span*.43;
+        const blue="#00a3ff",orange="#ff5c00";
+        const genePhase=(time*.0011)%10,activeGene=Math.floor(genePhase);
+        const trace=(time*.0002)%1;
         ctx.globalAlpha=sectionAlpha("input");
         const nx=compact?(a.left+a.right)/2:a.left+span*.2, ny=compact?a.top+80:a.top+(a.bottom-a.top)*.48;
         const genes=Array.from({length:10},(_,i)=>{const ang=i/10*Math.PI*2;return{x:nx+Math.cos(ang)*(compact?72:110),y:ny+Math.sin(ang)*(compact?48:85)}});
-        genes.forEach((g,i)=>{genes.forEach((h,j)=>{if(j>i&&(i*3+j)%7===0)line(g.x,g.y,h.x,h.y,"rgba(45,38,31,.13)");});dot(g.x,g.y,i%3===0?7:4,i%3===0?colors.orange:"rgba(15,157,141,.68)");});
-        dot(nx,ny,12,colors.teal);label("SPARSE SIGNATURE",nx,ny+(compact?78:118),{color:colors.teal});
+        const geneEdges=[];
+        genes.forEach((g,i)=>{genes.forEach((h,j)=>{if(j>i&&(i*3+j)%7===0){geneEdges.push([g,h]);line(g.x,g.y,h.x,h.y,"rgba(45,38,31,.13)");}});const active=i===activeGene;dot(g.x,g.y,(i%3===0?7:4)+(active?3:0),active?orange:(i%3===0?"rgba(255,92,0,.74)":"rgba(0,163,255,.68)"));});
+        const activeEdge=geneEdges[Math.floor((time*.00065)%geneEdges.length)];
+        if(activeEdge){const edgeProgress=(time*.00105)%1,ex=activeEdge[0].x+(activeEdge[1].x-activeEdge[0].x)*edgeProgress,ey=activeEdge[0].y+(activeEdge[1].y-activeEdge[0].y)*edgeProgress;dot(ex,ey,7,"rgba(0,163,255,.14)");dot(ex,ey,3.2,blue);}
+        const signaturePulse=12+3*(.5+.5*Math.sin(time*.004));
+        dot(nx,ny,signaturePulse,"rgba(0,163,255,.9)");label("SPARSE SIGNATURE",nx,ny+(compact?78:118),{color:blue});
         ctx.globalAlpha=sectionAlpha("core");
         const gx=compact?a.left:a.left+span*.52, gy=compact?a.top+(a.bottom-a.top)*.58:a.top+25, gw=compact?span:span*.45, gh=compact?(a.bottom-a.top)*.38:(a.bottom-a.top)*.72;
+        const bridgeStartX=compact?nx: nx+110,bridgeStartY=compact?ny+62:ny;
+        const bridgeEndX=gx,bridgeEndY=gy+gh*.12;
+        line(bridgeStartX,bridgeStartY,bridgeEndX,bridgeEndY,"rgba(0,163,255,.24)",1.5);
+        const bridgeProgress=(time*.00055)%1;
+        const bridgeX=bridgeStartX+(bridgeEndX-bridgeStartX)*bridgeProgress,bridgeY=bridgeStartY+(bridgeEndY-bridgeStartY)*bridgeProgress;
+        dot(bridgeX,bridgeY,8,"rgba(255,92,0,.14)");dot(bridgeX,bridgeY,3.5,orange);
         line(gx,gy,gx,gy+gh,"rgba(45,38,31,.25)");line(gx,gy+gh,gx+gw,gy+gh,"rgba(45,38,31,.25)");
-        const curve=(risk)=>{ctx.beginPath();for(let i=0;i<=40;i++){const x=gx+i/40*gw,y=gy+gh*(1-Math.exp(-i/40*(risk?1.65:.72)));if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);}ctx.strokeStyle=risk?colors.orange:colors.teal;ctx.lineWidth=3;ctx.stroke();};curve(false);curve(true);
-        label("LOW RISK",gx+gw*.74,gy+gh*.42,{color:colors.teal});label("HIGH RISK",gx+gw*.74,gy+gh*.72,{color:colors.orange});label("TIME",gx+gw,gy+gh+20,{align:"right"});
+        const survivalY=(fraction,risk)=>gy+gh*(1-Math.exp(-fraction*(risk?1.65:.72)));
+        const curve=(risk,progress,color,lineWidth)=>{ctx.beginPath();const steps=Math.max(1,Math.floor(50*progress));for(let i=0;i<=steps;i++){const fraction=i/50,x=gx+fraction*gw,y=survivalY(fraction,risk);if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);}ctx.strokeStyle=color;ctx.lineWidth=lineWidth;ctx.stroke();};
+        curve(false,1,"rgba(0,163,255,.12)",2);curve(true,1,"rgba(255,92,0,.12)",2);
+        curve(false,trace,blue,3);curve(true,trace,orange,3);
+        const cursorX=gx+trace*gw,lowY=survivalY(trace,false),highY=survivalY(trace,true);
+        line(cursorX,gy,cursorX,gy+gh,"rgba(45,38,31,.12)",1);
+        dot(cursorX,lowY,5,blue);dot(cursorX,highY,5,orange);
+        label("MODEL TIME",cursorX,gy-10,{color:colors.muted,font:mono(compact?7:8)});
+        label("LOW RISK",gx+gw*.74,gy+gh*.42,{color:blue});label("HIGH RISK",gx+gw*.74,gy+gh*.72,{color:orange});label("TIME",gx+gw,gy+gh+20,{align:"right"});
         ctx.globalAlpha=sectionAlpha("output");
-        if(!compact){roundRect(a.left+span*.82,a.bottom-62,span*.16,44,10,"rgba(255,252,246,.9)","rgba(45,38,31,.15)");label("RISK REPORT",a.left+span*.9,a.bottom-35,{color:colors.ink});}
+        if(!compact){const reportX=a.left+span*.82,reportW=span*.16;roundRect(reportX,a.bottom-62,reportW,44,10,"rgba(255,252,246,.9)","rgba(255,92,0,.3)");label("RISK REPORT",reportX+reportW/2,a.bottom-42,{color:colors.ink});label(`TRACE ${Math.round(trace*100)}%`,reportX+reportW/2,a.bottom-27,{color:orange,font:mono(8)});}
         ctx.globalAlpha=1;
     };
 
