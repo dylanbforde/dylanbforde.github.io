@@ -11,7 +11,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Playfair+Display:wght@700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="../styles/main.css?v=20260825c">
+    <link rel="stylesheet" href="../styles/main.css?v=20260825g">
     <style>
         .article {
             max-width: 720px;
@@ -131,6 +131,20 @@
                 <p class="hero-subtitle" style="font-style: italic;">How Gradient Descent Explains the Fall of the
                     Soviet Union</p>
             </header>
+
+            <section class="article-visual-breakout" aria-labelledby="constraint-visual-title">
+                <div class="article-visual-intro">
+                    <p class="mono-line mb-sm">Visual abstract</p>
+                    <h2 id="constraint-visual-title">Compare fresh local updates with a stale central batch.</h2>
+                    <p>Green signals update frequently from the edge. Orange signals travel slowly toward the central
+                        optimizer, compressing a changing world into a delayed batch.</p>
+                </div>
+                <div class="research-stage argument-stage article-argument-stage" data-argument-stage="constraint">
+                    <div class="stage-header"><div><p class="stage-kicker" data-argument-kicker></p><p class="stage-description" data-argument-description></p></div></div>
+                    <canvas class="sinkhorn-canvas argument-canvas" data-argument-canvas aria-label="Distributed and central optimization visual"></canvas>
+                    <div class="stage-footer"><div class="stage-stats"><span class="stage-stat">Variable <strong data-argument-variable></strong></span><span class="stage-stat">Effect <strong data-argument-effect></strong></span><span class="stage-stat">Horizon <strong data-argument-horizon></strong></span></div><button class="stage-control stage-pause" type="button" data-argument-pause aria-pressed="false">Pause motion</button></div>
+                </div>
+            </section>
 
             <article class="article-content">
                 <h2>The Optimization Problem That Ate the 20th Century</h2>
@@ -360,7 +374,8 @@
         </div>
     </footer>
 
-    <script src="../scripts/main.js?v=20260825e"></script>
+    <script src="../scripts/main.js?v=20260825g"></script>
+    <script src="../scripts/writing-visualization.js?v=20260825g"></script>
 </body>
 
 </html>

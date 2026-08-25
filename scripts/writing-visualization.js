@@ -20,7 +20,7 @@
         capital: { kicker: "Genetics / inheritance / compounding", description: "A small persistent change alters the starting point on which every later generation acts.", stats: ["heritable delta", "compounding base", "many generations"] }
     };
 
-    let mode = "commons";
+    let mode = stage.dataset.argumentStage || "commons";
     let width = 0;
     let height = 0;
     let paused = reduceMotion;
@@ -186,6 +186,6 @@
     canvas.addEventListener("pointerleave", () => { pointer = null; draw(performance.now()); });
 
     new ResizeObserver(fit).observe(canvas);
-    fit(); raf = requestAnimationFrame(animate);
+    setMode(mode); fit(); raf = requestAnimationFrame(animate);
     window.addEventListener("pagehide", () => cancelAnimationFrame(raf), { once: true });
 })();
