@@ -97,26 +97,124 @@
 
     const drawForde = (time, a) => {
         const compact = width < 700;
-        const layers = compact ? [4,6,6,3] : [5,8,8,4];
-        const layerX = layers.map((_, i) => a.left + (i / (layers.length - 1)) * (a.right - a.left));
-        const positions = layers.map((count, li) => Array.from({length:count}, (_, i) => ({x:layerX[li], y:a.top + 30 + (i + .5) * (a.bottom - a.top - 70) / count})));
+        const span = a.right - a.left;
+        const orange = "#ff5c00";
+        const blue = "#00a3ff";
+        const panel = "rgba(255,252,246,.94)";
+        const arrow = (x1, y1, x2, y2, color, lineWidth = 1.6) => {
+            line(x1, y1, x2, y2, color, lineWidth);
+            const angle = Math.atan2(y2 - y1, x2 - x1);
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.moveTo(x2, y2);
+            ctx.lineTo(x2 - Math.cos(angle - .55) * 7, y2 - Math.sin(angle - .55) * 7);
+            ctx.lineTo(x2 - Math.cos(angle + .55) * 7, y2 - Math.sin(angle + .55) * 7);
+            ctx.closePath();
+            ctx.fill();
+        };
+        const card = (x, y, w, h, title, subtitle, stroke = "rgba(45,38,31,.16)") => {
+            roundRect(x, y, w, h, compact ? 10 : 14, panel, stroke);
+            label(title, x + w / 2, y + h * .43, { color: colors.ink, font: sans(compact ? 8 : 10, 700) });
+            if (subtitle) label(subtitle, x + w / 2, y + h * .7, { color: colors.muted, font: mono(compact ? 6.5 : 7.5), upper: false });
+        };
+        const fastY = a.top + (compact ? 30 : 28);
+        const fastH = compact ? 70 : 88;
+        const inputW = compact ? span * .18 : span * .16;
+        const layerW = compact ? span * .38 : span * .31;
+        const outputW = compact ? span * .22 : span * .2;
+        const inputX = a.left;
+        const layerX = a.left + span * (compact ? .27 : .28);
+        const outputX = a.right - outputW;
+
+        ctx.globalAlpha = sectionAlpha("input");
+        label("FAST LOOP · EVERY TRAINING STEP", a.left, a.top, { align: "left", color: colors.ink });
+        card(inputX, fastY, inputW, fastH, "IMAGE + TEXT", compact ? "paired batch" : "paired contrastive batch", "rgba(0,163,255,.34)");
+        arrow(inputX + inputW, fastY + fastH / 2, layerX - 7, fastY + fastH / 2, "rgba(0,163,255,.62)");
+
         ctx.globalAlpha = sectionAlpha("core");
-        for (let li = 0; li < positions.length - 1; li += 1) {
-            positions[li].forEach((p, i) => positions[li + 1].forEach((q, j) => {
-                const route = (i * 3 + j + li) % 5 === 0;
-                const density = route ? 1.8 + (paused ? .3 : .8 * (.5 + .5 * Math.sin(time * .002 + i + j))) : .45;
-                line(p.x, p.y, q.x, q.y, route ? "rgba(15,157,141,.48)" : "rgba(45,38,31,.08)", density);
-            }));
+        card(layerX, fastY, layerW, fastH, "STATEFUL LAYER", compact ? "routed neurons" : "attention → routed neurons", "rgba(255,92,0,.42)");
+        const neuronY = fastY + fastH * .77;
+        const neuronCount = compact ? 5 : 7;
+        for (let i = 0; i < neuronCount; i += 1) {
+            const nx = layerX + layerW * (i + 1) / (neuronCount + 1);
+            dot(nx, neuronY, compact ? 3.2 : 4.2, i % 3 === 2 ? orange : blue);
         }
-        positions.forEach((layer, li) => layer.forEach((p, i) => dot(p.x, p.y, 4 + (li === 2 && i % 3 === 0 ? 3 : 0), li === 2 && i % 3 === 0 ? colors.orange : colors.teal)));
-        ["VISION", "ROUTES", "STATE", "TEXT"].forEach((name, i) => label(name, layerX[i], a.bottom - 2, { color: i === 2 ? colors.orange : colors.muted }));
-        ctx.globalAlpha = sectionAlpha("input"); label("fast loop · gradient updates", a.left, a.top, { align:"left", color:colors.ink });
+        arrow(layerX + layerW, fastY + fastH / 2, outputX - 7, fastY + fastH / 2, "rgba(45,38,31,.32)");
+
         ctx.globalAlpha = sectionAlpha("output");
-        const loopY = a.bottom + 25;
-        if (!compact) {
-            line(layerX[2], a.bottom - 20, layerX[2], loopY, "rgba(217,120,45,.55)", 2);
-            ["SENSE","CLUSTER","SMOOTH","ACTUATE"].forEach((name,i)=>label(name,a.left+(i+.5)*(a.right-a.left)/4,loopY,{color:i===3?colors.orange:colors.muted}));
+        card(outputX, fastY, outputW, fastH, "EMBEDDINGS", compact ? "loss" : "shared space + loss", "rgba(0,163,255,.34)");
+
+        const slowLabelY = fastY + fastH + (compact ? 56 : 72);
+        const slowY = slowLabelY + (compact ? 16 : 22);
+        const slowGap = compact ? 5 : 12;
+        const mapW = compact ? span * .2 : span * .19;
+        const slowSpan = span - mapW - (compact ? 16 : 34);
+        const slowW = (slowSpan - slowGap * 3) / 4;
+        const slowH = compact ? 48 : 62;
+        const slowNames = ["SENSE", "CLUSTER", "SMOOTH", "ACTUATE"];
+
+        ctx.globalAlpha = sectionAlpha("core");
+        label("SLOW LOOP · EVERY N STEPS", a.left, slowLabelY, { align: "left", color: orange });
+        slowNames.forEach((name, i) => {
+            const x = a.left + i * (slowW + slowGap);
+            card(x, slowY, slowW, slowH, name, compact ? "" : ["statistics", "neuron types", "stable areas", "write state"][i], i === 3 ? "rgba(255,92,0,.45)" : "rgba(45,38,31,.15)");
+            if (i < slowNames.length - 1) arrow(x + slowW, slowY + slowH / 2, x + slowW + slowGap - 2, slowY + slowH / 2, "rgba(45,38,31,.28)", 1.2);
+        });
+
+        const statStartX = layerX + layerW * .5;
+        const statStartY = fastY + fastH;
+        ctx.strokeStyle = "rgba(45,38,31,.26)";
+        ctx.lineWidth = 1.3;
+        ctx.setLineDash([4, 5]);
+        ctx.beginPath();
+        ctx.moveTo(statStartX, statStartY);
+        ctx.lineTo(statStartX, slowLabelY - 8);
+        ctx.lineTo(a.left + slowW * .5, slowLabelY - 8);
+        ctx.lineTo(a.left + slowW * .5, slowY - 4);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        label(compact ? "STATS" : "GRADIENT + ACTIVATION HISTORY", statStartX, slowLabelY - 13, { color: colors.muted, font: mono(compact ? 6.5 : 7.5) });
+
+        ctx.globalAlpha = sectionAlpha("output");
+        const mapX = a.right - mapW;
+        const mapY = slowY;
+        card(mapX, mapY, mapW, slowH, "BRAIN MAP", "assignments", "rgba(0,163,255,.42)");
+        const gridSize = compact ? 3 : 4;
+        const cell = compact ? 5 : 7;
+        const gridX = mapX + mapW / 2 - (gridSize * cell) / 2;
+        const gridY = mapY + slowH * .72 - (gridSize * cell) / 2;
+        for (let row = 0; row < gridSize; row += 1) for (let col = 0; col < gridSize; col += 1) {
+            ctx.fillStyle = (row + col * 2) % 3 === 0 ? orange : blue;
+            ctx.globalAlpha = sectionAlpha("output") * (.45 + ((row + col) % 3) * .2);
+            ctx.fillRect(gridX + col * cell, gridY + row * cell, cell - 1, cell - 1);
         }
+        ctx.globalAlpha = sectionAlpha("output");
+        arrow(a.left + slowSpan, slowY + slowH / 2, mapX - 5, slowY + slowH / 2, "rgba(255,92,0,.62)");
+
+        const returnY = Math.min(a.bottom - 14, slowY + slowH + (compact ? 54 : 68));
+        ctx.strokeStyle = "rgba(0,163,255,.72)";
+        ctx.lineWidth = 2;
+        const returnStart = { x: mapX + mapW / 2, y: mapY + slowH };
+        const returnControlA = { x: returnStart.x, y: returnY };
+        const returnEnd = { x: layerX + layerW / 2, y: fastY + fastH + 5 };
+        const returnControlB = { x: returnEnd.x, y: returnY };
+        ctx.beginPath();
+        ctx.moveTo(returnStart.x, returnStart.y);
+        ctx.bezierCurveTo(returnControlA.x, returnControlA.y, returnControlB.x, returnControlB.y, returnEnd.x, returnEnd.y);
+        ctx.stroke();
+        ctx.fillStyle = blue;
+        ctx.beginPath();
+        ctx.moveTo(returnEnd.x, returnEnd.y);
+        ctx.lineTo(returnEnd.x - 5, returnEnd.y + 8);
+        ctx.lineTo(returnEnd.x + 5, returnEnd.y + 8);
+        ctx.closePath();
+        ctx.fill();
+        const pulse = paused ? .5 : (time * .00022) % 1;
+        const inversePulse = 1 - pulse;
+        const pulseX = inversePulse ** 3 * returnStart.x + 3 * inversePulse ** 2 * pulse * returnControlA.x + 3 * inversePulse * pulse ** 2 * returnControlB.x + pulse ** 3 * returnEnd.x;
+        const pulseY = inversePulse ** 3 * returnStart.y + 3 * inversePulse ** 2 * pulse * returnControlA.y + 3 * inversePulse * pulse ** 2 * returnControlB.y + pulse ** 3 * returnEnd.y;
+        dot(pulseX, pulseY, compact ? 3.5 : 4.5, blue);
+        label("NEW ASSIGNMENTS ROUTE THE NEXT FAST STEPS", (returnStart.x + returnEnd.x) / 2, returnY + (compact ? 17 : 20), { color: blue, font: mono(compact ? 6.2 : 7.5) });
         ctx.globalAlpha = 1;
     };
 
