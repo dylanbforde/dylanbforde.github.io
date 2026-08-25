@@ -68,12 +68,13 @@
         const gy = compact ? a.top + (a.bottom - a.top) * .55 : (a.top + a.bottom) / 2;
         const gr = compact ? 70 : 92;
         const amino = 9;
+        const rotation = time * .00045;
         for (let i = 0; i < amino; i += 1) {
-            const angle = (i / amino) * Math.PI * 2 - Math.PI / 2;
+            const angle = (i / amino) * Math.PI * 2 - Math.PI / 2 + rotation;
             const x = gx + Math.cos(angle) * gr;
             const y = gy + Math.sin(angle) * gr * .62;
             const next = (i + 1) % amino;
-            const na = (next / amino) * Math.PI * 2 - Math.PI / 2;
+            const na = (next / amino) * Math.PI * 2 - Math.PI / 2 + rotation;
             line(x, y, gx + Math.cos(na) * gr, gy + Math.sin(na) * gr * .62, "rgba(15,157,141,.35)", 2);
             const pulse = paused ? 0 : .5 + .5 * Math.sin(time * .003 + i);
             dot(x, y, 8 + pulse * 3, i === 4 ? colors.orange : "rgba(15,157,141,.86)");
