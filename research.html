@@ -11,17 +11,17 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Research | Dylan Forde">
     <meta name="twitter:description"
-        content="Papers and research systems spanning block-wise Sinkhorn attention, optimal transport, and efficient machine learning.">
+        content="Papers and research systems spanning Sinkhorn attention, support topology, gradient mixing, and efficient machine learning.">
     <meta property="og:title" content="Research | Dylan Forde">
     <meta property="og:type" content="website">
     <meta property="og:description"
-        content="Papers and research systems spanning block-wise Sinkhorn attention, optimal transport, and efficient machine learning.">
+        content="Papers and research systems spanning Sinkhorn attention, support topology, gradient mixing, and efficient machine learning.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Playfair+Display:wght@700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="styles/main.css?v=20260825c">
+    <link rel="stylesheet" href="styles/main.css?v=20260924">
 </head>
 
 <body class="paper-bg">
@@ -62,9 +62,8 @@
                                 implementations designed around the memory hierarchy.
                             </p>
                             <div class="button-row">
-                                <a href="#blockwise-sinkhorn" class="btn btn-primary">Explore Featured Paper</a>
-                                <a href="https://arxiv.org/search/?query=Dylan+Forde&amp;searchtype=author" target="_blank" rel="noreferrer"
-                                    class="btn btn-secondary">arXiv Author Page</a>
+                                <a href="#blockwise-sinkhorn" class="btn btn-primary">BlockWise · NeurIPS 2026</a>
+                                <a href="#transport-topology" class="btn btn-secondary">Transport Topology</a>
                             </div>
                         </section>
                         <aside class="hero-panel">
@@ -83,7 +82,7 @@
             </div>
         </header>
 
-        <section class="section" id="blockwise-sinkhorn" style="padding-top: 0;">
+        <section class="section paper-section" id="blockwise-sinkhorn">
             <div class="container paper-feature">
                 <div class="paper-heading reveal">
                     <div>
@@ -178,6 +177,101 @@
             </div>
         </section>
 
+        <section class="section paper-section" id="transport-topology">
+            <div class="container paper-feature">
+                <div class="paper-heading reveal">
+                    <div>
+                        <p class="mono-line mb-sm">Transport topology · Preprint · September 2026</p>
+                        <h2 class="paper-title">Support Topology and Gradient Mixing in Sinkhorn Layers</h2>
+                        <p class="paper-deck">
+                            How does a sparse transport graph shape the gradients that pass through it?
+                            A fixed-support calculus connects Sinkhorn differentiation to two-step walks,
+                            overlap, and contraction.
+                        </p>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="https://arxiv.org/abs/2609.07954" target="_blank" rel="noreferrer"
+                            class="btn btn-primary">Read on arXiv</a>
+                        <a href="https://arxiv.org/pdf/2609.07954" target="_blank" rel="noreferrer"
+                            class="btn btn-secondary">Open PDF</a>
+                    </div>
+                </div>
+
+                <div class="research-stage topology-stage reveal" data-topology-stage>
+                    <div class="stage-header">
+                        <div>
+                            <p class="stage-kicker">From support to gradient mixing</p>
+                            <p class="stage-description" data-topology-description>
+                                Local overlap can spread a signal without guaranteeing contraction in one cycle.
+                            </p>
+                        </div>
+                        <div class="stage-controls" role="group" aria-label="Transport support">
+                            <button class="stage-control" type="button" data-support="ring" aria-pressed="true">Local ring</button>
+                            <button class="stage-control" type="button" data-support="shared" aria-pressed="false">Shared row</button>
+                            <button class="stage-control" type="button" data-support="dense" aria-pressed="false">Dense</button>
+                        </div>
+                    </div>
+                    <div class="topology-body">
+                        <figure class="topology-walk">
+                            <svg data-topology-graph viewBox="0 0 540 380" role="img" aria-labelledby="topology-graph-title topology-graph-desc">
+                                <title id="topology-graph-title">A two-step walk through a transport support</title>
+                                <desc id="topology-graph-desc">Follow a column through its incident rows to the columns they share. Choose a support above to compare the paths.</desc>
+                            </svg>
+                            <figcaption>Column → row → column. Highlighted paths start at column 1.</figcaption>
+                        </figure>
+                        <div class="topology-mixing">
+                            <p class="mono-line">Homogeneous cotangent</p>
+                            <h3>Watch a difference spread.</h3>
+                            <p>Start with +1 and −1 on opposite columns. Each cycle applies Mᵀ to that zero-sum signal.</p>
+                            <svg data-topology-signal viewBox="0 0 320 150" role="img" aria-label="Signed cotangent values across eight columns"></svg>
+                            <div class="topology-readout" aria-live="polite" aria-atomic="true">
+                                <span>Cycle <strong data-topology-cycle>0</strong></span>
+                                <span>Remaining TV <strong data-topology-tv>100%</strong></span>
+                            </div>
+                            <div class="stage-controls topology-playback" role="group" aria-label="Gradient propagation">
+                                <button class="stage-control" type="button" data-topology-action="step">One cycle</button>
+                                <button class="stage-control" type="button" data-topology-action="play" aria-pressed="false">Play</button>
+                                <button class="stage-control" type="button" data-topology-action="reset">Reset</button>
+                            </div>
+                            <p class="topology-certificate">One-step coefficient <strong data-topology-tau>τ(M) = 1.00</strong></p>
+                        </div>
+                    </div>
+                    <div class="stage-footer">
+                        <p class="stage-stat">8 columns · balanced toy plans · M = CᵀR</p>
+                        <p class="stage-stat">Blue + / orange −</p>
+                    </div>
+                </div>
+
+                <div class="paper-facts reveal">
+                    <article class="paper-fact">
+                        <p class="mono-line mb-sm">01 · Derivative structure</p>
+                        <h3>A walk behind the gradient</h3>
+                        <p>Each normalization cycle induces a stochastic operator on column-potential perturbations
+                            modulo constants. Its transpose carries zero-mass reverse-mode signals.</p>
+                    </article>
+                    <article class="paper-fact">
+                        <p class="mono-line mb-sm">02 · Uniform guarantees</p>
+                        <h3>Every feasible face matters</h3>
+                        <p>At balanced plans, score-uniform one-step contraction requires pairwise two-hop column
+                            overlap on every feasible face of the transportation polytope.</p>
+                    </article>
+                    <article class="paper-fact">
+                        <p class="mono-line mb-sm">03 · Sparse schedules</p>
+                        <h3>Mixing across several steps</h3>
+                        <p>Ordered support schedules can provide contraction over a window even when an individual
+                            layer has no global one-step guarantee.</p>
+                    </article>
+                </div>
+                <aside class="evidence-note reveal">
+                    <p class="mono-line mb-sm">Scope of the result</p>
+                    <p>The guarantees concern the fixed-support quotient-gradient component. The illustration uses
+                        balanced toy plans and omits score and marginal source terms. Finite Sinkhorn cycles generally
+                        use two distinct half-step plans; the single-plan walk shown here is the balanced case.
+                        A coefficient of one withholds a one-step guarantee; it does not rule out later mixing.</p>
+                </aside>
+            </div>
+        </section>
+
         <section class="section">
             <div class="container">
                 <div class="section-header">
@@ -186,11 +280,24 @@
                         <h2 class="section-title">Research record</h2>
                     </div>
                     <p class="section-subtitle">
-                        This index is designed to grow as new papers are released, with each paper receiving its own
-                        explanation, artifacts, and evidence boundary.
+                        Work on efficient transport attention and the support geometry that governs its gradients.
                     </p>
                 </div>
                 <div class="publication-list reveal">
+                    <article class="publication-row">
+                        <div>
+                            <p class="publication-year">2026</p>
+                            <p class="publication-status">Preprint</p>
+                        </div>
+                        <div>
+                            <h3>Support Topology and Gradient Mixing in Sinkhorn Layers</h3>
+                            <p>Dylan Forde</p>
+                        </div>
+                        <div class="publication-links">
+                            <a href="#transport-topology">Explore</a>
+                            <a href="https://arxiv.org/abs/2609.07954" target="_blank" rel="noreferrer">arXiv</a>
+                        </div>
+                    </article>
                     <article class="publication-row">
                         <div>
                             <p class="publication-year">2026</p>
@@ -263,7 +370,8 @@
     </footer>
 
     <script src="scripts/main.js?v=20260825"></script>
-    <script src="scripts/sinkhorn-visualization.js?v=20260825e"></script>
+    <script src="scripts/sinkhorn-visualization.js?v=20260924"></script>
+    <script src="scripts/topology-visualization.js?v=20260924"></script>
 </body>
 
 </html>

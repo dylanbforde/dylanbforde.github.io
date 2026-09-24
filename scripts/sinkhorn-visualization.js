@@ -31,8 +31,8 @@
 
     const speedStates = [
         { multiplier: 1, label: "Slow down" },
-        { multiplier: 0.34, label: "30× slow" },
-        { multiplier: 0.12, label: "150× slow" }
+        { multiplier: 0.34, label: "Speed: ⅓×" },
+        { multiplier: 0.12, label: "Speed: ⅛×" }
     ];
 
     let mode = "stream";
@@ -74,11 +74,11 @@
     const getLayout = () => {
         const compact = width < 720;
         const count = compact ? 14 : 20;
-        const top = compact ? 238 : 150;
-        const bottom = height - (compact ? 125 : 92);
-        const left = compact ? 38 : 86;
+        const top = 44;
+        const bottom = height - 32;
+        const left = compact ? 24 : 86;
         const right = width - left;
-        const centerLeft = compact ? 88 : 190;
+        const centerLeft = compact ? 52 : 190;
         const centerRight = width - centerLeft;
         const rowGap = (bottom - top) / Math.max(1, count - 1);
         return { compact, count, top, bottom, left, right, centerLeft, centerRight, rowGap };
@@ -119,9 +119,9 @@
         context.save();
         context.fillStyle = palette.muted;
         context.font = "10px JetBrains Mono, monospace";
-        context.textAlign = layout.compact ? "left" : "center";
+        context.textAlign = "left";
         context.fillText("QUERY TOKENS", layout.compact ? 18 : layout.left, layout.top - 24);
-        context.textAlign = layout.compact ? "right" : "center";
+        context.textAlign = "right";
         context.fillText("KEY / VALUE TOKENS", layout.compact ? width - 18 : layout.right, layout.top - 24);
         context.restore();
     };
@@ -246,7 +246,7 @@
         context.fillStyle = palette.ink;
         context.font = "10px JetBrains Mono, monospace";
         context.textAlign = "left";
-        context.fillText("RESIDENT TILE", matrix.x + 8, activeY + 16);
+        context.fillText("RESIDENT TILE", matrix.x, matrix.y - 12);
 
         const sourceRow = Math.round(active * (layout.count - 1) / Math.max(1, matrix.cells - 1));
         selectedRow = sourceRow;
@@ -303,7 +303,7 @@
         context.font = "10px JetBrains Mono, monospace";
         context.textAlign = "center";
         context.textBaseline = "alphabetic";
-        context.fillText("ONE MATERIALIZED REFERENCE", tileX + tileSize / 2, tileY + tileSize + 18);
+        context.fillText(layout.compact ? "ONE REFERENCE TILE" : "ONE MATERIALIZED REFERENCE", width / 2, matrix.y + matrix.size + 22);
     };
 
     const draw = (time) => {
