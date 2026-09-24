@@ -13,7 +13,27 @@
     let cycle = 0;
     let eta = [];
     let kernel = [];
-    let timer = null;
+    const slider = stage.querySelector('[data-topology-scrubber]');
+    const speedButton = stage.querySelector('[data-topology-action="speed"]');
+    const message = stage.querySelector('[data-topology-message]');
+    const speeds = [
+        { duration: 1600, label: 'Speed: normal' },
+        { duration: 3200, label: 'Speed: slow' },
+        { duration: 6000, label: 'Speed: very slow' }
+    ];
+    let speedIndex = 1;
+    let states = [];
+    let bars = [];
+    let playing = false;
+    let frame = null;
+    let transition = null;
+    let previousTime = null;
+    const tv = values => values.reduce((sum, value) => sum + Math.abs(value), 0) / 2;
+    const percentage = values => {
+        const percent = tv(values) * 100;
+        return percent > 0 && percent < 0.1 ? '<0.1%' : `${percent.toFixed(1)}%`;
+    };
+    const finished = () => cycle >= 24 || tv(eta) < 0.001;
 
     const descriptions = {
         ring: 'Local overlap can spread a signal without guaranteeing contraction in one cycle.',
@@ -93,45 +113,88 @@
         graph.append(group);
     };
 
-    const drawSignal = () => {
+    const buildSignal = () => {
         signal.replaceChildren();
         signal.append(svg('line', { x1: 15, y1: 68, x2: 305, y2: 68, stroke: '#c5bba9' }));
-        eta.forEach((value, col) => {
-            const x = 24 + col * 38;
-            const h = Math.abs(value) * 52;
-            signal.append(svg('rect', {
-                x: x - 9, y: value >= 0 ? 68 - h : 68,
-                width: 18, height: Math.max(0.8, h), rx: 2,
-                fill: value >= 0 ? '#00a3ff' : '#ff5c00'
-            }));
-            signal.append(label(x, 140, col + 1, 12));
+        // Keep the initial amplitude visible without rescaling a shrinking signal.
+        [0, 4].forEach(col => signal.append(svg('rect', {
+            x: 24 + col * 38 - 9, y: col === 0 ? 16 : 68,
+            width: 18, height: 52, rx: 2, fill: 'none',
+            stroke: '#867a69', 'stroke-opacity': 0.45, 'stroke-dasharray': '3 3'
+        })));
+        bars = Array.from({ length: n }, (_, col) => {
+            const bar = svg('rect', { x: 15 + col * 38, y: 68, width: 18, height: 0, rx: 2 });
+            signal.append(bar, label(24 + col * 38, 140, col + 1, 12));
+            return bar;
         });
-        const tv = eta.reduce((sum, value) => sum + Math.abs(value), 0) / 2;
-        const percent = tv * 100;
-        stage.querySelector('[data-topology-cycle]').textContent = cycle;
-        stage.querySelector('[data-topology-tv]').textContent = percent > 0 && percent < 0.1 ? '<0.1%' : `${percent.toFixed(1)}%`;
-        signal.setAttribute('aria-label', `Cycle ${cycle}: ${percent.toFixed(1)} percent of the initial total variation remains across eight columns.`);
     };
-    const stop = () => {
-        window.clearInterval(timer);
-        timer = null;
-        playButton.textContent = 'Play';
+    const drawBars = values => values.forEach((value, col) => {
+        const height = Math.abs(value) * 52;
+        bars[col].setAttribute('y', value >= 0 ? 68 - height : 68);
+        bars[col].setAttribute('height', height);
+        bars[col].setAttribute('fill', value >= 0 ? '#00a3ff' : '#ff5c00');
+    });
+    const updateReadout = (next = null) => {
+        const cycleText = next === null ? String(cycle) : `${cycle} → ${next}`;
+        const remaining = next === null ? percentage(eta) : `${percentage(eta)} → ${percentage(states[next])}`;
+        stage.querySelector('[data-topology-cycle]').textContent = cycleText;
+        stage.querySelector('[data-topology-tv]').textContent = remaining;
+        slider.value = cycle;
+        signal.setAttribute('aria-label', `Cycle ${cycleText}: ${remaining} of the initial total variation. Dashed outlines show the starting signal.`);
+        if (next !== null) {
+            message.textContent = 'Showing the transition between two exact cycle states.';
+        } else if (tv(eta) === 0) {
+            message.textContent = `Fully mixed after ${cycle} ${cycle === 1 ? 'cycle' : 'cycles'}. Replay or drag back to inspect the starting signal.`;
+        } else if (tv(eta) < 0.001) {
+            message.textContent = 'Less than 0.1% remains. Drag back to inspect earlier cycles.';
+        } else if (cycle >= 24) {
+            message.textContent = '24 cycles shown. Replay or drag back to compare earlier states.';
+        } else {
+            message.textContent = 'Dashed outlines mark the starting signal. Bars keep the same scale.';
+        }
+        if (!playing) playButton.textContent = !transition && finished() ? 'Replay' : 'Play';
+    };
+    const pause = () => {
+        playing = false;
+        window.cancelAnimationFrame(frame);
+        frame = null;
+        previousTime = null;
+        playButton.textContent = !transition && finished() ? 'Replay' : 'Play';
         playButton.setAttribute('aria-pressed', 'false');
         stage.classList.remove('is-playing');
     };
-    const step = () => {
-        eta = Array.from({ length: n }, (_, col) => eta.reduce((sum, value, row) => sum + kernel[row][col] * value, 0));
-        cycle++;
-        drawSignal();
-        if (cycle >= 24) stop();
+    const seek = next => {
+        pause();
+        transition = null;
+        cycle = Math.max(0, Math.min(24, next));
+        eta = states[cycle].slice();
+        drawBars(eta);
+        updateReadout();
     };
-    const reset = () => {
-        stop();
-        cycle = 0;
-        eta = Array(n).fill(0);
-        eta[0] = 1;
-        eta[4] = -1;
-        drawSignal();
+    const reset = () => seek(0);
+    const animate = time => {
+        if (!playing) return;
+        const elapsed = previousTime === null ? 0 : Math.min(time - previousTime, 100);
+        previousTime = time;
+        if (!transition) transition = { progress: 0, announced: false };
+        transition.progress += elapsed / speeds[speedIndex].duration;
+        // Hold the old state, ease to the next, then leave time to read the result.
+        const progress = Math.max(0, Math.min(1, (transition.progress - 0.2) / 0.6));
+        if (progress > 0 && !transition.announced) {
+            transition.announced = true;
+            updateReadout(cycle + 1);
+        }
+        const eased = reducedMotion.matches ? (progress >= 1 ? 1 : 0) : progress * progress * (3 - 2 * progress);
+        drawBars(eta.map((value, col) => value + (states[cycle + 1][col] - value) * eased));
+        if (transition.progress >= 1) {
+            cycle++;
+            eta = states[cycle].slice();
+            transition = null;
+            drawBars(eta);
+            updateReadout();
+            if (finished()) { pause(); return; }
+        }
+        frame = window.requestAnimationFrame(animate);
     };
     const select = next => {
         support = next;
@@ -140,23 +203,36 @@
         modes.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.support === support)));
         stage.querySelector('[data-topology-description]').textContent = descriptions[support];
         stage.querySelector('[data-topology-tau]').textContent = `τ(M) = ${coefficient(kernel).toFixed(2)}`;
+        states = [Array.from({ length: n }, (_, col) => col === 0 ? 1 : col === 4 ? -1 : 0)];
+        for (let step = 1; step <= 24; step++) {
+            const prior = states[step - 1];
+            states.push(Array.from({ length: n }, (_, col) => prior.reduce((sum, value, row) => sum + kernel[row][col] * value, 0)));
+        }
         drawGraph(plan);
+        buildSignal();
         reset();
     };
     modes.forEach(button => button.addEventListener('click', () => select(button.dataset.support)));
-    stage.querySelector('[data-topology-action="step"]').addEventListener('click', () => { stop(); step(); });
+    stage.querySelector('[data-topology-action="step"]').addEventListener('click', () => seek(cycle + 1));
     stage.querySelector('[data-topology-action="reset"]').addEventListener('click', reset);
+    slider.addEventListener('input', () => seek(Number(slider.value)));
+    speedButton.addEventListener('click', () => {
+        speedIndex = (speedIndex + 1) % speeds.length;
+        speedButton.textContent = speeds[speedIndex].label;
+    });
     playButton.addEventListener('click', () => {
-        if (timer) return stop();
-        if (cycle >= 24) reset();
+        if (playing) return pause();
+        if (!transition && finished()) reset();
+        playing = true;
+        previousTime = null;
         playButton.textContent = 'Pause';
         playButton.setAttribute('aria-pressed', 'true');
         if (!reducedMotion.matches) stage.classList.add('is-playing');
-        timer = window.setInterval(step, 850);
+        frame = window.requestAnimationFrame(animate);
     });
-    document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); });
+    document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); });
     if ('IntersectionObserver' in window) {
-        new IntersectionObserver(entries => { if (!entries[0].isIntersecting) stop(); }).observe(stage);
+        new IntersectionObserver(entries => { if (!entries[0].isIntersecting) pause(); }).observe(stage);
     }
     select(support);
 })();

@@ -21,7 +21,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Playfair+Display:wght@700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="styles/main.css?v=20260924">
+    <link rel="stylesheet" href="styles/main.css?v=20260924b">
 </head>
 
 <body class="paper-bg">
@@ -228,11 +228,17 @@
                                 <span>Cycle <strong data-topology-cycle>0</strong></span>
                                 <span>Remaining TV <strong data-topology-tv>100%</strong></span>
                             </div>
+                            <label class="topology-scrubber">
+                                <span>Inspect cycle</span>
+                                <input type="range" min="0" max="24" step="1" value="0" data-topology-scrubber aria-label="Inspect cycle">
+                            </label>
                             <div class="stage-controls topology-playback" role="group" aria-label="Gradient propagation">
                                 <button class="stage-control" type="button" data-topology-action="step">One cycle</button>
                                 <button class="stage-control" type="button" data-topology-action="play" aria-pressed="false">Play</button>
                                 <button class="stage-control" type="button" data-topology-action="reset">Reset</button>
+                                <button class="stage-control" type="button" data-topology-action="speed">Speed: slow</button>
                             </div>
+                            <p class="topology-message" data-topology-message>Dashed outlines mark the starting signal. Bars keep the same scale.</p>
                             <p class="topology-certificate">One-step coefficient <strong data-topology-tau>τ(M) = 1.00</strong></p>
                         </div>
                     </div>
@@ -371,7 +377,7 @@
 
     <script src="scripts/main.js?v=20260825"></script>
     <script src="scripts/sinkhorn-visualization.js?v=20260924"></script>
-    <script src="scripts/topology-visualization.js?v=20260924"></script>
+    <script src="scripts/topology-visualization.js?v=20260924b"></script>
 </body>
 
 </html>
