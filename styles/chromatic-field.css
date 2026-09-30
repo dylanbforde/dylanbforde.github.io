@@ -1,0 +1,109 @@
+/* The colour is a continuous page surface, beneath the type and paper grain. */
+body.paper-bg { isolation: isolate; }
+.chromatic-field {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    overflow: hidden;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse at 88% 6%, #ff9755aa, transparent 40%),
+        radial-gradient(ellipse at 99% 57%, #e73dbcad, transparent 39%),
+        radial-gradient(ellipse at 76% 76%, #5655ef99, transparent 36%),
+        radial-gradient(ellipse at -12% 80%, #349deb80, transparent 32%);
+}
+.chromatic-canvas { display: block; width: 100%; height: 100%; opacity: 0; }
+.chromatic-field[data-ready="true"] { background: none; }
+.chromatic-field[data-ready="true"] .chromatic-canvas { opacity: 1; }
+.chromatic-field[data-surface="local"] {
+    position: absolute;
+    inset: -64px 0;
+    /* A small composited surface follows native scrolling, including momentum. */
+    transform: translateZ(0);
+    -webkit-mask-image: linear-gradient(transparent, #000 40px, #000 calc(100% - 40px), transparent);
+    mask-image: linear-gradient(transparent, #000 40px, #000 calc(100% - 40px), transparent);
+}
+
+.art-motion {
+    position: absolute;
+    z-index: 20;
+    top: 108px;
+    right: max(24px, calc((100% - 1040px) / 2));
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 11px;
+    border: 1px solid #77768140;
+    border-radius: 2px;
+    color: #46414c;
+    background: #f7f6f2e8;
+    font: 10px/1.4 var(--font-mono);
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+}
+.art-motion::before { content: "Ⅱ"; font: 12px/1 var(--font-sans); }
+body[data-art-motion="paused"] .art-motion::before { content: "▷"; }
+.art-motion:hover { border-color: #625c7d; color: #383047; }
+.art-motion[hidden] { display: none; }
+
+/* The animated constellation replaces the static study; keep its research link. */
+.home-page .introduction { position: static; }
+.home-page .margin-study { overflow: visible; }
+.home-page .graph-sketch { color: #3f3e57; }
+.graph-sketch svg { transform-origin: 50% 50%; transition: opacity .35s ease; }
+body[data-art-motion] .graph-sketch svg { display: none; }
+body[data-art-motion] .graph-sketch { top: auto; bottom: 12px; right: 18px; left: auto; width: auto; }
+body[data-art-motion] .graph-sketch > span { margin: 0; }
+body[data-art-motion] .graph-sketch svg { animation: graph-drift 20s ease-in-out infinite alternate; }
+.graph-sketch .flow-dot { fill: #5933b5; offset-rotate: 0deg; opacity: 0; }
+.graph-sketch .flow-dot:nth-of-type(1) { offset-path: path("M66 44C136 45 171 110 226 126"); }
+.graph-sketch .flow-dot:nth-of-type(2) { offset-path: path("M60 150C126 148 184 166 240 179"); animation-delay: -3s; }
+.graph-sketch .flow-dot:nth-of-type(3) { offset-path: path("M81 213C130 226 180 239 219 232"); animation-delay: -5s; }
+body[data-art-motion] .graph-sketch .flow-dot { animation-name: ink-travel; animation-duration: 9s; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+body[data-art-motion="paused"] .graph-sketch svg,
+body[data-art-motion="paused"] .graph-sketch .flow-dot { animation-play-state: paused; }
+.home-page .graph-sketch > span { color: #4f435e; }
+.home-page .entry-meta { color: #5c5180; }
+.home-page main a:hover { color: #703baa; }
+.home-page .index-heading { border-color: #65627950; }
+.home-page .thread-sketch { color: #76569c; opacity: .8; }
+.home-page .site-header { border-bottom-color: #65627940; }
+
+@keyframes graph-drift {
+    from { transform: translate(0, -3px) rotate(-2deg); }
+    to { transform: translate(-6px, 6px) rotate(2deg); }
+}
+@keyframes ink-travel {
+    0%, 12% { offset-distance: 0%; opacity: 0; }
+    24%, 74% { opacity: .72; }
+    88%, 100% { offset-distance: 100%; opacity: 0; }
+}
+@media (max-width: 600px) {
+    .art-motion { top: 16px; right: 20px; font-size: 9px; min-height: 44px; }
+    .home-page .margin-study { margin: 21px -2px -8px auto; }
+    /* The artwork and its link follow the heading in both visual and tab order. */
+    body.home-page[data-art-motion] .introduction { display: flex; flex-direction: column; max-width: none; }
+    body.home-page[data-art-motion] .introduction > h1 { margin-bottom: 12px; }
+    body.home-page[data-art-motion] .margin-study {
+        flex: none;
+        position: relative;
+        width: calc(100% + 40px);
+        height: clamp(270px, 78vw, 340px);
+        margin: 0 -20px 14px;
+    }
+    body.home-page[data-art-motion] .graph-sketch {
+        right: auto;
+        left: 20px;
+        bottom: 12px;
+    }
+}
+@media (max-width: 360px) {
+    body.home-page[data-art-motion] .margin-study { width: calc(100% + 32px); margin-inline: -16px; }
+    body.home-page[data-art-motion] .graph-sketch { left: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .graph-sketch svg, .graph-sketch .flow-dot { animation: none !important; transition: none; }
+}
+@media print {
+    .chromatic-field, .art-motion { display: none !important; }
+}

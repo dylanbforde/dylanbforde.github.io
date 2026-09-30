@@ -43,20 +43,18 @@
     let width = 0;
     let height = 0;
     let pixelRatio = 1;
-    let frameId = null;
-    let startTime = performance.now();
-    let pauseTime = 0;
+    let motion;
 
     const palette = {
-        ink: "#2d261f",
-        muted: "#867a69",
-        faint: "rgba(45, 38, 31, 0.1)",
-        cyan: "#00a3ff",
-        cyanSoft: "rgba(0, 163, 255, 0.16)",
-        amber: "#ff5c00",
-        amberSoft: "rgba(255, 92, 0, 0.14)",
-        red: "#a54826",
-        paper: "rgba(255, 252, 246, 0.92)"
+        ink: "#3f3949",
+        muted: "#797080",
+        faint: "rgba(63,57,73, 0.1)",
+        cyan: "#6389bf",
+        cyanSoft: "rgba(99,137,191, 0.16)",
+        amber: "#c97f91",
+        amberSoft: "rgba(201,127,145, 0.14)",
+        red: "#9d6789",
+        paper: "rgba(249,247,244, 0.92)"
     };
 
     const clamp = (value, minimum, maximum) => Math.max(minimum, Math.min(maximum, value));
@@ -68,7 +66,7 @@
         canvas.width = Math.round(width * pixelRatio);
         canvas.height = Math.round(height * pixelRatio);
         context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-        draw(performance.now());
+        motion?.redraw();
     };
 
     const getLayout = () => {
@@ -92,7 +90,7 @@
         context.fillStyle = active ? (target ? palette.amber : palette.cyan) : palette.paper;
         context.fill();
         context.lineWidth = active ? 1.5 : 1;
-        context.strokeStyle = active ? palette.ink : "rgba(45, 38, 31, 0.45)";
+        context.strokeStyle = active ? palette.ink : "rgba(63,57,73, 0.45)";
         context.stroke();
     };
 
@@ -118,7 +116,7 @@
     const drawSequenceLabels = (layout) => {
         context.save();
         context.fillStyle = palette.muted;
-        context.font = "10px JetBrains Mono, monospace";
+        context.font = "10px Consolas, monospace";
         context.textAlign = "left";
         context.fillText("QUERY TOKENS", layout.compact ? 18 : layout.left, layout.top - 24);
         context.textAlign = "right";
@@ -144,7 +142,7 @@
                 layout.right - 5,
                 nodeY(target, layout),
                 0.07,
-                "rgba(45, 38, 31, ALPHA)",
+                "rgba(63,57,73, ALPHA)",
                 Math.sin(row) * 12
             );
         }
@@ -165,7 +163,7 @@
                 endX,
                 endY,
                 opacity,
-                offset === 0 ? "rgba(0, 163, 255, ALPHA)" : "rgba(255, 92, 0, ALPHA)",
+                offset === 0 ? "rgba(99,137,191, ALPHA)" : "rgba(201,127,145, ALPHA)",
                 bend
             );
 
@@ -174,7 +172,7 @@
             const particleColor = offset === 0 ? palette.cyan : palette.amber;
             context.beginPath();
             context.arc(particle.x, particle.y, distance === 0 ? 9 : 7, 0, Math.PI * 2);
-            context.fillStyle = offset === 0 ? "rgba(0, 163, 255, 0.16)" : "rgba(255, 92, 0, 0.13)";
+            context.fillStyle = offset === 0 ? "rgba(99,137,191, 0.16)" : "rgba(201,127,145, 0.13)";
             context.fill();
             context.beginPath();
             context.arc(particle.x, particle.y, distance === 0 ? 4.2 : 3.2, 0, Math.PI * 2);
@@ -183,7 +181,7 @@
         }
 
         context.fillStyle = palette.ink;
-        context.font = `${layout.compact ? 8 : 10}px JetBrains Mono, monospace`;
+        context.font = `${layout.compact ? 8 : 10}px Consolas, monospace`;
         context.textAlign = "center";
         context.fillText("MASS FLOW  →", width / 2, nodeY(selectedRow, layout) - 18);
 
@@ -200,7 +198,7 @@
         const cells = layout.compact ? 7 : 9;
         const cell = matrixSize / cells;
 
-        context.strokeStyle = "rgba(45, 38, 31, 0.12)";
+        context.strokeStyle = "rgba(63,57,73, 0.12)";
         context.lineWidth = 1;
         for (let index = 0; index <= cells; index += 1) {
             context.beginPath();
@@ -226,8 +224,8 @@
             for (let column = 0; column < matrix.cells; column += 1) {
                 if (Math.abs(row - column) <= band) {
                     context.fillStyle = row === active
-                        ? "rgba(0, 163, 255, 0.34)"
-                        : "rgba(0, 163, 255, 0.07)";
+                        ? "rgba(99,137,191, 0.34)"
+                        : "rgba(99,137,191, 0.07)";
                     context.fillRect(
                         matrix.x + column * matrix.cell + 1,
                         matrix.y + row * matrix.cell + 1,
@@ -244,7 +242,7 @@
         context.strokeRect(matrix.x - 2, activeY - 2, matrix.size + 4, matrix.cell + 4);
 
         context.fillStyle = palette.ink;
-        context.font = "10px JetBrains Mono, monospace";
+        context.font = "10px Consolas, monospace";
         context.textAlign = "left";
         context.fillText("RESIDENT TILE", matrix.x, matrix.y - 12);
 
@@ -263,7 +261,7 @@
         const tileX = matrix.x + matrix.size / 2 - tileSize / 2;
         const tileY = matrix.y + matrix.size / 2 - tileSize / 2;
 
-        context.fillStyle = "rgba(0, 163, 255, 0.2)";
+        context.fillStyle = "rgba(99,137,191, 0.2)";
         context.fillRect(tileX, tileY, tileSize, tileSize);
         context.strokeStyle = palette.cyan;
         context.lineWidth = 2;
@@ -277,13 +275,13 @@
             const y = tileY + tileSize / 2 + Math.sin(angle) * orbit;
             context.beginPath();
             context.arc(x, y, 18, 0, Math.PI * 2);
-            context.fillStyle = index === 0 ? palette.cyan : "rgba(255, 92, 0, 0.13)";
+            context.fillStyle = index === 0 ? palette.cyan : "rgba(201,127,145, 0.13)";
             context.fill();
             context.strokeStyle = index === 0 ? palette.ink : palette.amber;
             context.lineWidth = 1;
             context.stroke();
-            context.fillStyle = index === 0 ? "#fffaf4" : palette.ink;
-            context.font = "10px JetBrains Mono, monospace";
+            context.fillStyle = index === 0 ? "#f9f7f4" : palette.ink;
+            context.font = "10px Consolas, monospace";
             context.textAlign = "center";
             context.textBaseline = "middle";
             context.fillText(label, x, y);
@@ -294,13 +292,13 @@
                 x,
                 y,
                 index === 0 ? 0.8 : 0.38,
-                index === 0 ? "rgba(0, 163, 255, ALPHA)" : "rgba(255, 92, 0, ALPHA)",
+                index === 0 ? "rgba(99,137,191, ALPHA)" : "rgba(201,127,145, ALPHA)",
                 0
             );
         });
 
         context.fillStyle = palette.ink;
-        context.font = "10px JetBrains Mono, monospace";
+        context.font = "10px Consolas, monospace";
         context.textAlign = "center";
         context.textBaseline = "alphabetic";
         context.fillText(layout.compact ? "ONE REFERENCE TILE" : "ONE MATERIALIZED REFERENCE", width / 2, matrix.y + matrix.size + 22);
@@ -317,11 +315,11 @@
         drawSequenceLabels(layout);
 
         if (mode === "stream") {
-            drawStream(paused ? pauseTime : time, layout);
+            drawStream(time, layout);
         } else if (mode === "adjoint") {
-            drawAdjoint(paused ? pauseTime : time, layout);
+            drawAdjoint(time, layout);
         } else {
-            drawTransport(paused ? pauseTime : time, layout);
+            drawTransport(time, layout);
         }
 
         if (status) {
@@ -329,10 +327,6 @@
         }
     };
 
-    const animate = (time) => {
-        draw(time - startTime);
-        frameId = window.requestAnimationFrame(animate);
-    };
 
     const selectMode = (nextMode) => {
         mode = nextMode;
@@ -342,7 +336,7 @@
         if (description) {
             description.textContent = modes[mode].description;
         }
-        draw(performance.now() - startTime);
+        motion?.redraw();
     };
 
     modeButtons.forEach((button) => {
@@ -355,17 +349,7 @@
         speedButton.setAttribute("aria-pressed", String(speedIndex > 0));
     });
 
-    pauseButton?.addEventListener("click", () => {
-        paused = !paused;
-        if (paused) {
-            pauseTime = performance.now() - startTime;
-        } else {
-            startTime = performance.now() - pauseTime;
-        }
-        pauseButton.textContent = paused ? "Resume" : "Pause";
-        pauseButton.setAttribute("aria-pressed", String(paused));
-        draw(paused ? pauseTime : performance.now() - startTime);
-    });
+    pauseButton?.addEventListener("click", () => motion.setPaused(!paused));
 
     const updateSelectedRow = (event) => {
         if (mode !== "transport") {
@@ -377,7 +361,7 @@
         const pointerY = event.clientY - rect.top;
         const normalized = (pointerY - layout.top) / Math.max(1, layout.bottom - layout.top);
         selectedRow = Math.round(clamp(normalized, 0, 1) * (layout.count - 1));
-        draw(performance.now() - startTime);
+        motion?.redraw();
     };
 
     canvas.addEventListener("pointermove", updateSelectedRow, { passive: true });
@@ -386,14 +370,10 @@
         pointerInside = false;
     }, { passive: true });
 
-    document.addEventListener("visibilitychange", () => {
-        if (document.hidden && frameId) {
-            window.cancelAnimationFrame(frameId);
-            frameId = null;
-        } else if (!document.hidden && !frameId) {
-            frameId = window.requestAnimationFrame(animate);
-        }
-    });
+    motion = createFigureMotion({ element: stage, render: draw, paused, onPauseChange: value => {
+        paused = value;
+        if (pauseButton) { pauseButton.textContent = value ? "Resume" : "Pause"; pauseButton.setAttribute("aria-pressed", String(value)); }
+    } });
 
     if ("ResizeObserver" in window) {
         const resizeObserver = new ResizeObserver(setCanvasSize);
@@ -408,5 +388,5 @@
         pauseButton.setAttribute("aria-pressed", "true");
     }
     setCanvasSize();
-    frameId = window.requestAnimationFrame(animate);
+
 })();

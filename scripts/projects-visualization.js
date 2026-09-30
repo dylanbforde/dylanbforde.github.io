@@ -83,8 +83,7 @@
     let paused = reduceMotion;
     let hoverIndex = -1;
     let pointer = null;
-    let frame = 0;
-    let last = performance.now();
+    let motion;
 
     const resize = () => {
         const rect = canvas.getBoundingClientRect();
@@ -94,13 +93,13 @@
         canvas.width = Math.round(width * dpr);
         canvas.height = Math.round(height * dpr);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        draw(performance.now());
+        motion?.redraw();
     };
 
     const layoutNode = (node, index) => {
         const compact = width < 700;
-        const top = compact ? 205 : 145;
-        const bottom = compact ? 125 : 92;
+        const top = 36;
+        const bottom = 36;
         if (compact) {
             const nodeCount = projects[mode].nodes.length;
             const rows = Math.ceil(nodeCount / 2);
@@ -127,7 +126,7 @@
         const uy = dy / distance;
         const start = { x: a.x + ux * 54, y: a.y + uy * 28 };
         const end = { x: b.x - ux * 56, y: b.y - uy * 28 };
-        ctx.strokeStyle = active ? "rgba(15,157,141,.62)" : "rgba(45,38,31,.1)";
+        ctx.strokeStyle = active ? "rgba(91,119,177,.62)" : "rgba(63,57,73,.1)";
         ctx.lineWidth = active ? 2 : 1.2;
         ctx.setLineDash(active ? [] : [4, 5]);
         ctx.beginPath();
@@ -137,7 +136,7 @@
         ctx.setLineDash([]);
 
         const angle = Math.atan2(end.y - start.y, end.x - start.x);
-        ctx.fillStyle = active ? "rgba(15,157,141,.78)" : "rgba(45,38,31,.28)";
+        ctx.fillStyle = active ? "rgba(91,119,177,.78)" : "rgba(63,57,73,.28)";
         ctx.beginPath();
         ctx.moveTo(end.x, end.y);
         ctx.lineTo(end.x - 8 * Math.cos(angle - .45), end.y - 8 * Math.sin(angle - .45));
@@ -145,11 +144,11 @@
         ctx.closePath();
         ctx.fill();
 
-        if (!paused) {
+        {
             const progress = ((time * .00016 + edgeIndex * .17) % 1);
             const px = start.x + (end.x - start.x) * progress;
             const py = start.y + (end.y - start.y) * progress;
-            ctx.fillStyle = active ? "#d9782d" : "rgba(15,157,141,.72)";
+            ctx.fillStyle = active ? "#c37e87" : "rgba(91,119,177,.72)";
             ctx.beginPath();
             ctx.arc(px, py, active ? 4 : 3, 0, Math.PI * 2);
             ctx.fill();
@@ -163,22 +162,22 @@
         const hovered = index === hoverIndex;
         const x = Math.max(8, Math.min(width - w - 8, position.x - w / 2));
         const y = position.y - h / 2;
-        ctx.shadowColor = hovered ? "rgba(15,157,141,.22)" : "rgba(45,38,31,.08)";
+        ctx.shadowColor = hovered ? "rgba(91,119,177,.22)" : "rgba(63,57,73,.08)";
         ctx.shadowBlur = hovered ? 20 : 8;
         ctx.shadowOffsetY = 3;
         roundedRect(x, y, w, h, 12);
-        ctx.fillStyle = hovered ? "rgba(15,157,141,.96)" : (active ? "rgba(255,252,246,.97)" : "rgba(255,252,246,.58)");
+        ctx.fillStyle = hovered ? "rgba(91,119,177,.96)" : (active ? "rgba(249,247,244,.97)" : "rgba(249,247,244,.58)");
         ctx.fill();
         ctx.shadowColor = "transparent";
-        ctx.strokeStyle = hovered ? "rgba(15,157,141,1)" : (active ? "rgba(45,38,31,.18)" : "rgba(45,38,31,.08)");
+        ctx.strokeStyle = hovered ? "rgba(91,119,177,1)" : (active ? "rgba(63,57,73,.18)" : "rgba(63,57,73,.08)");
         ctx.lineWidth = 1;
         ctx.stroke();
         ctx.textAlign = "center";
-        ctx.fillStyle = hovered ? "#fffaf4" : (active ? "#2d261f" : "rgba(45,38,31,.35)");
-        ctx.font = `600 ${compact ? 10 : 11}px Inter, sans-serif`;
+        ctx.fillStyle = hovered ? "#f9f7f4" : (active ? "#3f3949" : "rgba(63,57,73,.35)");
+        ctx.font = `600 ${compact ? 10 : 11}px Helvetica, Arial, sans-serif`;
         ctx.fillText(node[2], x + w / 2, y + 21);
-        ctx.fillStyle = hovered ? "rgba(255,250,244,.76)" : (active ? "rgba(91,80,69,.76)" : "rgba(91,80,69,.3)");
-        ctx.font = `${compact ? 8 : 9}px 'JetBrains Mono', monospace`;
+        ctx.fillStyle = hovered ? "rgba(249,247,244,.76)" : (active ? "rgba(96,89,105,.76)" : "rgba(96,89,105,.3)");
+        ctx.font = `${compact ? 8 : 9}px Consolas, monospace`;
         ctx.fillText(node[3], x + w / 2, y + 38);
     };
 
@@ -202,19 +201,13 @@
         project.nodes.forEach((node, index) => drawNode(node, index, positions[index], focus === "all" || activeIndices.has(index)));
 
         if (pointer && hoverIndex >= 0) {
-            ctx.fillStyle = "rgba(217,120,45,.08)";
+            ctx.fillStyle = "rgba(195,126,135,.08)";
             ctx.beginPath();
             ctx.arc(pointer.x, pointer.y, 34, 0, Math.PI * 2);
             ctx.fill();
         }
     }
 
-    const animate = (time) => {
-        frame = requestAnimationFrame(animate);
-        if (paused || document.hidden || time - last < 30) return;
-        last = time;
-        draw(time);
-    };
 
     const setMode = (nextMode) => {
         if (!projects[nextMode]) return;
@@ -228,21 +221,16 @@
         fields.core.textContent = project.stats[1];
         fields.output.textContent = project.stats[2];
         if (fields.link) fields.link.href = project.page;
-        draw(performance.now());
+        motion?.redraw();
     };
 
     controls.forEach((button) => button.addEventListener("click", () => setMode(button.dataset.projectMode)));
     focusControls.forEach((button) => button.addEventListener("click", () => {
         focus = button.dataset.projectFocus;
         focusControls.forEach((current) => current.setAttribute("aria-pressed", String(current === button)));
-        draw(performance.now());
+        motion?.redraw();
     }));
-    pauseButton?.addEventListener("click", () => {
-        paused = !paused;
-        pauseButton.setAttribute("aria-pressed", String(paused));
-        pauseButton.textContent = paused ? "Resume motion" : "Pause motion";
-        draw(performance.now());
-    });
+    pauseButton?.addEventListener("click", () => motion.setPaused(!paused));
 
     canvas.addEventListener("pointermove", (event) => {
         const rect = canvas.getBoundingClientRect();
@@ -254,14 +242,17 @@
             const distance = Math.hypot(pointer.x - position.x, pointer.y - position.y);
             if (distance < minDistance) { minDistance = distance; nearest = index; }
         });
-        if (nearest !== hoverIndex) { hoverIndex = nearest; draw(performance.now()); }
+        if (nearest !== hoverIndex) { hoverIndex = nearest; motion?.redraw(); }
     });
-    canvas.addEventListener("pointerleave", () => { pointer = null; hoverIndex = -1; draw(performance.now()); });
+    canvas.addEventListener("pointerleave", () => { pointer = null; hoverIndex = -1; motion?.redraw(); });
 
+    motion = createFigureMotion({ element: stage, render: draw, paused, onPauseChange: value => {
+        paused = value;
+        if (pauseButton) { pauseButton.setAttribute("aria-pressed", String(value)); pauseButton.textContent = value ? "Resume motion" : "Pause motion"; }
+    } });
     const observer = new ResizeObserver(resize);
     observer.observe(canvas);
     setMode(mode);
     resize();
-    frame = requestAnimationFrame(animate);
-    window.addEventListener("pagehide", () => cancelAnimationFrame(frame), { once: true });
+
 })();

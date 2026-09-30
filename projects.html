@@ -3,16 +3,32 @@
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects | Dylan Forde</title>
-    <link rel="icon" href="/assets/brand/logo-mark.svg" type="image/svg+xml">
     <meta name="description" content="Explore Dylan Forde's project case studies across graph AI, adaptive networks, reinforcement learning, medical imaging, computational biology, and reproducible systems.">
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/main.css?v=20260825f">
+    <link rel="stylesheet" href="styles/main.css?v=20260930b">
+    <link rel="icon" href="assets/brand/rosette.svg" type="image/svg+xml">
+    <link rel="preload" href="assets/fonts/instrument-serif-regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="stylesheet" href="styles/chromatic-field.css?v=20260930i">
+    <link rel="stylesheet" href="styles/editorial.css?v=20260930d">
 </head>
-<body class="paper-bg">
-    <nav class="nav" id="navbar"><div class="container nav-inner"><a href="index.html" class="nav-logo">DF.</a><button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button><ul class="nav-links" id="navLinks"><li><a href="index.html" class="nav-link">Home</a></li><li><a href="research.html" class="nav-link">Research</a></li><li><a href="projects.html" class="nav-link active">Projects</a></li><li><a href="resume.html" class="nav-link">Resume</a></li><li><a href="writing.html" class="nav-link">Notes</a></li><li><a href="about.html" class="nav-link">About</a></li><li><a href="https://github.com/dylanbforde" target="_blank" rel="noreferrer" class="btn btn-secondary">GitHub</a></li></ul></div></nav>
-    <main>
-        <header class="hero project-hero"><div class="hero-orb hero-orb-1"></div><div class="hero-orb hero-orb-3"></div><div class="container"><div class="hero-shell fade-in-up"><div class="hero-split"><section class="hero-copy"><span class="eyebrow">Selected Projects</span><p class="mono-line mt-lg">Systems, experiments, and applied machine learning</p><h1 class="hero-title">Start with the map. Open the system that interests you.</h1><p class="hero-subtitle">The atlas gives a fast architectural view. Each project now opens into its own case study with a dedicated diagram, implementation narrative, and evidence boundary.</p><div class="button-row"><a href="#project-atlas" class="btn btn-primary">Explore the atlas</a><a href="research.html" class="btn btn-secondary">Research Papers</a></div></section><aside class="hero-panel"><p class="mono-line mb-md">A cleaner structure</p><p>The index stays deliberately compact. Select a system, understand its computational shape, then follow it into a focused page when you want the details.</p><div class="subtle-divider"></div><div class="tags"><span class="tag tag-gradient">7 case studies</span><span class="tag">7 diagrams</span><span class="tag">Public source</span></div></aside></div></div></div></header>
+<body class="paper-bg editorial-page projects-page" data-art-theme="work">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <button class="art-motion" type="button" hidden>Pause colour</button>
+    <header class="site-header container">
+        <a class="site-brand" href="index.html" aria-label="Dylan Forde home">
+            <span>Dylan Forde</span>
+        </a>
+        <nav class="site-navigation" aria-label="Main navigation">
+            <a href="research.html">Research</a>
+            <a href="projects.html" aria-current="page">Work</a>
+            <a href="writing.html">Notes</a>
+            <a href="about.html">About</a>
+            <a href="resume.html">Résumé</a>
+        </nav>
+    </header>
+    <main id="main-content">
+        <header class="hero project-hero"><div class="container"><div class="hero-shell fade-in-up"><div class="hero-split"><section class="hero-copy"><span class="eyebrow">Selected Projects</span><p class="mono-line mt-lg">Systems, experiments, and applied machine learning</p><h1 class="hero-title">Start with the map. Open the system that interests you.</h1>
+<figure class="page-study" aria-hidden="true"><div class="chromatic-field" data-surface="local" aria-hidden="true"><canvas class="chromatic-canvas"></canvas></div><figcaption>02 / Selected work</figcaption></figure><p class="hero-subtitle">The atlas gives a fast architectural view. Each project now opens into its own case study with a dedicated diagram, implementation narrative, and evidence boundary.</p><div class="button-row"><a href="#project-atlas" class="btn btn-primary">Explore the atlas</a><a href="research.html" class="btn btn-secondary">Research Papers</a></div></section><aside class="hero-panel"><p class="mono-line mb-md">A cleaner structure</p><p>The index stays deliberately compact. Select a system, understand its computational shape, then follow it into a focused page when you want the details.</p><div class="subtle-divider"></div><div class="tags"><span class="tag tag-gradient">7 case studies</span><span class="tag">7 diagrams</span><span class="tag">Public source</span></div></aside></div></div></div></header>
 
         <section class="section" id="project-atlas" style="padding-top:0"><div class="container"><div class="section-shell project-feature"><div class="paper-heading reveal"><div><p class="mono-line mb-sm">Interactive system map</p><h2 class="paper-title">Seven different computational shapes.</h2><p class="paper-deck">Switch projects to compare their pipelines, then open the selected case study for the complete diagram and design story.</p></div><div class="paper-actions"><a href="#project-directory" class="btn btn-secondary">View directory</a></div></div>
             <div class="research-stage project-stage reveal" data-project-stage><div class="stage-header"><div><p class="stage-kicker" data-project-kicker>Graph AI / precision oncology</p><p class="stage-description" data-project-description>Mutations become candidate peptides, graph representations, binding estimates, and a ranked shortlist.</p></div><div class="stage-controls" role="group" aria-label="Choose a project diagram"><button class="stage-control" type="button" data-project-mode="vaccine" aria-pressed="true">Vaccine</button><button class="stage-control" type="button" data-project-mode="forde" aria-pressed="false">FORDE</button><button class="stage-control" type="button" data-project-mode="shift" aria-pressed="false">Domain shift</button><button class="stage-control" type="button" data-project-mode="cardiac" aria-pressed="false">Cardiac MRI</button><button class="stage-control" type="button" data-project-mode="mrnet" aria-pressed="false">MRNet</button><button class="stage-control" type="button" data-project-mode="luad" aria-pressed="false">LUAD</button><button class="stage-control" type="button" data-project-mode="nix" aria-pressed="false">NixOS</button></div></div><canvas class="sinkhorn-canvas project-canvas" data-project-canvas aria-label="Animated architecture diagram for the selected project"></canvas><div class="stage-footer"><div class="stage-stats"><span class="stage-stat">Input <strong data-project-input>TCGA variants</strong></span><span class="stage-stat">Core <strong data-project-core>peptide graph</strong></span><span class="stage-stat">Output <strong data-project-output>ranked candidates</strong></span></div><div class="stage-footer-actions"><a class="stage-control stage-link" href="projects/vaccine-design.html" data-project-link>Open case study →</a><button class="stage-control stage-pause" type="button" data-project-pause aria-pressed="false">Pause motion</button></div></div></div>
@@ -34,6 +50,19 @@
         <section class="section"><div class="container"><div class="section-shell"><div class="section-header reveal"><div><p class="mono-line mb-sm">Production work</p><h2 class="section-title">Systems built under real constraints</h2></div><p class="section-subtitle">These projects remain at the architectural level because their data and implementation are private.</p></div><div class="professional-grid"><article class="system-card reveal"><span class="system-number">A</span><div><p class="feature-meta">Valeo / computer vision</p><h3>Generative parking-trace pipeline</h3><p>Segmentation, mask conditioning, and inpainting for inserting or removing complex objects while controlling temporal and geometric artifacts in downstream training data.</p><div class="tags"><span class="tag">Segmentation</span><span class="tag">Inpainting</span><span class="tag">Data quality</span></div></div></article><article class="system-card reveal"><span class="system-number">B</span><div><p class="feature-meta">Infrastructure / orchestration</p><h3>Airflow and Kubernetes execution stack</h3><p>Workflow boundaries and task routing across cloud and on-premise compute, designed around failure visibility, retry behaviour, and resource-aware scheduling.</p><div class="tags"><span class="tag">Airflow</span><span class="tag">Kubernetes</span><span class="tag">Docker</span></div></div></article><article class="system-card reveal"><span class="system-number">C</span><div><p class="feature-meta">Performance / 3D data</p><h3>JAX kernels for height maps and point clouds</h3><p>Algorithmic restructuring and compilation-aware memory access for high-volume spatial workloads using JAX and Pallas-style kernels.</p><div class="tags"><span class="tag">JAX</span><span class="tag">Pallas</span><span class="tag">Point clouds</span></div></div></article></div></div></div></section>
         <section class="section"><div class="container"><div class="split-grid"><section class="section-panel reveal"><p class="mono-line mb-sm">Smaller builds</p><h2 class="section-title">Experiments beyond the main case studies</h2><p>JAX training exercises, GPU experiments, forecasting studies, Kaggle work, and a terminal typing game in Rust remain available on GitHub.</p><div class="button-row"><a class="btn btn-secondary" href="https://github.com/dylanbforde?tab=repositories" target="_blank" rel="noreferrer">Browse all repositories</a></div></section><aside class="section-panel reveal delay-1"><p class="mono-line mb-sm">Research belongs next door</p><p>Blockwise Sinkhorn Attention and subsequent paper work remain on the dedicated Research page.</p><div class="button-row"><a class="btn btn-primary" href="research.html">Go to Research</a></div></aside></div></div></section>
     </main>
-    <footer class="footer"><div class="container footer-inner"><ul class="footer-links"><li><a href="research.html" class="footer-link">Research</a></li><li><a href="writing.html" class="footer-link">Notes</a></li><li><a href="about.html" class="footer-link">About</a></li><li><a href="mailto:forde.dylan@gmail.com" class="footer-link">Email</a></li></ul><p class="footer-copy">Mechanisms, implementation detail, and honest boundaries.</p></div></footer>
-    <script src="scripts/main.js?v=20260825f"></script><script src="scripts/projects-visualization.js?v=20260825f"></script>
+    <footer class="site-footer container">
+        <div class="site-colophon">
+            <span>Dylan Forde</span>
+            <nav class="site-footer-links" aria-label="Elsewhere">
+                <a href="mailto:forde.dylan@gmail.com">Email</a>
+                <a href="https://github.com/dylanbforde" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="https://linkedin.com/in/dylanbforde" target="_blank" rel="noreferrer">LinkedIn</a>
+                <a href="https://dforde.substack.com/" target="_blank" rel="noreferrer">Substack</a>
+            </nav>
+            <a href="assets/resume/dylan-forde-research-resume.pdf">Résumé (PDF)</a>
+        </div>
+    </footer>
+    <script src="scripts/main.js?v=20260930c"></script><script src="scripts/figure-motion.js?v=20260930a"></script>
+    <script src="scripts/projects-visualization.js?v=20260930a"></script>
+    <script src="scripts/chromatic-field.js?v=20260930p" defer></script>
 </body></html>

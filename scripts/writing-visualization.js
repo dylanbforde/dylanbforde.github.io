@@ -25,8 +25,7 @@
     let height = 0;
     let paused = reduceMotion;
     let pointer = null;
-    let last = 0;
-    let raf = 0;
+    let motion;
 
     const fit = () => {
         const rect = canvas.getBoundingClientRect();
@@ -36,19 +35,19 @@
         canvas.width = Math.round(width * dpr);
         canvas.height = Math.round(height * dpr);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        draw(performance.now());
+        motion?.redraw();
     };
 
     const area = () => ({
         left: width < 700 ? 24 : 58,
         right: width - (width < 700 ? 24 : 58),
-        top: width < 700 ? 215 : 155,
-        bottom: height - (width < 700 ? 126 : 96)
+        top: 38,
+        bottom: height - 50
     });
 
-    const label = (text, x, y, color = "rgba(45,38,31,.62)", align = "center") => {
+    const label = (text, x, y, color = "rgba(63,57,73,.62)", align = "center") => {
         ctx.fillStyle = color;
-        ctx.font = `${width < 700 ? 8 : 9}px 'JetBrains Mono', monospace`;
+        ctx.font = `${width < 700 ? 8 : 9}px Consolas, monospace`;
         ctx.textAlign = align;
         ctx.fillText(text.toUpperCase(), x, y);
     };
@@ -66,7 +65,7 @@
             { x: box.left + spanX * .48, y: box.top + spanY * .39, h: .43, name: "legible prestige" },
             { x: box.left + spanX * .76, y: box.top + spanY * .58, h: .24, name: "unmapped frontier" }
         ];
-        ctx.strokeStyle = "rgba(45,38,31,.12)"; ctx.lineWidth = 1;
+        ctx.strokeStyle = "rgba(63,57,73,.12)"; ctx.lineWidth = 1;
         for (let row = 0; row < 5; row += 1) {
             ctx.beginPath();
             for (let i = 0; i <= 80; i += 1) {
@@ -78,21 +77,21 @@
             }
             ctx.stroke();
         }
-        peaks.forEach((peak, i) => label(peak.name, peak.x, box.bottom - peak.h * spanY - 18, i === 1 ? "#0f9d8d" : "rgba(45,38,31,.5)"));
+        peaks.forEach((peak, i) => label(peak.name, peak.x, box.bottom - peak.h * spanY - 18, i === 1 ? "#637fae" : "rgba(63,57,73,.5)"));
 
         const target = pointer && pointer.y > box.top && pointer.y < box.bottom ? pointer.x : peaks[1].x;
         for (let i = 0; i < 18; i += 1) {
             const startX = box.left + (i / 17) * spanX;
-            const phase = paused ? .72 : ((time * .00012 + i * .041) % 1);
+            const phase = ((time * .00012 + i * .041) % 1);
             const correlated = i < 14;
             const endX = correlated ? peaks[1].x + Math.sin(i * 2.2) * 18 : peaks[i % 3].x;
             const perturbedEnd = correlated ? endX * .84 + target * .16 : endX;
             const x = startX + (perturbedEnd - startX) * phase;
             const arc = Math.sin(phase * Math.PI) * (28 + (i % 4) * 7);
             const y = box.bottom - 12 - arc;
-            dot(x, y, correlated ? 4 : 3, correlated ? "rgba(217,120,45,.82)" : "rgba(15,157,141,.72)");
+            dot(x, y, correlated ? 4 : 3, correlated ? "rgba(195,126,135,.82)" : "rgba(91,119,177,.72)");
         }
-        label("18 search trajectories · 14 share the same signal", box.left, box.bottom + 26, "rgba(45,38,31,.56)", "left");
+        label("18 search trajectories · 14 share the same signal", box.left, box.bottom + 26, "rgba(63,57,73,.56)", "left");
     };
 
     const drawConstraint = (time, box) => {
@@ -106,20 +105,20 @@
         }
         local.forEach((point, i) => {
             const fresh = i % 3 !== 0;
-            ctx.strokeStyle = fresh ? "rgba(15,157,141,.24)" : "rgba(217,120,45,.22)";
+            ctx.strokeStyle = fresh ? "rgba(91,119,177,.24)" : "rgba(195,126,135,.22)";
             ctx.setLineDash(fresh ? [] : [4,5]);
             ctx.beginPath(); ctx.moveTo(point.x, point.y); ctx.lineTo(cx, cy); ctx.stroke(); ctx.setLineDash([]);
-            const pulse = paused ? .4 : ((time * (fresh ? .00028 : .00008) + i * .08) % 1);
-            dot(point.x + (cx - point.x) * pulse, point.y + (cy - point.y) * pulse, fresh ? 3 : 4, fresh ? "rgba(15,157,141,.8)" : "rgba(217,120,45,.78)");
-            dot(point.x, point.y, 7, fresh ? "rgba(15,157,141,.82)" : "rgba(217,120,45,.72)");
+            const pulse = ((time * (fresh ? .00028 : .00008) + i * .08) % 1);
+            dot(point.x + (cx - point.x) * pulse, point.y + (cy - point.y) * pulse, fresh ? 3 : 4, fresh ? "rgba(91,119,177,.8)" : "rgba(195,126,135,.78)");
+            dot(point.x, point.y, 7, fresh ? "rgba(91,119,177,.82)" : "rgba(195,126,135,.72)");
         });
-        ctx.shadowColor = "rgba(45,38,31,.15)"; ctx.shadowBlur = 18;
-        ctx.fillStyle = "rgba(255,252,246,.98)"; ctx.beginPath(); ctx.arc(cx, cy, 57, 0, Math.PI * 2); ctx.fill();
-        ctx.shadowColor = "transparent"; ctx.strokeStyle = "rgba(45,38,31,.2)"; ctx.stroke();
-        label("central batch", cx, cy - 3, "#2d261f"); label("arrives after delay", cx, cy + 15, "rgba(217,120,45,.85)");
-        label("frequent local updates", box.left, box.bottom + 26, "rgba(15,157,141,.8)", "left");
-        label("slow / compressed updates", box.right, box.bottom + 26, "rgba(217,120,45,.8)", "right");
-        if (pointer && pointer.y > box.top && pointer.y < box.bottom) dot(pointer.x, pointer.y, 18, "rgba(15,157,141,.08)");
+        ctx.shadowColor = "rgba(63,57,73,.15)"; ctx.shadowBlur = 18;
+        ctx.fillStyle = "rgba(249,247,244,.98)"; ctx.beginPath(); ctx.arc(cx, cy, 57, 0, Math.PI * 2); ctx.fill();
+        ctx.shadowColor = "transparent"; ctx.strokeStyle = "rgba(63,57,73,.2)"; ctx.stroke();
+        label("central batch", cx, cy - 3, "#3f3949"); label("arrives after delay", cx, cy + 15, "rgba(195,126,135,.85)");
+        label("frequent local updates", box.left, box.bottom + 26, "rgba(91,119,177,.8)", "left");
+        label("slow / compressed updates", box.right, box.bottom + 26, "rgba(195,126,135,.8)", "right");
+        if (pointer && pointer.y > box.top && pointer.y < box.bottom) dot(pointer.x, pointer.y, 18, "rgba(91,119,177,.08)");
     };
 
     const drawCapital = (time, box) => {
@@ -129,26 +128,26 @@
         const generations = width < 700 ? 5 : 7;
         for (let g = generations; g >= 1; g -= 1) {
             const r = (g / generations) * maxR;
-            ctx.strokeStyle = g === generations ? "rgba(217,120,45,.38)" : "rgba(45,38,31,.13)";
+            ctx.strokeStyle = g === generations ? "rgba(195,126,135,.38)" : "rgba(63,57,73,.13)";
             ctx.lineWidth = g === generations ? 2 : 1;
             ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.stroke();
-            label(`G${g}`, cx, cy - r + 12, g === generations ? "rgba(217,120,45,.9)" : "rgba(45,38,31,.42)");
+            label(`G${g}`, cx, cy - r + 12, g === generations ? "rgba(195,126,135,.9)" : "rgba(63,57,73,.42)");
             const count = 5 + g * 2;
             for (let i = 0; i < count; i += 1) {
                 const baseAngle = (i / count) * Math.PI * 2;
-                const drift = paused ? .2 : Math.sin(time * .00035 + g + i) * .025;
+                const drift = Math.sin(time * .00035 + g + i) * .025;
                 const rr = r + Math.sin(i * 3.1) * 4;
                 const emphasized = i % Math.max(2, 7 - g) === 0;
-                dot(cx + Math.cos(baseAngle + drift) * rr, cy + Math.sin(baseAngle + drift) * rr, emphasized ? 4 : 2.5, emphasized ? "rgba(217,120,45,.8)" : "rgba(15,157,141,.54)");
+                dot(cx + Math.cos(baseAngle + drift) * rr, cy + Math.sin(baseAngle + drift) * rr, emphasized ? 4 : 2.5, emphasized ? "rgba(195,126,135,.8)" : "rgba(91,119,177,.54)");
             }
         }
-        dot(cx, cy, 12, "#0f9d8d");
-        ctx.strokeStyle = "rgba(217,120,45,.55)"; ctx.lineWidth = 2;
+        dot(cx, cy, 12, "#637fae");
+        ctx.strokeStyle = "rgba(195,126,135,.55)"; ctx.lineWidth = 2;
         ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + maxR * .72, cy - maxR * .58); ctx.stroke();
-        label("persistent delta", cx + maxR * .74, cy - maxR * .61, "rgba(217,120,45,.9)");
-        label("each ring inherits the previous base", box.left, box.bottom + 26, "rgba(45,38,31,.56)", "left");
+        label("persistent delta", cx + maxR * .74, cy - maxR * .61, "rgba(195,126,135,.9)");
+        label("each ring inherits the previous base", box.left, box.bottom + 26, "rgba(63,57,73,.56)", "left");
         if (pointer && pointer.y > box.top && pointer.y < box.bottom) {
-            ctx.strokeStyle = "rgba(15,157,141,.22)"; ctx.beginPath(); ctx.arc(pointer.x, pointer.y, 24, 0, Math.PI * 2); ctx.stroke();
+            ctx.strokeStyle = "rgba(91,119,177,.22)"; ctx.beginPath(); ctx.arc(pointer.x, pointer.y, 24, 0, Math.PI * 2); ctx.stroke();
         }
     };
 
@@ -161,11 +160,6 @@
         if (mode === "capital") drawCapital(time, box);
     }
 
-    const animate = (time) => {
-        raf = requestAnimationFrame(animate);
-        if (paused || document.hidden || time - last < 30) return;
-        last = time; draw(time);
-    };
 
     const setMode = (next) => {
         if (!modes[next]) return;
@@ -174,18 +168,19 @@
         const data = modes[mode];
         copy.kicker.textContent = data.kicker; copy.description.textContent = data.description;
         copy.variable.textContent = data.stats[0]; copy.effect.textContent = data.stats[1]; copy.horizon.textContent = data.stats[2];
-        draw(performance.now());
+        motion?.redraw();
     };
 
     buttons.forEach((button) => button.addEventListener("click", () => setMode(button.dataset.argumentMode)));
-    pauseButton?.addEventListener("click", () => {
-        paused = !paused; pauseButton.setAttribute("aria-pressed", String(paused));
-        pauseButton.textContent = paused ? "Resume motion" : "Pause motion"; draw(performance.now());
-    });
-    canvas.addEventListener("pointermove", (event) => { const rect = canvas.getBoundingClientRect(); pointer = { x: event.clientX - rect.left, y: event.clientY - rect.top }; draw(performance.now()); });
-    canvas.addEventListener("pointerleave", () => { pointer = null; draw(performance.now()); });
+    pauseButton?.addEventListener("click", () => motion.setPaused(!paused));
+    canvas.addEventListener("pointermove", (event) => { const rect = canvas.getBoundingClientRect(); pointer = { x: event.clientX - rect.left, y: event.clientY - rect.top }; motion?.redraw(); });
+    canvas.addEventListener("pointerleave", () => { pointer = null; motion?.redraw(); });
 
+    motion = createFigureMotion({ element: stage, render: draw, paused, onPauseChange: value => {
+        paused = value;
+        if (pauseButton) { pauseButton.setAttribute("aria-pressed", String(value)); pauseButton.textContent = value ? "Resume motion" : "Pause motion"; }
+    } });
     new ResizeObserver(fit).observe(canvas);
-    setMode(mode); fit(); raf = requestAnimationFrame(animate);
-    window.addEventListener("pagehide", () => cancelAnimationFrame(raf), { once: true });
+    setMode(mode); fit();
+
 })();

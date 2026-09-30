@@ -48,8 +48,8 @@
         return element;
     };
     const label = (x, y, text, size = 17) => svg('text', {
-        x, y, 'text-anchor': 'middle', fill: '#867a69',
-        'font-family': 'JetBrains Mono, monospace', 'font-size': size
+        x, y, 'text-anchor': 'middle', fill: '#797080',
+        'font-family': 'Consolas, monospace', 'font-size': size
     }, text);
 
     // Construct balanced plans explicitly; their row/column sums define a and b.
@@ -89,7 +89,7 @@
                     const to = half === 0 ? [x[1], y(i, plan.length)] : [x[2], y(j, n)];
                     group.append(svg('path', {
                         d: `M${from} C${(from[0] + to[0]) / 2},${from[1]} ${(from[0] + to[0]) / 2},${to[1]} ${to}`,
-                        fill: 'none', stroke: active ? (half === 0 ? '#00a3ff' : '#ff5c00') : '#2d261f',
+                        fill: 'none', stroke: active ? (half === 0 ? '#6389bf' : '#c97f91') : '#3f3949',
                         'stroke-width': active ? 2 : 1, opacity: active ? 0.7 : 0.08,
                         class: active ? 'topology-route' : ''
                     }));
@@ -102,8 +102,8 @@
                 const shared = column === 1 && i === n;
                 group.append(svg('circle', {
                     cx: x[column], cy: y(i, count), r: shared ? 10 : 7,
-                    fill: active ? (column === 0 ? '#00a3ff' : '#ff5c00') : '#fffcf6',
-                    stroke: '#2d261f', 'stroke-width': 1
+                    fill: active ? (column === 0 ? '#6389bf' : '#c97f91') : '#f9f7f4',
+                    stroke: '#3f3949', 'stroke-width': 1
                 }));
                 if (column !== 1) group.append(label(x[column] + (column === 0 ? -25 : 25), y(i, count) + 5, i + 1, 16));
             }
@@ -115,12 +115,12 @@
 
     const buildSignal = () => {
         signal.replaceChildren();
-        signal.append(svg('line', { x1: 15, y1: 68, x2: 305, y2: 68, stroke: '#c5bba9' }));
+        signal.append(svg('line', { x1: 15, y1: 68, x2: 305, y2: 68, stroke: '#cdc5d2' }));
         // Keep the initial amplitude visible without rescaling a shrinking signal.
         [0, 4].forEach(col => signal.append(svg('rect', {
             x: 24 + col * 38 - 9, y: col === 0 ? 16 : 68,
             width: 18, height: 52, rx: 2, fill: 'none',
-            stroke: '#867a69', 'stroke-opacity': 0.45, 'stroke-dasharray': '3 3'
+            stroke: '#797080', 'stroke-opacity': 0.45, 'stroke-dasharray': '3 3'
         })));
         bars = Array.from({ length: n }, (_, col) => {
             const bar = svg('rect', { x: 15 + col * 38, y: 68, width: 18, height: 0, rx: 2 });
@@ -132,7 +132,7 @@
         const height = Math.abs(value) * 52;
         bars[col].setAttribute('y', value >= 0 ? 68 - height : 68);
         bars[col].setAttribute('height', height);
-        bars[col].setAttribute('fill', value >= 0 ? '#00a3ff' : '#ff5c00');
+        bars[col].setAttribute('fill', value >= 0 ? '#6389bf' : '#c97f91');
     });
     const updateReadout = (next = null) => {
         const cycleText = next === null ? String(cycle) : `${cycle} → ${next}`;

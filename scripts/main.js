@@ -8,80 +8,11 @@ const showAllReveals = () => {
 
 document.addEventListener("DOMContentLoaded", () => {
     try {
-        const navbar = document.getElementById("navbar");
-        const navToggle = document.getElementById("navToggle");
-        const navLinks = document.getElementById("navLinks");
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         const currentReadingRoot = document.getElementById("currentlyReadingBooks");
         const sevenStarRoot = document.getElementById("sevenStarBooks");
         const goodreadsMeta = document.getElementById("goodreadsMeta");
         const articleContent = document.querySelector(".article-content");
-
-        const syncNavbar = () => {
-            if (!navbar) {
-                return;
-            }
-
-            if (window.scrollY > 12) {
-                navbar.classList.add("scrolled");
-            } else {
-                navbar.classList.remove("scrolled");
-            }
-        };
-
-        const setNavState = (isOpen) => {
-            if (!navLinks || !navToggle) {
-                return;
-            }
-
-            navLinks.classList.toggle("active", isOpen);
-            navToggle.setAttribute("aria-expanded", String(isOpen));
-
-            const spans = navToggle.querySelectorAll("span");
-            if (spans.length === 3) {
-                spans[0].style.transform = isOpen ? "translateY(6px) rotate(45deg)" : "none";
-                spans[1].style.opacity = isOpen ? "0" : "1";
-                spans[2].style.transform = isOpen ? "translateY(-6px) rotate(-45deg)" : "none";
-            }
-        };
-
-        if (navToggle && navLinks) {
-            if (!navToggle.getAttribute("aria-label")) {
-                navToggle.setAttribute("aria-label", "Toggle navigation");
-            }
-            navToggle.setAttribute("aria-controls", "navLinks");
-            navToggle.setAttribute("aria-expanded", "false");
-
-            navToggle.addEventListener("click", () => {
-                const isOpen = navLinks.classList.contains("active");
-                setNavState(!isOpen);
-            });
-
-            navLinks.querySelectorAll("a").forEach((link) => {
-                link.addEventListener("click", () => setNavState(false));
-            });
-
-            document.addEventListener("click", (event) => {
-                if (!navLinks.classList.contains("active")) {
-                    return;
-                }
-
-                if (navLinks.contains(event.target) || navToggle.contains(event.target)) {
-                    return;
-                }
-
-                setNavState(false);
-            });
-
-            document.addEventListener("keydown", (event) => {
-                if (event.key === "Escape") {
-                    setNavState(false);
-                }
-            });
-        }
-
-        syncNavbar();
-        window.addEventListener("scroll", syncNavbar, { passive: true });
 
         if (articleContent) {
             const progress = document.createElement("div");
@@ -92,17 +23,26 @@ document.addEventListener("DOMContentLoaded", () => {
             progress.setAttribute("aria-valuemax", "100");
             document.body.prepend(progress);
 
+            let start = 0, span = 1, progressFrame = 0;
             const syncReadingProgress = () => {
-                const start = articleContent.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.35;
-                const finish = start + articleContent.offsetHeight - window.innerHeight * 0.45;
-                const ratio = Math.max(0, Math.min(1, (window.scrollY - start) / Math.max(1, finish - start)));
+                progressFrame = 0;
+                const ratio = Math.max(0, Math.min(1, (window.scrollY - start) / span));
                 progress.style.transform = `scaleX(${ratio})`;
                 progress.setAttribute("aria-valuenow", String(Math.round(ratio * 100)));
             };
-
-            syncReadingProgress();
-            window.addEventListener("scroll", syncReadingProgress, { passive: true });
-            window.addEventListener("resize", syncReadingProgress, { passive: true });
+            const measureReadingProgress = () => {
+                cancelAnimationFrame(progressFrame);
+                start = articleContent.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.35;
+                span = Math.max(1, articleContent.offsetHeight - window.innerHeight * 0.45);
+                syncReadingProgress();
+            };
+            measureReadingProgress();
+            window.addEventListener("scroll", () => {
+                if (!progressFrame) progressFrame = requestAnimationFrame(syncReadingProgress);
+            }, { passive: true });
+            window.addEventListener("resize", measureReadingProgress, { passive: true });
+            if (typeof ResizeObserver !== "undefined") new ResizeObserver(measureReadingProgress).observe(articleContent);
+            document.fonts?.ready.then(measureReadingProgress);
         }
 
         const formatDate = (value) => {

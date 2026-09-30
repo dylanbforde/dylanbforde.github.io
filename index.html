@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dylan Forde | AI Engineer, Researcher, Infrastructure Builder</title>
-    <link rel="icon" href="/assets/brand/logo-mark.svg" type="image/svg+xml">
     <meta name="description"
         content="Dylan Forde builds machine learning systems across autonomous driving, research engineering, and MLOps infrastructure." />
     <meta name="twitter:card" content="summary">
@@ -16,252 +14,136 @@
     <meta property="og:type" content="website">
     <meta property="og:description"
         content="Research-minded AI engineer working on autonomous systems, JAX optimization, and production ML infrastructure.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Playfair+Display:wght@700;800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="styles/main.css?v=20260825c">
+    <link rel="stylesheet" href="styles/main.css?v=20260930b">
+    <link rel="icon" href="assets/brand/rosette.svg" type="image/svg+xml">
+    <link rel="preload" href="assets/fonts/instrument-serif-regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="stylesheet" href="styles/home.css?v=20260930c">
+    <link rel="stylesheet" href="styles/chromatic-field.css?v=20260930i">
 </head>
+<body class="paper-bg home-page">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="chromatic-field" aria-hidden="true"><canvas class="chromatic-canvas"></canvas></div>
+    <button class="art-motion" type="button" hidden>Pause colour</button>
+    <header class="site-header container">
+        <a class="site-brand" href="index.html" aria-label="Dylan Forde home" aria-current="page">
+            <span>Dylan Forde</span>
+        </a>
+        <nav class="site-navigation" aria-label="Main navigation">
+            <a href="research.html">Research</a>
+            <a href="projects.html">Work</a>
+            <a href="writing.html">Notes</a>
+            <a href="about.html">About</a>
+            <a href="resume.html">Résumé</a>
+        </nav>
+    </header>
 
-<body class="paper-bg">
-    <nav class="nav" id="navbar">
-        <div class="container nav-inner">
-            <a href="index.html" class="nav-logo">DF.</a>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"
-                aria-controls="navLinks">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html" class="nav-link active">Home</a></li>
-                <li><a href="research.html" class="nav-link">Research</a></li>
-                <li><a href="projects.html" class="nav-link">Projects</a></li>
-                <li><a href="resume.html" class="nav-link">Resume</a></li>
-                <li><a href="writing.html" class="nav-link">Notes</a></li>
-                <li><a href="about.html" class="nav-link">About</a></li>
-                <li><a href="https://github.com/dylanbforde" target="_blank" rel="noreferrer"
-                        class="btn btn-secondary">GitHub</a></li>
-            </ul>
+    <main id="main-content" class="home-index">
+        <section class="opening" aria-labelledby="intro-title">
+            <div class="introduction">
+                <h1 id="intro-title">I like knowing<br>how things work.</h1>
+                <figure class="margin-study">
+                    <a class="graph-sketch" href="research.html#transport-topology" aria-label="Explore support topology and gradient mixing">
+                        <svg viewBox="0 0 310 290" role="img" aria-labelledby="sketch-title">
+                            <title id="sketch-title">A sketch of a sparse bipartite support graph</title>
+                            <g fill="none" stroke="currentColor" stroke-width=".65" opacity=".55">
+                                <path d="M66 44C108 38 174 64 236 72M66 44C136 45 171 110 226 126M73 99C139 86 175 69 236 72M73 99C129 96 171 123 226 126M73 99C119 130 180 175 240 179M60 150C125 128 173 115 226 126M60 150C126 148 184 166 240 179M60 150C118 186 178 215 219 232M81 213C135 199 173 183 240 179M81 213C130 226 180 239 219 232"/>
+                                <path d="M56 28C43 59 45 101 44 130M44 147C43 181 56 220 66 234M252 54C266 102 259 144 263 160M263 181C260 209 247 238 238 252" stroke-dasharray="1 5" opacity=".65"/>
+                            </g>
+                            <g fill="var(--paper-0)" stroke="currentColor" stroke-width="1">
+                                <path d="M73 45C73 53 58 52 59 43C59 34 74 34 73 45ZM80 98C82 108 65 111 65 100C64 91 78 89 80 98ZM67 150C68 160 51 159 52 150C53 141 66 141 67 150ZM88 213C88 224 73 222 73 213C72 203 88 203 88 213Z"/>
+                                <path d="M243 72C243 81 228 81 228 72C228 62 243 64 243 72ZM234 126C235 137 218 135 218 126C218 116 233 117 234 126ZM248 178C248 190 232 187 232 179C231 169 247 169 248 178ZM227 232C228 241 211 242 211 232C211 222 226 223 227 232Z"/>
+                            </g>
+                            <g fill="currentColor" opacity=".45"><circle cx="66" cy="44" r="1.4"/><circle cx="240" cy="179" r="1.5"/></g>
+                        <g aria-hidden="true"><circle class="flow-dot" r="2.3"/><circle class="flow-dot" r="2"/><circle class="flow-dot" r="2"/></g>
+                        </svg>
+                        <span>support topology <span aria-hidden="true">↗</span></span>
+                    </a>
+                </figure>
+                <p>I’m Dylan, an AI engineer at Valeo and an independent researcher. I work on autonomous driving, efficient machine learning, and the infrastructure around it.</p>
+                <p>I’ll usually read the source code and trace what happens to the data before changing anything. It takes time, but I’d rather understand why something breaks.</p>
+                <p class="intro-links"><a href="about.html">More about me</a><a href="mailto:forde.dylan@gmail.com">Say hello</a></p>
+            </div>
+        </section>
+
+        <div class="index-layout">
+            <section class="research-index" id="research" aria-labelledby="research-title">
+                <div class="index-heading"><h2 id="research-title">Research</h2><a href="research.html">All papers <span aria-hidden="true">↗</span></a></div>
+                <article class="paper-entry">
+                    <p class="entry-meta">Accepted at NeurIPS 2026</p>
+                    <h3><a href="research.html#blockwise-sinkhorn">Block-Wise Differentiable Sinkhorn Attention</a></h3>
+                    <p>A block-wise optimal-transport attention kernel with an exact tail-refinement adjoint, one-reference-tile schedule, and TPU-oriented JAX implementation.</p>
+                    <a class="entry-link" href="research.html#blockwise-sinkhorn">Paper &amp; implementation <span aria-hidden="true">↗</span></a>
+                </article>
+                <article class="paper-entry">
+                    <p class="entry-meta">Preprint · 2026</p>
+                    <h3><a href="research.html#transport-topology">Support Topology and Gradient Mixing in Sinkhorn Layers</a></h3>
+                    <p>How does a sparse transport graph shape the gradients that pass through it?</p>
+                    <a class="entry-link" href="research.html#transport-topology">Paper &amp; interactive figures <span aria-hidden="true">↗</span></a>
+                </article>
+            </section>
+
+            <section class="notes-index" id="notes" aria-labelledby="notes-title">
+                <div class="index-heading"><h2 id="notes-title">Notes &amp; essays</h2></div>
+                <ul class="essay-list">
+                    <li><a href="writing/correlated-commons.html">Tragedy of the Correlated Commons</a><span>Education &amp; game theory</span></li>
+                    <li><a href="writing/communist-constraint.html">The Communist Constraint</a><span>Economics &amp; optimization</span></li>
+                    <li><a href="writing/genetic-capital.html">Compounding Returns of Genetic Capital</a><span>Genetics &amp; long horizons</span></li>
+                </ul>
+                <a class="entry-link" href="writing.html">All writing <span aria-hidden="true">↗</span></a>
+            </section>
+
+            <section class="work-index" id="work" aria-labelledby="work-title">
+                <div class="index-heading"><h2 id="work-title">Selected work</h2><a href="projects.html">All projects <span aria-hidden="true">↗</span></a></div>
+                <article class="work-entry">
+                    <h3><a href="resume.html">Generative data &amp; ML infrastructure</a></h3>
+                    <p class="entry-meta">Valeo Vision Systems</p>
+                    <p>Built and optimized internal ML workflows spanning generative augmentation, trace processing, orchestration, and cross-cluster scheduling for perception workloads.</p>
+                </article>
+                <article class="work-entry">
+                    <h3><a href="projects/vaccine-design.html">Personalized cancer vaccine design</a></h3>
+                    <p>Variants → sequence reconstruction → peptide graphs → MHC ranking.</p>
+                </article>
+                <article class="work-entry">
+                    <h3><a href="projects/domain-shift-rl.html">Domain-shift quantification</a></h3>
+                    <p>Estimate policy suitability before a changed environment exposes failure.</p>
+                </article>
+            </section>
+
+            <aside class="off-hours" id="about" aria-labelledby="off-hours-title">
+                <div class="index-heading"><h2 id="off-hours-title">Away from the terminal</h2></div>
+                <p>A lot of my off-hours go into essays, books, and side projects that sit somewhere between economics, machine learning, coordination problems, and technology history.</p>
+                <p><a href="about.html">A little more about me</a>, or <a href="https://dforde.substack.com/" target="_blank" rel="noreferrer">find me on Substack</a>.</p>
+                <svg class="thread-sketch" viewBox="0 0 220 90" fill="none" aria-hidden="true"><path d="M5 68C46 70 73 30 88 21C117 4 139 29 119 46C96 66 79 35 113 21C160 1 193 45 175 65C162 80 141 68 153 51C167 32 198 39 214 30M82 49C88 59 108 60 124 49" stroke="currentColor" stroke-width=".8"/><path d="M8 73C42 74 67 47 86 29C119 0 147 27 126 47" stroke="currentColor" stroke-width=".4" opacity=".4"/></svg>
+            </aside>
         </div>
-    </nav>
 
-    <main>
-        <header class="hero hero-home">
-            <div class="hero-orb hero-orb-1"></div>
-            <div class="hero-orb hero-orb-2"></div>
-            <div class="hero-orb hero-orb-3"></div>
-
-            <div class="container">
-                <div class="hero-shell fade-in-up">
-                    <div class="hero-split">
-                        <section class="hero-copy">
-                            <span class="eyebrow">Europe</span>
-                            <p class="mono-line mt-lg">AI engineer working across research and production systems</p>
-                            <h1 class="hero-title">Building machine learning systems for real-world use.</h1>
-                            <p class="hero-subtitle">
-                                I work across autonomous driving, deep learning optimization, and MLOps
-                                infrastructure. At Valeo, that means shipping pipelines, accelerating JAX workloads,
-                                and helping models move from experiment to fleet-scale execution.
-                            </p>
-                            <div class="tags mt-lg">
-                                <span class="tag">Python</span>
-                                <span class="tag">JAX</span>
-                                <span class="tag">PyTorch</span>
-                                <span class="tag">Airflow</span>
-                                <span class="tag">Kubernetes</span>
-                                <span class="tag">Autonomous Systems</span>
-                            </div>
-                            <div class="hero-cta">
-                                <a href="resume.html" class="btn btn-primary">See Experience</a>
-                                <a href="projects.html" class="btn btn-secondary">Browse Projects</a>
-                                <a href="assets/resume/dylan-forde-research-resume.pdf" class="btn btn-quiet">Download
-                                    Resume PDF</a>
-                            </div>
-                        </section>
-
-                        <aside class="hero-panel">
-                            <p class="mono-line mb-md">Current work</p>
-                            <h3 class="mb-md">Applied ML, research, and infrastructure.</h3>
-                            <ul class="profile-list">
-                                <li>Generative AI data pipelines for 10,000+ parking video traces at high hardware
-                                    utilization.</li>
-                                <li>JAX and Pallas optimizations that cut internal trace processing from 45 minutes to
-                                    5.</li>
-                                <li>Airflow and Kubernetes systems for resilient extraction, scheduling, and dynamic
-                                    task routing.</li>
-                                <li>Research work spanning optimal transport, RL domain shift, genomics, and medical
-                                    imaging.</li>
-                            </ul>
-                            <div class="subtle-divider"></div>
-                            <p class="mono-line mb-md">What I care about</p>
-                            <div class="tags">
-                                <span class="tag tag-gradient">Systems That Scale</span>
-                                <span class="tag">Fast Feedback Loops</span>
-                                <span class="tag">Clean Interfaces</span>
-                                <span class="tag">Testing</span>
-                                <span class="tag">Inference Efficiency</span>
-                            </div>
-                        </aside>
-                    </div>
-                </div>
+        <section class="bookshelf" id="reading" aria-labelledby="reading-title">
+            <div class="index-heading"><h2 id="reading-title">On the bookshelf</h2><a href="https://www.goodreads.com/user/show/195775990-dylan-forde" target="_blank" rel="noreferrer">Goodreads <span aria-hidden="true">↗</span></a></div>
+            <div class="reading-columns">
+                <section aria-labelledby="current-reading-title"><h3 id="current-reading-title" class="shelf-label">Currently reading</h3><div class="book-grid" id="currentlyReadingBooks"><article class="book-card"><a class="book-cover" href="https://www.goodreads.com/book/show/2458709" target="_blank" rel="noreferrer"><img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1347235524l/2458709.jpg" alt="50 Physics Ideas You Really Need to Know cover" width="64" height="96" loading="lazy"></a><div class="book-copy"><h3 class="book-title"><a href="https://www.goodreads.com/book/show/2458709" target="_blank" rel="noreferrer">50 Physics Ideas You Really Need to Know</a></h3><p class="book-author">Joanne Baker</p><div class="book-meta"><span class="book-chip">Currently reading</span></div></div></article>
+<article class="book-card"><a class="book-cover" href="https://www.goodreads.com/book/show/231191100" target="_blank" rel="noreferrer"><img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1746501287l/231191100._SX318_.jpg" alt="AI Systems Performance Engineering: Optimizing Model Training and Inference Workloads with GPUs, CUDA, and PyTorch cover" width="64" height="96" loading="lazy"></a><div class="book-copy"><h3 class="book-title"><a href="https://www.goodreads.com/book/show/231191100" target="_blank" rel="noreferrer">AI Systems Performance Engineering: Optimizing Model Training and Inference Workloads with GPUs, CUDA, and PyTorch</a></h3><p class="book-author">Chris Fregly</p><div class="book-meta"><span class="book-chip">Currently reading</span></div></div></article>
+<article class="book-card"><a class="book-cover" href="https://www.goodreads.com/book/show/12158480" target="_blank" rel="noreferrer"><img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1348987396l/12158480.jpg" alt="Why Nations Fail: The Origins of Power, Prosperity, and Poverty cover" width="64" height="96" loading="lazy"></a><div class="book-copy"><h3 class="book-title"><a href="https://www.goodreads.com/book/show/12158480" target="_blank" rel="noreferrer">Why Nations Fail: The Origins of Power, Prosperity, and Poverty</a></h3><p class="book-author">Daron Acemoğlu</p><div class="book-meta"><span class="book-chip">Currently reading</span></div></div></article></div></section>
+                <section aria-labelledby="favourite-reading-title"><h3 id="favourite-reading-title" class="shelf-label">The 7-star shelf</h3><div class="book-grid" id="sevenStarBooks"><article class="book-card"><a class="book-cover" href="https://www.goodreads.com/book/show/7967" target="_blank" rel="noreferrer"><img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1295660894l/7967.jpg" alt="Speaker for the Dead (Ender&#x27;s Saga, #2) cover" width="64" height="96" loading="lazy"></a><div class="book-copy"><h3 class="book-title"><a href="https://www.goodreads.com/book/show/7967" target="_blank" rel="noreferrer">Speaker for the Dead (Ender&#x27;s Saga, #2)</a></h3><p class="book-author">Orson Scott Card</p><div class="book-meta"><span class="book-chip">7-star pick</span></div></div></article>
+<article class="book-card"><a class="book-cover" href="https://www.goodreads.com/book/show/7126" target="_blank" rel="noreferrer"><img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1724863997l/7126._SY475_.jpg" alt="The Count of Monte Cristo cover" width="64" height="96" loading="lazy"></a><div class="book-copy"><h3 class="book-title"><a href="https://www.goodreads.com/book/show/7126" target="_blank" rel="noreferrer">The Count of Monte Cristo</a></h3><p class="book-author">Alexandre Dumas</p><div class="book-meta"><span class="book-chip">7-star pick</span></div></div></article>
+<article class="book-card"><a class="book-cover" href="https://www.goodreads.com/book/show/13530973" target="_blank" rel="noreferrer"><img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1352422827l/13530973.jpg" alt="Antifragile: Things That Gain from Disorder cover" width="64" height="96" loading="lazy"></a><div class="book-copy"><h3 class="book-title"><a href="https://www.goodreads.com/book/show/13530973" target="_blank" rel="noreferrer">Antifragile: Things That Gain from Disorder</a></h3><p class="book-author">Nassim Nicholas Taleb</p><div class="book-meta"><span class="book-chip">7-star pick</span></div></div></article></div></section>
             </div>
-        </header>
-
-        <section class="section">
-            <div class="container">
-                <div class="section-shell">
-                    <div class="section-header">
-                        <div>
-                            <p class="mono-line mb-sm">Selected Work</p>
-                            <h2 class="section-title">Recent systems and research threads</h2>
-                        </div>
-                        <div class="button-row">
-                            <a href="research.html" class="btn btn-primary">Explore Research</a>
-                            <a href="projects.html" class="btn btn-secondary">View Projects</a>
-                        </div>
-                    </div>
-                    <div class="project-grid">
-                        <article class="card reveal">
-                            <div class="spotlight-meta">Valeo Vision Systems</div>
-                            <h3 class="spotlight-title">Generative data and infrastructure for autonomous systems</h3>
-                            <p>
-                                Built and optimized internal ML workflows spanning generative augmentation, trace
-                                processing, orchestration, and cross-cluster scheduling for perception workloads.
-                            </p>
-                            <div class="tags mt-md">
-                                <span class="tag">JAX</span>
-                                <span class="tag">Airflow</span>
-                                <span class="tag">K8s</span>
-                                <span class="tag">Computer Vision</span>
-                            </div>
-                        </article>
-                        <article class="card card-neon reveal delay-1">
-                            <div class="spotlight-meta">Accepted at NeurIPS 2026</div>
-                            <h3 class="spotlight-title"><a href="research.html#blockwise-sinkhorn">Block-wise
-                                    differentiable Sinkhorn attention</a></h3>
-                            <p>
-                                A block-wise optimal-transport attention kernel with an exact tail-refinement adjoint,
-                                one-reference-tile schedule, and TPU-oriented JAX implementation.
-                            </p>
-                            <div class="tags mt-md">
-                                <span class="tag">Optimal Transport</span>
-                                <span class="tag">TPU</span>
-                                <span class="tag">Kernel Engineering</span>
-                            </div>
-                            <a href="research.html#blockwise-sinkhorn" class="card-link">Explore paper <span
-                                    aria-hidden="true">→</span></a>
-                        </article>
-                        <article class="card reveal delay-2">
-                            <div class="spotlight-meta">Microsoft Research</div>
-                            <h3 class="spotlight-title">Developer tooling and mocking for faster preview loops</h3>
-                            <p>
-                                Built state and API mocking systems, configuration abstractions, and LLM evaluation work
-                                to reduce friction in production and internal engineering workflows.
-                            </p>
-                            <div class="tags mt-md">
-                                <span class="tag">TypeScript</span>
-                                <span class="tag">Testing</span>
-                                <span class="tag">LLM Evaluation</span>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" id="reading">
-            <div class="container">
-                <div class="section-shell reading-journal">
-                    <div class="section-header">
-                        <div>
-                            <p class="mono-line mb-sm">Books</p>
-                            <h2 class="section-title">Reading now, and books worth returning to.</h2>
-                        </div>
-                        <a href="https://www.goodreads.com/user/show/195775990-dylan-forde" target="_blank"
-                            rel="noreferrer" class="btn btn-secondary">Goodreads Profile</a>
-                    </div>
-                    <div class="split-grid">
-                        <section class="section-panel reveal">
-                            <p class="mono-line mb-sm">In progress</p>
-                            <p class="mb-lg">
-                                The public shelf as it stands now—not recommendations yet, simply the current stack.
-                            </p>
-                            <div class="book-grid" id="currentlyReadingBooks">
-                                <article class="book-card book-card-placeholder">
-                                    <div class="book-copy">
-                                        <h3 class="book-title">Loading current reads</h3>
-                                        <p class="book-author">A moment while the reading list comes in.</p>
-                                    </div>
-                                </article>
-                            </div>
-                        </section>
-
-                        <aside class="section-panel reveal delay-1">
-                            <p class="mono-line mb-sm">The 7-star shelf</p>
-                            <p class="mb-lg">
-                                A deliberately small list for books that exceeded the normal rating scale.
-                            </p>
-                            <div class="book-grid" id="sevenStarBooks">
-                                <article class="book-card book-card-placeholder">
-                                    <div class="book-copy">
-                                        <h3 class="book-title">Loading favorites</h3>
-                                        <p class="book-author">A moment while the shelf comes in.</p>
-                                    </div>
-                                </article>
-                            </div>
-                        </aside>
-                    </div>
-                    <p class="mono-line mt-lg" id="goodreadsMeta">
-                        A live snapshot of my public Goodreads shelves.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section class="section">
-            <div class="container">
-                <div class="section-header reveal">
-                    <div>
-                        <p class="mono-line mb-sm">Contact</p>
-                        <h2 class="section-title">Interested in research engineering, applied ML, or infrastructure?</h2>
-                    </div>
-                    <div>
-                        <p class="section-subtitle">
-                            I am most interested in teams where systems design and practical model performance both
-                            matter.
-                        </p>
-                        <div class="contact-grid mt-lg">
-                            <a href="mailto:forde.dylan@gmail.com" class="btn btn-primary">Email</a>
-                            <a href="https://linkedin.com/in/dylanbforde" target="_blank" rel="noreferrer"
-                                class="btn btn-secondary">LinkedIn</a>
-                            <a href="https://github.com/dylanbforde" target="_blank" rel="noreferrer"
-                                class="btn btn-secondary">GitHub</a>
-                            <a href="resume.html" class="btn btn-secondary">Resume</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <p class="reading-updated" id="goodreadsMeta">From my public Goodreads shelves · Snapshot: 2026-08-25</p>
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="container footer-inner">
-            <ul class="footer-links">
-                <li><a href="mailto:forde.dylan@gmail.com" class="footer-link">Email</a></li>
-                <li><a href="https://github.com/dylanbforde" target="_blank" rel="noreferrer"
-                        class="footer-link">GitHub</a></li>
-                <li><a href="https://linkedin.com/in/dylanbforde" target="_blank" rel="noreferrer"
-                        class="footer-link">LinkedIn</a></li>
-                <li><a href="https://dforde.substack.com/" target="_blank" rel="noreferrer"
-                        class="footer-link">Substack</a></li>
-            </ul>
-            <p class="footer-copy">Built to be clear, fast, and easy to maintain.</p>
+    <footer class="site-footer container">
+        <div class="site-colophon">
+            <span>Dylan Forde</span>
+            <nav class="site-footer-links" aria-label="Elsewhere">
+                <a href="mailto:forde.dylan@gmail.com">Email</a>
+                <a href="https://github.com/dylanbforde" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="https://linkedin.com/in/dylanbforde" target="_blank" rel="noreferrer">LinkedIn</a>
+                <a href="https://dforde.substack.com/" target="_blank" rel="noreferrer">Substack</a>
+            </nav>
+            <a href="assets/resume/dylan-forde-research-resume.pdf">Résumé (PDF)</a>
         </div>
     </footer>
-
-    <script src="scripts/main.js?v=20260825"></script>
+    <script src="scripts/main.js?v=20260930c"></script>
+    <script src="scripts/chromatic-field.js?v=20260930p" defer></script>
 </body>
-
 </html>

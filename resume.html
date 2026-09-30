@@ -5,42 +5,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume | Dylan Forde</title>
-    <link rel="icon" href="/assets/brand/logo-mark.svg" type="image/svg+xml">
     <meta name="description"
         content="Experience, projects, education, and technical skills for Dylan Forde across AI engineering, research, and MLOps." />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Playfair+Display:wght@700;800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="styles/main.css?v=20260825d">
+    <link rel="stylesheet" href="styles/main.css?v=20260930b">
+    <link rel="icon" href="assets/brand/rosette.svg" type="image/svg+xml">
+    <link rel="preload" href="assets/fonts/instrument-serif-regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="stylesheet" href="styles/chromatic-field.css?v=20260930i">
+    <link rel="stylesheet" href="styles/editorial.css?v=20260930d">
 </head>
 
-<body class="paper-bg">
-    <nav class="nav" id="navbar">
-        <div class="container nav-inner">
-            <a href="index.html" class="nav-logo">DF.</a>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"
-                aria-controls="navLinks">
-                <span></span><span></span><span></span>
-            </button>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="research.html" class="nav-link">Research</a></li>
-                <li><a href="projects.html" class="nav-link">Projects</a></li>
-                <li><a href="resume.html" class="nav-link active">Resume</a></li>
-                <li><a href="writing.html" class="nav-link">Notes</a></li>
-                <li><a href="about.html" class="nav-link">About</a></li>
-                <li><a href="https://github.com/dylanbforde" target="_blank" rel="noreferrer"
-                        class="btn btn-secondary">GitHub</a></li>
-            </ul>
-        </div>
-    </nav>
+<body class="paper-bg editorial-page resume-page" data-art-theme="resume">
+    <a class="skip-link" href="#main-content">Skip to content</a>
 
-    <main>
+    <button class="art-motion" type="button" hidden>Pause colour</button>
+    <header class="site-header container">
+        <a class="site-brand" href="index.html" aria-label="Dylan Forde home">
+            <span>Dylan Forde</span>
+        </a>
+        <nav class="site-navigation" aria-label="Main navigation">
+            <a href="research.html">Research</a>
+            <a href="projects.html">Work</a>
+            <a href="writing.html">Notes</a>
+            <a href="about.html">About</a>
+            <a href="resume.html" aria-current="page">Résumé</a>
+        </nav>
+    </header>
+
+    <main id="main-content">
         <header class="hero">
-            <div class="hero-orb hero-orb-1"></div>
-            <div class="hero-orb hero-orb-2"></div>
+
+
             <div class="container">
                 <div class="hero-shell fade-in-up">
                     <div class="hero-split">
@@ -49,6 +43,7 @@
                             <p class="mono-line mt-lg">AI engineer working across production ML, research, and
                                 infrastructure</p>
                             <h1 class="hero-title">Experience across production ML, research, and infrastructure.</h1>
+<figure class="page-study" aria-hidden="true"><div class="chromatic-field" data-surface="local" aria-hidden="true"><canvas class="chromatic-canvas"></canvas></div><figcaption>05 / Résumé</figcaption></figure>
                             <p class="hero-subtitle">
                                 Experience across production machine learning, research engineering, and infrastructure,
                                 with most of the recent work centered on autonomous systems and high-performance ML.
@@ -449,20 +444,22 @@
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="container footer-inner">
-            <ul class="footer-links">
-                <li><a href="mailto:forde.dylan@gmail.com" class="footer-link">Email</a></li>
-                <li><a href="projects.html" class="footer-link">Projects</a></li>
-                <li><a href="writing.html" class="footer-link">Notes</a></li>
-                <li><a href="about.html" class="footer-link">About</a></li>
-            </ul>
-            <p class="footer-copy">Experience, projects, and the work behind them.</p>
+    <footer class="site-footer container">
+        <div class="site-colophon">
+            <span>Dylan Forde</span>
+            <nav class="site-footer-links" aria-label="Elsewhere">
+                <a href="mailto:forde.dylan@gmail.com">Email</a>
+                <a href="https://github.com/dylanbforde" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="https://linkedin.com/in/dylanbforde" target="_blank" rel="noreferrer">LinkedIn</a>
+                <a href="https://dforde.substack.com/" target="_blank" rel="noreferrer">Substack</a>
+            </nav>
+            <a href="assets/resume/dylan-forde-research-resume.pdf">Résumé (PDF)</a>
         </div>
     </footer>
 
-    <script src="scripts/main.js?v=20260825"></script>
+    <script src="scripts/main.js?v=20260930c"></script>
     <script src="scripts/resume-timeline.js?v=20260825a"></script>
+    <script src="scripts/chromatic-field.js?v=20260930p" defer></script>
 </body>
 
 </html>
