@@ -49,12 +49,12 @@
                         <section class="hero-copy">
                             <span class="eyebrow">Research</span>
                             <p class="mono-line mt-lg">Optimal transport / efficient attention / ML systems</p>
-                            <h1 class="hero-title">Research where mathematical structure meets hardware constraints.</h1>
+                            <h1 class="hero-title">Learning systems built around mathematical structure and hardware limits.</h1>
 <figure class="page-study" aria-hidden="true"><div class="chromatic-field" data-surface="local" aria-hidden="true"><canvas class="chromatic-canvas"></canvas></div><figcaption>01 / Research</figcaption></figure>
                             <p class="hero-subtitle">
-                                I work on learning systems that have to survive both theoretical scrutiny and real
-                                machines: differentiable transport, long-context attention, sparse derivatives, and
-                                implementations designed around the memory hierarchy.
+                                I work on differentiable transport, long-context attention, and sparse derivatives.
+                                The systems need to stand up to theoretical scrutiny and run on real machines, so
+                                the implementations are designed around the memory hierarchy.
                             </p>
                             <div class="button-row">
                                 <a href="#blockwise-sinkhorn" class="btn btn-primary">BlockWise · NeurIPS 2026</a>
@@ -65,9 +65,9 @@
                             <p class="mono-line mb-md">Current direction</p>
                             <h3 class="mb-md">Making structured attention practical at long context.</h3>
                             <ul class="profile-list">
-                                <li>Exact, inspectable differentiation schedules rather than opaque memory blow-ups.</li>
-                                <li>Block-wise algorithms that align mathematical sparsity with accelerator memory.</li>
-                                <li>Evidence that separates numerical exactness, systems performance, and task outcomes.</li>
+                                <li>Exact differentiation schedules whose steps and memory costs can be inspected.</li>
+                                <li>Block-wise algorithms that fit mathematical sparsity to accelerator memory.</li>
+                                <li>Separate evidence for numerical exactness, systems performance, and task outcomes.</li>
                             </ul>
                             <div class="subtle-divider"></div>
                             <p class="mono-line">Europe · Independent research</p>
@@ -84,8 +84,8 @@
                         <p class="mono-line mb-sm">Featured paper · Accepted at NeurIPS 2026 · arXiv:2605.08123</p>
                         <h2 class="paper-title">Block-Wise Differentiable Sinkhorn Attention</h2>
                         <p class="paper-deck">
-                            Tail-refinement gradients with a gap-aware dustbin bridge: a memory-efficient route to
-                            differentiating balanced entropic optimal-transport attention at long context.
+                            A memory-efficient way to differentiate balanced entropic optimal-transport attention
+                            at long context, using tail-refinement gradients and a gap-aware dustbin bridge.
                         </p>
                     </div>
                     <div class="paper-actions">
@@ -138,8 +138,8 @@
                         <p class="mono-line mb-sm">01 · Exact surrogate adjoint</p>
                         <h3>One reference tile</h3>
                         <p>
-                            For the reported two-step refinement path, the four staircase plan factors can be
-                            reconstructed from one resident reference tile and explicit row and column modifiers.
+                            On the reported two-step refinement path, one resident reference tile and explicit row
+                            and column modifiers are enough to reconstruct the four staircase plan factors.
                         </p>
                     </article>
                     <article class="paper-fact">
@@ -154,8 +154,9 @@
                         <p class="mono-line mb-sm">03 · Structured gaps</p>
                         <h3>Dustbin augmentation bridge</h3>
                         <p>
-                            The implemented gap-aware path is formalized as the same balanced surrogate on an augmented
-                            support, allowing the adjoint schedule to lift without claiming a general unbalanced model.
+                            The implemented gap-aware path uses the same balanced surrogate on an augmented support.
+                            This formalization lets the adjoint schedule carry over; it does not claim a general
+                            unbalanced model.
                         </p>
                     </article>
                 </div>
@@ -163,10 +164,10 @@
                 <aside class="evidence-note reveal">
                     <p class="mono-line mb-sm">Evidence boundary</p>
                     <p>
-                        The optimized masked kernel matches exact autodiff of the same centered surrogate on synthetic
-                        checks. TPU experiments establish trainability and systems stability for the promoted balanced
-                        path; the paper reports mixed downstream alignment results and keeps those claims deliberately
-                        separate from kernel exactness.
+                        On synthetic checks, the optimized masked kernel matches exact autodiff of the same centered
+                        surrogate. TPU experiments establish trainability and systems stability for the promoted balanced
+                        path. Downstream alignment results are mixed, and the paper treats them separately from kernel
+                        exactness.
                     </p>
                 </aside>
             </div>
@@ -179,9 +180,9 @@
                         <p class="mono-line mb-sm">Transport topology · Preprint · September 2026</p>
                         <h2 class="paper-title">Support Topology and Gradient Mixing in Sinkhorn Layers</h2>
                         <p class="paper-deck">
-                            How does a sparse transport graph shape the gradients that pass through it?
-                            A fixed-support calculus connects Sinkhorn differentiation to two-step walks,
-                            overlap, and contraction.
+                            A sparse transport graph shapes the gradients that pass through it. The paper develops
+                            a fixed-support calculus connecting Sinkhorn differentiation to two-step walks, overlap,
+                            and contraction.
                         </p>
                     </div>
                     <div class="paper-actions">
@@ -216,7 +217,7 @@
                         </figure>
                         <div class="topology-mixing">
                             <p class="mono-line">Homogeneous cotangent</p>
-                            <h3>Watch a difference spread.</h3>
+                            <h3>Follow the signal across cycles.</h3>
                             <p>Start with +1 and −1 on opposite columns. Each cycle applies Mᵀ to that zero-sum signal.</p>
                             <svg data-topology-signal viewBox="0 0 320 150" role="img" aria-label="Signed cotangent values across eight columns"></svg>
                             <div class="topology-readout" aria-live="polite" aria-atomic="true">
@@ -246,29 +247,29 @@
                 <div class="paper-facts reveal">
                     <article class="paper-fact">
                         <p class="mono-line mb-sm">01 · Derivative structure</p>
-                        <h3>A walk behind the gradient</h3>
+                        <h3>The walk induced by normalization</h3>
                         <p>Each normalization cycle induces a stochastic operator on column-potential perturbations
-                            modulo constants. Its transpose carries zero-mass reverse-mode signals.</p>
+                            modulo constants. The transpose of that operator carries zero-mass reverse-mode signals.</p>
                     </article>
                     <article class="paper-fact">
                         <p class="mono-line mb-sm">02 · Uniform guarantees</p>
-                        <h3>Every feasible face matters</h3>
+                        <h3>Overlap on every feasible face</h3>
                         <p>At balanced plans, score-uniform one-step contraction requires pairwise two-hop column
                             overlap on every feasible face of the transportation polytope.</p>
                     </article>
                     <article class="paper-fact">
                         <p class="mono-line mb-sm">03 · Sparse schedules</p>
                         <h3>Mixing across several steps</h3>
-                        <p>Ordered support schedules can provide contraction over a window even when an individual
+                        <p>An ordered support schedule can provide contraction over a window even when an individual
                             layer has no global one-step guarantee.</p>
                     </article>
                 </div>
                 <aside class="evidence-note reveal">
                     <p class="mono-line mb-sm">Scope of the result</p>
-                    <p>The guarantees concern the fixed-support quotient-gradient component. The illustration uses
+                    <p>The guarantees apply to the fixed-support quotient-gradient component. This illustration uses
                         balanced toy plans and omits score and marginal source terms. Finite Sinkhorn cycles generally
-                        use two distinct half-step plans; the single-plan walk shown here is the balanced case.
-                        A coefficient of one withholds a one-step guarantee; it does not rule out later mixing.</p>
+                        use two distinct half-step plans. The single-plan walk shown here is the balanced case.
+                        A coefficient of one gives no one-step guarantee, but later mixing is still possible.</p>
                 </aside>
             </div>
         </section>
@@ -281,7 +282,7 @@
                         <h2 class="section-title">Research record</h2>
                     </div>
                     <p class="section-subtitle">
-                        Work on efficient transport attention and the support geometry that governs its gradients.
+                        Papers on efficient transport attention and the support geometry that governs its gradients.
                     </p>
                 </div>
                 <div class="publication-list reveal">
@@ -323,7 +324,7 @@
                 <div class="section-shell">
                     <div class="section-header">
                         <div>
-                            <p class="mono-line mb-sm">Earlier research threads</p>
+                            <p class="mono-line mb-sm">Earlier research</p>
                             <h2 class="section-title">Problems that shaped the current work</h2>
                         </div>
                     </div>
@@ -332,7 +333,7 @@
                             <div class="feature-meta">Deep reinforcement learning</div>
                             <h3 class="feature-title">Intrinsic quantification of domain shift</h3>
                             <p>
-                                Reactive exploration methods for measuring domain-shift magnitude across controlled
+                                Using reactive exploration methods to measure domain-shift magnitude across controlled
                                 reinforcement-learning environments.
                             </p>
                         </article>
@@ -340,15 +341,15 @@
                             <div class="feature-meta">Computational biology</div>
                             <h3 class="feature-title">Multi-omics and biological representation learning</h3>
                             <p>
-                                Research across biomarker discovery, protein representations, regulatory networks, and
-                                learning from heterogeneous biological signals.
+                                Work on biomarker discovery, protein representations, regulatory networks, and learning
+                                from heterogeneous biological signals.
                             </p>
                         </article>
                         <article class="card reveal delay-2">
                             <div class="feature-meta">Medical imaging</div>
                             <h3 class="feature-title">Attention across volumetric MRI</h3>
                             <p>
-                                Patch tokenization, self-attention, and inter-slice aggregation for volume-aware
+                                Using patch tokenization, self-attention, and inter-slice aggregation for volume-aware
                                 diagnostic classification.
                             </p>
                         </article>

@@ -9,13 +9,13 @@
     const focusButtons = [...stage.querySelectorAll("[data-project-focus]")];
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const details = {
-        vaccine: ["Graph AI / precision oncology", "A mutation is localized in sequence, expanded into peptide candidates, represented structurally, and ranked.", "TCGA variants", "peptide graph", "ranked candidates"],
-        forde: ["Adaptive networks / vision–language", "Route density emerges inside the neural layer while a slower loop senses and reorganizes functional pathways.", "image + text", "adaptive layer", "brain map"],
-        shift: ["Deep reinforcement learning / robustness", "A cart-pole policy is observed across controlled dynamics shifts before a meta-model estimates its suitability.", "source policy", "shift probe", "suitability estimate"],
-        cardiac: ["Volumetric vision / segmentation", "A scanning plane passes through a cardiac volume while hierarchical features reconstruct an anatomy mask.", "MRI volume", "3D hierarchy", "anatomy mask"],
-        mrnet: ["Medical imaging / study classification", "A stack of MRI slices retains local evidence before learned attention forms a study-level decision.", "MRI slices", "slice attention", "study prediction"],
-        luad: ["Computational biology / survival modeling", "A regulatory network and clinical cohort produce a sparse signature, separated survival curves, and a report.", "TCGA-LUAD", "Cox + network", "risk report"],
-        nix: ["Developer systems / reproducibility", "A flake evaluates a configuration tree, decrypts runtime secrets, passes checks, and creates a new generation.", "flake inputs", "module evaluation", "atomic generation"]
+        vaccine: ["Graph AI / precision oncology", "Locate the mutation in the sequence, generate peptide candidates, represent their structure, and rank them.", "TCGA variants", "peptide graph", "ranked candidates"],
+        forde: ["Adaptive networks / vision–language", "Route density emerges within the neural layer. A slower loop senses the functional pathways and reorganizes them.", "image + text", "adaptive layer", "brain map"],
+        shift: ["Deep reinforcement learning / robustness", "Observe a cart-pole policy under controlled dynamics shifts, then use a meta-model to estimate its suitability.", "source policy", "shift probe", "suitability estimate"],
+        cardiac: ["Volumetric vision / segmentation", "The scanning plane moves through the cardiac volume as hierarchical features reconstruct an anatomy mask.", "MRI volume", "3D hierarchy", "anatomy mask"],
+        mrnet: ["Medical imaging / study classification", "Keep local evidence in the stack of MRI slices, then use learned attention to form a study-level decision.", "MRI slices", "slice attention", "study prediction"],
+        luad: ["Computational biology / survival modeling", "The regulatory network and clinical cohort feed a workflow that produces a sparse signature, separated survival curves, and a report.", "TCGA-LUAD", "Cox + network", "risk report"],
+        nix: ["Developer systems / reproducibility", "The flake evaluates a configuration tree, decrypts secrets at runtime, passes checks, and creates a new generation.", "flake inputs", "module evaluation", "atomic generation"]
     };
 
     const copy = details[mode];

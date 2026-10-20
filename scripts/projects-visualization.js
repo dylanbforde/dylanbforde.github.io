@@ -21,7 +21,7 @@
         vaccine: {
             page: "projects/vaccine-design.html",
             kicker: "Graph AI / precision oncology",
-            description: "Mutations become candidate peptides, graph representations, binding estimates, and a ranked shortlist.",
+            description: "The pipeline starts with mutations and produces candidate peptides, graph representations, binding estimates, and a ranked shortlist.",
             stats: ["TCGA variants", "peptide graph", "ranked candidates"],
             nodes: [[.08,.52,"Variants","missense · indel"],[.26,.36,"Sequence","UniProt / Ensembl"],[.26,.67,"9-mers","mutant windows"],[.49,.51,"Peptide graph","biophysical nodes"],[.7,.36,"GNN score","MHC binding"],[.7,.67,"Sinkhorn","motif alignment"],[.91,.51,"Rank","candidate report"]],
             edges: [[0,1],[0,2],[1,3],[2,3],[3,4],[3,5],[4,6],[5,6]]
@@ -29,7 +29,7 @@
         forde: {
             page: "projects/forde-vision-language.html",
             kicker: "Adaptive networks / vision–language",
-            description: "A fast gradient loop feeds a slower Sense → Cluster → Smooth → Actuate reorganization loop.",
+            description: "The fast gradient loop feeds a slower loop that reorganizes the network: Sense → Cluster → Smooth → Actuate.",
             stats: ["image + text", "dual-loop routing", "brain map"],
             nodes: [[.08,.5,"Image + text","paired samples"],[.29,.5,"Dual encoder","fast loop"],[.51,.31,"Sense","activation history"],[.68,.31,"Cluster","functional groups"],[.82,.5,"Smooth","stable map"],[.68,.69,"Actuate","route update"],[.51,.69,"State","cached brain map"]],
             edges: [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,1]]
@@ -37,7 +37,7 @@
         shift: {
             page: "projects/domain-shift-rl.html",
             kicker: "Deep reinforcement learning / robustness",
-            description: "Behaviour across controlled environment changes trains a meta-model of policy suitability.",
+            description: "A meta-model learns to estimate policy suitability from behaviour under controlled environment changes.",
             stats: ["source policy", "shift meta-model", "suitability estimate"],
             nodes: [[.08,.48,"Policy","source domain"],[.29,.31,"Shift A","dynamics"],[.29,.66,"Shift B","observations"],[.51,.31,"Rollout","behaviour trace"],[.51,.66,"Rollout","return + state"],[.73,.48,"Meta-model","shift magnitude"],[.92,.48,"Estimate","policy fit"]],
             edges: [[0,1],[0,2],[1,3],[2,4],[3,5],[4,5],[5,6]]
@@ -45,7 +45,7 @@
         cardiac: {
             page: "projects/cardiac-mri.html",
             kicker: "Volumetric vision / segmentation",
-            description: "Overlapping 3D patches move through a hierarchical encoder and return as a voxel-level mask.",
+            description: "A hierarchical encoder processes overlapping 3D patches, which are decoded into a voxel-level mask.",
             stats: ["MRI volume", "3D MixTransformer", "anatomy mask"],
             nodes: [[.08,.5,"MRI volume","stacked slices"],[.28,.5,"3D patches","overlapping tokens"],[.48,.26,"Stage 1","fine detail"],[.57,.42,"Stage 2","local context"],[.66,.58,"Stage 3","global context"],[.75,.72,"Stage 4","semantic features"],[.91,.5,"Decoder","voxel mask"]],
             edges: [[0,1],[1,2],[2,3],[3,4],[4,5],[2,6],[3,6],[4,6],[5,6]]
@@ -53,7 +53,7 @@
         mrnet: {
             page: "projects/mrnet-classification.html",
             kicker: "Medical imaging / study classification",
-            description: "Slice representations preserve local evidence before attention aggregates a decision across the scan.",
+            description: "The model keeps local evidence in each slice representation, then uses attention to combine it into a decision across the scan.",
             stats: ["MRI slices", "slice attention", "study prediction"],
             nodes: [[.08,.27,"Slice 01","patch tokens"],[.08,.5,"Slice 02","patch tokens"],[.08,.73,"Slice 03","patch tokens"],[.34,.27,"Encoder","local evidence"],[.34,.5,"Encoder","local evidence"],[.34,.73,"Encoder","local evidence"],[.65,.5,"Attention","across slices"],[.9,.5,"Classifier","study label"]],
             edges: [[0,3],[1,4],[2,5],[3,6],[4,6],[5,6],[6,7]]
@@ -61,7 +61,7 @@
         luad: {
             page: "projects/luad-modeling.html",
             kicker: "Computational biology / survival modeling",
-            description: "Molecular and clinical data converge on risk stratification, rule-based recommendations, and a report.",
+            description: "The workflow uses molecular and clinical data for risk stratification, rule-based recommendations, and reporting.",
             stats: ["TCGA-LUAD", "Cox + rules", "risk report"],
             nodes: [[.07,.34,"Expression","gene matrix"],[.07,.68,"Clinical","outcomes"],[.29,.34,"Cox screen","survival signal"],[.49,.34,"Lasso-Cox","risk signature"],[.29,.68,"Biomarkers","clinical rules"],[.7,.5,"Risk + rules","combined view"],[.91,.5,"Report","research output"]],
             edges: [[0,2],[1,2],[2,3],[1,4],[3,5],[4,5],[5,6]]
@@ -69,7 +69,7 @@
         nix: {
             page: "projects/nixos-system.html",
             kicker: "Developer systems / reproducibility",
-            description: "Pinned inputs compose hosts and modules while encrypted secrets and checks guard activation.",
+            description: "Pinned inputs define the hosts and modules, with encrypted secrets and checks before activation.",
             stats: ["flake inputs", "module graph", "reproducible host"],
             nodes: [[.07,.5,"Inputs","pinned revisions"],[.28,.28,"Hosts","machine intent"],[.28,.69,"Home","user intent"],[.5,.28,"Modules","reusable config"],[.5,.69,"sops-nix","encrypted secrets"],[.72,.5,"Checks","eval + leak scan"],[.92,.5,"System","atomic activation"]],
             edges: [[0,1],[0,2],[1,3],[2,3],[2,4],[3,5],[4,5],[5,6]]

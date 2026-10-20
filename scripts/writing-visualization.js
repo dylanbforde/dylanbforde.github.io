@@ -15,9 +15,9 @@
         horizon: stage.querySelector("[data-argument-horizon]")
     };
     const modes = {
-        commons: { kicker: "Education / coordination / search", description: "Independent explorers become correlated around the same legible path, leaving more of the search space untouched.", stats: ["correlation", "crowded search", "one generation"] },
-        constraint: { kicker: "Economics / information / optimization", description: "Frequent local updates respond to fresh conditions while a central batch becomes cleaner, slower, and increasingly stale.", stats: ["update latency", "stale gradient", "continuous"] },
-        capital: { kicker: "Genetics / inheritance / compounding", description: "A small persistent change alters the starting point on which every later generation acts.", stats: ["heritable delta", "compounding base", "many generations"] }
+        commons: { kicker: "Education / coordination / search", description: "People follow the same easily recognized path, so fewer of them explore the alternatives.", stats: ["correlation", "crowded search", "one generation"] },
+        constraint: { kicker: "Economics / information / optimization", description: "Local updates respond to current conditions. A central batch is cleaner, but takes longer and becomes increasingly stale.", stats: ["update latency", "stale gradient", "continuous"] },
+        capital: { kicker: "Genetics / inheritance / compounding", description: "A small change that persists alters the starting point for every later generation.", stats: ["heritable delta", "compounding base", "many generations"] }
     };
 
     let mode = stage.dataset.argumentStage || "commons";
